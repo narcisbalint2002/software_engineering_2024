@@ -224,11 +224,13 @@ public class DoublyLinkedList<E> {
 
 
         if (head.getNext() == tail) {
-            new_node = new Node(e, head, tail);
+            new_node = new Node(null, head, tail);
+            new_node.data = e; // ensures data is hashmap passed in (doesnt work otherwise as hashmap becomes empty)
             head.next = new_node;
             tail.prev = new_node;
         } else {
-            new_node = new Node(e, tail.getPrev(), tail);
+            new_node = new Node(null, tail.getPrev(), tail);
+            new_node.data = e; // ensures data is hashmap passed in (doesnt work otherwise as hashmap becomes empty)
             tail.prev.next = new_node;
             tail.prev = new_node;
         }
@@ -241,12 +243,14 @@ public class DoublyLinkedList<E> {
 
 
         if (head.getNext() == tail) {
-            Node<E> new_node = new Node(e, head, tail);
+            Node<E> new_node = new Node(null, head, tail);
+            new_node.data = e; // ensures data is hashmap passed in (doesnt work otherwise as hashmap becomes empty)
             head.next = new_node;
             tail.prev = new_node;
         } else {
             Node<E> curr_node = head.getNext();
-            Node<E> new_node = new Node(e, head, curr_node);
+            Node<E> new_node = new Node(null, head, curr_node);
+            new_node.data = e; // ensures data is hashmap passed in (doesnt work otherwise as hashmap becomes empty)
             curr_node.prev = new_node;
             head.next = new_node;
         }
