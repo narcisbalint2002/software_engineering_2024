@@ -4,9 +4,82 @@
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
+
+//////                    IGNORE - was from when this was hashmap
+//    public static HashMap<Integer, Integer> atoms_coordinates = new HashMap<>();
+
+//    create nested arraylist (arraylists inside an arraylist)
+    public static ArrayList<ArrayList<Integer>> atoms_coordinates = new ArrayList<>();
+
+//    will return an array list containing arrays with coordinates,
+//    e.g.
+//          {
+//              {0,0},
+//              {1,0},
+//              {2,0}
+//          }
+    public static ArrayList<ArrayList<Integer>> atomsInput(DoublyLinkedList board) {
+//////                    IGNORE - was from when this was hashmap
+////        create a hashmap that will have placement of atoms in format:
+////          {row1=col1, row2=col1, row3=col1}
+//        HashMap<Integer, Integer> atoms = new HashMap<>();
+
+        ArrayList<ArrayList<Integer>> atoms = new ArrayList<>();
+
+//        currently set to place 5 atoms, can change to variable if needed but hard coded as 5 for now
+        for (int i = 0; i < 5; i++) {
+//            condition for while loop reset to ensure runs every time, this will run while input not valid,
+//            i.e. while coordinates inputted by user cannot be found in the board, meaning they dont exist
+            boolean valid_input = false;
+
+            while (!valid_input) {
+                Scanner input = new Scanner(System.in);
+                System.out.printf("\nEnter valid coordinates for atom %d, separated by comma:\n\te.g. 0,0\n", i+1);
+                String atom_coordinates = input.nextLine();
+
+                String[] num_arr = atom_coordinates.split(",");
+                int row = Integer.parseInt(num_arr[0]);
+                int col = Integer.parseInt(num_arr[1]);
+
+//                need function to edit item Node at index i of linked list, then within it can check if second integer
+//                is in array of columns for that row
+//                  so setBoolean does this, it goes to specified row and column, setting false to true for that
+//                  coordinate, meaning an atom is there
+                valid_input = board.setBoolean(row, col);
+
+                if (!valid_input) {
+//                    mostly done to alert user that coordinates they typed were invalid
+                    System.out.println("Invalid coordinates (not in board)");
+                } else {
+//////                    IGNORE - was from when this was hashmap
+//                    atoms.put(row, col);
+
+//                    basically just adding an array list with coordinates
+//                    e.g.
+//                              {0,0}
+//                    to main list
+//                    e.g. (once added)
+//                          {
+//                              {0,0},
+//                              {1,0}
+//                          }
+                    ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row,col));
+                    atoms.add(temp);
+
+//                    ensures break out of loop (even though condition should break anyway)
+                    break;
+                }
+
+            }
+        }
+//        return "nested" array with atom coordinates
+        return atoms;
+    }
 
     public static void main(String[] args) {
 
@@ -79,6 +152,20 @@ public class Main {
 
         System.out.println(board_data.first().isEmpty());
 
+
+
+//        pay attention to row and column to see if they have been updated to true, unlike rest which are still false
+        board_data.setBoolean(1,2);
+        System.out.println("\n\n" + board_data);
+
+
+
+        atoms_coordinates = atomsInput(board_data);
+//        atomsPlace(atoms_map, board_data);
+
+        for (int i = 0; i < atoms_coordinates.size(); i++) {
+            System.out.println(atoms_coordinates.get(i));
+        }
 
 
     }
