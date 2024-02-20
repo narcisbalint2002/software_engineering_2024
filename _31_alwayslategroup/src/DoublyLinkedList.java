@@ -85,8 +85,23 @@ public class DoublyLinkedList<E> {
             return false;
         } else {
 //            so far need to edit key value in current node (i.e. current row)
-//            dont know if this updates board or just current variable we made called row
+//            updates board
             row.put(col_index, true);
+            return true;
+        }
+    }
+
+//    this is SAME as function above, but is instead ONLY for checking if a coordinate is valid
+    public boolean getBoolean(int row_index, int col_index) {
+//        first we get the hashmap of the node we need to edit in the linked list,
+//        i.e. we get the possible columns for a specific row index
+        HashMap<Integer, Boolean> row = get(row_index);
+
+//        if that column doesnt exist, return null (were not able to set atom), otherwise we are successful
+        if (row.get(col_index) == null) {
+            return false;
+        } else {
+//            no need to edit actual board, so just return true because coordinate user inputted IS in board
             return true;
         }
     }

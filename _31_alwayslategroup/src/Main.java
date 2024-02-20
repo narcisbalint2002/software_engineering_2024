@@ -16,7 +16,8 @@ public class Main {
 //    create nested arraylist (arraylists inside an arraylist)
     public static ArrayList<ArrayList<Integer>> atoms_coordinates = new ArrayList<>();
 
-//    will return an array list containing arrays with coordinates,
+//    will return an array list containing arrays with coordinates, these are the coordinates of the atoms that are
+//    in the board, NOT the ones the user guesses
 //    e.g.
 //          {
 //              {0,0},
@@ -43,14 +44,15 @@ public class Main {
                 String atom_coordinates = input.nextLine();
 
                 String[] num_arr = atom_coordinates.split(",");
-                int row = Integer.parseInt(num_arr[0]);
-                int col = Integer.parseInt(num_arr[1]);
+                int row_index = Integer.parseInt(num_arr[0]);
+                int col_index = Integer.parseInt(num_arr[1]);
 
 //                need function to edit item Node at index i of linked list, then within it can check if second integer
 //                is in array of columns for that row
 //                  so setBoolean does this, it goes to specified row and column, setting false to true for that
 //                  coordinate, meaning an atom is there
-                valid_input = board.setBoolean(row, col);
+//                getBoolean ONLY checks IF the coordinate is valid, exact same as setBoolean but doesnt edit it
+                valid_input = board.getBoolean(row_index, col_index);
 
                 if (!valid_input) {
 //                    mostly done to alert user that coordinates they typed were invalid
@@ -68,7 +70,15 @@ public class Main {
 //                              {0,0},
 //                              {1,0}
 //                          }
-                    ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row,col));
+
+
+//                    HashMap<Integer, Boolean> row = board.get(row_index);
+//                    row.put(col_index, true);
+
+
+                    valid_input = board.setBoolean(row_index, col_index);
+
+                    ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row_index,col_index));
                     atoms.add(temp);
 
 //                    ensures break out of loop (even though condition should break anyway)
@@ -124,7 +134,7 @@ public class Main {
             int count = 0;
 //            System.out.println("WIDTH: " + current_width);
             while (count < current_width) {
-                System.out.printf("%d ", i);
+//                System.out.printf("%d ", i);
 
 //                for current column in node row, set it to not have atom
                 new_map.put(i, false);
@@ -134,7 +144,7 @@ public class Main {
 
 //            add hashmap to row
             board_data.addLast(new_map);
-            System.out.println(new_map);
+//            System.out.println(new_map);
 
 //            this is to make sure width starts to decrease after reaching middle
             if (current_height >= (max_height / 2)) {
@@ -148,24 +158,33 @@ public class Main {
         }
 
 
-        System.out.println("\n\n" + board_data);
+//        System.out.println("\n\n" + board_data);
+//
+//        System.out.println(board_data.first().isEmpty());
 
-        System.out.println(board_data.first().isEmpty());
 
 
-
-//        pay attention to row and column to see if they have been updated to true, unlike rest which are still false
-        board_data.setBoolean(1,2);
-        System.out.println("\n\n" + board_data);
+////        pay attention to row and column to see if they have been updated to true, unlike rest which are still false
+//        board_data.setBoolean(1,2);
+//        System.out.println("\n\n" + board_data);
 
 
 
         atoms_coordinates = atomsInput(board_data);
-//        atomsPlace(atoms_map, board_data);
+//        atomsCompare(atoms_map, board_data);
+
+//        ArrayList<ArrayList<Integer>> atoms_user_coordinates = atomsInput(board_data);
+
+
 
         for (int i = 0; i < atoms_coordinates.size(); i++) {
             System.out.println(atoms_coordinates.get(i));
         }
+
+
+//        for (int i = 0; i < 5; i++) {
+//            System.out.println(board_data.);
+//        }
 
 
     }
