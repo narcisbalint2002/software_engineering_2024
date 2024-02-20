@@ -19,6 +19,69 @@ public class Main {
 //    total number of atoms in board
     public static int num_atoms = 3;
 
+//    creates board
+    public static void boardCreate(DoublyLinkedList board_data) {
+        //        set the max width to the total number of hexagons (including those in between)
+//        e.g.
+//                  O O O
+//                 O O O O
+//                  O O O
+//        this hexagon has max_width = 7, this is because we see middle row has 4, but the hexagon pattern actually
+//        allows a space in between, like we see width 3 first row, so if you were to count continuously it is width 7
+//
+//        set max height to anything less than or equal to max width (but probably something that makes the overall
+//        shape of board look hexagonal)
+        int max_width = 9;
+        int max_height = 5;
+
+        int current_height = 0;
+        int current_width = max_width - max_height - 1;
+
+
+//        code to create board, loops while max height of board not reached
+        while (current_height < max_height) {
+//            temporary new hashmap to be added for current row
+            HashMap<Integer, Boolean> new_map = new HashMap<Integer, Boolean>();
+
+//            used for loops
+            int i = 0;
+
+            if (current_height <= (max_height / 2)) {
+                i -= current_height;
+            } else {
+                i = i - (max_height / 2);
+            }
+
+            System.out.println();
+
+//            this makes sure correct width for loop below is printed
+            int count = 0;
+//            System.out.println("WIDTH: " + current_width);
+            while (count < current_width) {
+//                System.out.printf("%d ", i);
+
+//                for current column in node row, set it to not have atom
+                new_map.put(i, false);
+                count++;
+                i++;
+            }
+
+//            add hashmap to row
+            board_data.addLast(new_map);
+//            System.out.println(new_map);
+
+//            this is to make sure width starts to decrease after reaching middle
+            if (current_height >= (max_height / 2)) {
+                current_width--;
+            } else {
+                current_width++;
+            }
+
+//            move to next row down
+            current_height++;
+        }
+    }
+
 //    will return an array list containing arrays with coordinates, these are the coordinates of the atoms that are
 //    in the board, NOT the ones the user guesses
 //    e.g.
@@ -98,7 +161,7 @@ public class Main {
 //                    row.put(col_index, true);
 
 
-                    if (user == 'a') {
+                    if (user == 'p') {
                         valid_input = board.setBoolean(row_index, col_index);
                     }
 
@@ -127,97 +190,30 @@ public class Main {
     public static void main(String[] args) {
 
 //        entire linked list of board
-        DoublyLinkedList board_data = new DoublyLinkedList();
+        DoublyLinkedList board = new DoublyLinkedList();
+
+//        creates board in variable board_data
+        boardCreate(board);
 
 
-//        set the max width to the total number of hexagons (including those in between)
-//        e.g.
-//                  O O O
-//                 O O O O
-//                  O O O
-//        this hexagon has max_width = 7, this is because we see middle row has 4, but the hexagon pattern actually
-//        allows a space in between, like we see width 3 first row, so if you were to count continuously it is width 7
-//
-//        set max height to anything less than or equal to max width (but probably something that makes the overall
-//        shape of board look hexagonal)
-        int max_width = 9;
-        int max_height = 5;
 
-        int current_height = 0;
-        int current_width = max_width - max_height - 1;
-
-
-//        code to create board, loops while max height of board not reached
-        while (current_height < max_height) {
-//            temporary new hashmap to be added for current row
-            HashMap<Integer, Boolean> new_map = new HashMap<Integer, Boolean>();
-
-//            used for loops
-            int i = 0;
-
-            if (current_height <= (max_height / 2)) {
-                i -= current_height;
-            } else {
-                i = i - (max_height / 2);
-            }
-
-            System.out.println();
-
-//            this makes sure correct width for loop below is printed
-            int count = 0;
-//            System.out.println("WIDTH: " + current_width);
-            while (count < current_width) {
-//                System.out.printf("%d ", i);
-
-//                for current column in node row, set it to not have atom
-                new_map.put(i, false);
-                count++;
-                i++;
-            }
-
-//            add hashmap to row
-            board_data.addLast(new_map);
-//            System.out.println(new_map);
-
-//            this is to make sure width starts to decrease after reaching middle
-            if (current_height >= (max_height / 2)) {
-                current_width--;
-            } else {
-                current_width++;
-            }
-
-//            move to next row down
-            current_height++;
-        }
-
-
-//        System.out.println("\n\n" + board_data);
-//
 //        System.out.println(board_data.first().isEmpty());
 
 
 
 ////        pay attention to row and column to see if they have been updated to true, unlike rest which are still false
 //        board_data.setBoolean(1,2);
-//        System.out.println("\n\n" + board_data);
+        System.out.println("\n\n" + board);
 
 
-
-        atoms_coordinates = atomsInput(board_data, 'p');
-//        atomsCompare(atoms_map, board_data);
-
-//        ArrayList<ArrayList<Integer>> atoms_user_coordinates = atomsInput(board_data);
-
-
+        atoms_coordinates = atomsInput(board, 'p');
 
         for (int i = 0; i < atoms_coordinates.size(); i++) {
             System.out.println(atoms_coordinates.get(i));
         }
 
 
-//        for (int i = 0; i < 5; i++) {
-//            System.out.println(board_data.);
-//        }
+        System.out.println("\n\n" + board);
 
 
     }

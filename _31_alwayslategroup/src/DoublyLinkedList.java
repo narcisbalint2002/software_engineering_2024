@@ -297,7 +297,7 @@ public class DoublyLinkedList<E> {
             sb.append(curr.data);
             curr = curr.getNext();
             if (curr != tail) {
-                sb.append(", ");
+                sb.append(", \n");
             }
         }
         sb.append("]");
