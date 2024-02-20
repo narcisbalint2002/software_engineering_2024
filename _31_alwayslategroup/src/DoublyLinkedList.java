@@ -136,29 +136,13 @@ public class DoublyLinkedList<E> {
         Node<E> curr_node = prev_node.next;
         Node<E> new_node;
 
-//        if (prev_node.getNext() == tail) {
-//            new_node = new Node(e, prev_node, tail);
-//            prev_node.next = new_node;
-//            tail.prev = new_node;
-//        }
-//
-//        Node<E> curr_node = prev_node.next;
-//
-//        if (curr_node.getNext() == tail) {
-//            new_node = new Node(e, curr_node, tail);
-//            curr_node.next = new_node;
-//            tail.prev = new_node;
-//        }
-
         while (pos > 1)
         {
             prev_node = curr_node;
             curr_node = curr_node.next;
             pos--;
-//            System.out.println("WHILE");
         }
 
-//        System.out.println("WOAH");
 
         new_node = new Node(e, prev_node, curr_node);
         prev_node.next = new_node;
@@ -182,10 +166,8 @@ public class DoublyLinkedList<E> {
             prev_node = curr_node;
             curr_node = curr_node.next;
             pos--;
-//            System.out.println("WHILE");
         }
 
-//        System.out.println("WOAH");
 
 
         deleted_node = curr_node;
@@ -196,6 +178,8 @@ public class DoublyLinkedList<E> {
         return deleted_node.getData();
     }
 
+
+//  //// ill be honest i have no idea how to use this
 //    private class DoublyLinkedListIterator<E> implements Iterator<E> {
 //        Node<E> curr = (Node<E>) head.next;
 //        public boolean hasNext() {
@@ -273,7 +257,6 @@ public class DoublyLinkedList<E> {
     }
     public void addFirst(HashMap<Integer, Boolean> e) {
         // TODO
-//        Node<E> new_node;
 
 
         if (head.getNext() == tail) {

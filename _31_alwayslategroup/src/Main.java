@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class Main {
 
-//////                    IGNORE - was from when this was hashmap
-//    public static HashMap<Integer, Integer> atoms_coordinates = new HashMap<>();
-
 //    create nested arraylist (arraylists inside an arraylist)
     public static ArrayList<ArrayList<Integer>> atoms_coordinates = new ArrayList<>();
 
@@ -143,39 +140,47 @@ public class Main {
 //                    mostly done to alert user that coordinates they typed were invalid
                     System.out.println("Invalid coordinates (not in board)");
                 } else {
-//////                    IGNORE - was from when this was hashmap
-//                    atoms.put(row, col);
-
-//                    basically just adding an array list with coordinates
-//                    e.g.
+//                    basically just adding an array list with coordinates to an array list of array lists
+//                    e.g. current list of coordinates:
 //                              {0,0}
-//                    to main list
-//                    e.g. (once added)
+//                    which we are adding to main list
+//                    e.g. main list:
 //                          {
-//                              {0,0},
-//                              {1,0}
+//                              {1,0},
+//                              {0,0}    <--- the array list we just added
 //                          }
 
 
-//                    HashMap<Integer, Boolean> row = board.get(row_index);
-//                    row.put(col_index, true);
-
-
-                    if (user == 'p') {
+//                    if function is run for AI/computer, then this must be start of game,
+//                    so it is currently setter's turn to set atoms, so we SET the atoms,
+//                    meaning we actually update the board, NOT just check it
+//                      for this, we use setBoolean instead of getBoolean
+                    if (user == 'a') {
                         valid_input = board.setBoolean(row_index, col_index);
                     }
 
+//                    this is JUST an option for debugging, will set atoms using input,
+//                    for DEVELOPERS ONLY, would never actually be done by player
+                    else if (user == 'd') {
+                        valid_input = board.setBoolean(row_index, col_index);
+                    }
+
+//                    temporary list, this is the current coordinate list to be added to
+//                    main array list of coordinates
                     ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row_index,col_index));
 
 
+//                    if current coordinates are already in list, decrement i (this will ensure
+//                    stays on current number of atoms in the for loop, so it will basically do
+//                    same loop iteration until an atom that isnt already in the board is added)
                     if (atoms.contains(temp)) {
                         System.out.println("Atom already inputted");
                         i--;
-                    } else {
+                    }
+//                    otherwise atom not in board, so add to our list of coordinates
+                    else {
                         atoms.add(temp);
                     }
-
-
 
 //                    ensures break out of loop (even though condition should break anyway)
                     break;
@@ -184,6 +189,7 @@ public class Main {
             }
         }
 //        return "nested" array with atom coordinates
+//        (i.e. arraylist of all atom coordinates arraylist)
         return atoms;
     }
 
@@ -196,23 +202,44 @@ public class Main {
         boardCreate(board);
 
 
+////        to check if board first row is empty
+////        (could be used in tests in future)
+//        System.out.println(board.first().isEmpty());
 
-//        System.out.println(board_data.first().isEmpty());
 
 
+////        sets specific row and column to be true, meaning atom will be there
+////        (could be used in tests in future)
+//        board.setBoolean(1,2);
 
-////        pay attention to row and column to see if they have been updated to true, unlike rest which are still false
-//        board_data.setBoolean(1,2);
+
+//        print board
         System.out.println("\n\n" + board);
 
 
-        atoms_coordinates = atomsInput(board, 'p');
+//        returns an arraylist of arraylists of coordinates, so basically:
+//          {
+//              {1,0},
+//              {0,0}
+//          }
+//        Functionality:
+//        - 'a' means AI/computer, so in this case it would also set atoms in the board,
+//          then return the location of those items
+//        - 'p' means player, so this could be used for getting final input of atom guesses
+//          then return the atom coordinates guessed by player
+//        - 'd' means developer, so basically is exactly like player BUT also sets atoms,
+//          this will just be used for testing (normally only AI sets, player just checks if
+//          inputted coordinates are in the board)
+        atoms_coordinates = atomsInput(board, 'd');
 
+
+//        this is just for showcasing the arraylist of all coordinates
         for (int i = 0; i < atoms_coordinates.size(); i++) {
             System.out.println(atoms_coordinates.get(i));
         }
 
 
+//        print full board again
         System.out.println("\n\n" + board);
 
 
