@@ -16,6 +16,9 @@ public class Main {
 //    create nested arraylist (arraylists inside an arraylist)
     public static ArrayList<ArrayList<Integer>> atoms_coordinates = new ArrayList<>();
 
+//    total number of atoms in board
+    public static int num_atoms = 3;
+
 //    will return an array list containing arrays with coordinates, these are the coordinates of the atoms that are
 //    in the board, NOT the ones the user guesses
 //    e.g.
@@ -24,7 +27,7 @@ public class Main {
 //              {1,0},
 //              {2,0}
 //          }
-    public static ArrayList<ArrayList<Integer>> atomsInput(DoublyLinkedList board) {
+    public static ArrayList<ArrayList<Integer>> atomsInput(DoublyLinkedList board, char user) {
 //////                    IGNORE - was from when this was hashmap
 ////        create a hashmap that will have placement of atoms in format:
 ////          {row1=col1, row2=col1, row3=col1}
@@ -32,20 +35,39 @@ public class Main {
 
         ArrayList<ArrayList<Integer>> atoms = new ArrayList<>();
 
-//        currently set to place 5 atoms, can change to variable if needed but hard coded as 5 for now
-        for (int i = 0; i < 5; i++) {
+        int row_index = -1;
+        int col_index = -1;
+
+//        currently set to place x atoms
+        for (int i = 0; i < num_atoms; i++) {
 //            condition for while loop reset to ensure runs every time, this will run while input not valid,
 //            i.e. while coordinates inputted by user cannot be found in the board, meaning they dont exist
             boolean valid_input = false;
 
+//            while loop to run while current coordinates NOT valid
             while (!valid_input) {
-                Scanner input = new Scanner(System.in);
-                System.out.printf("\nEnter valid coordinates for atom %d, separated by comma:\n\te.g. 0,0\n", i+1);
-                String atom_coordinates = input.nextLine();
+                if (user == 'a') {
+//                    put code to generate random numbers here (instead of two zeros)
+                    row_index = 0;
+                    col_index = 0;
+                }
+//                if not ai/computer, then HAS to be player
+                else {
+                    Scanner input = new Scanner(System.in);
+                    System.out.printf("\nEnter valid coordinates for atom %d, separated by comma:\n\te.g. 0,0\n", i+1);
+                    String atom_coordinates = input.nextLine();
 
-                String[] num_arr = atom_coordinates.split(",");
-                int row_index = Integer.parseInt(num_arr[0]);
-                int col_index = Integer.parseInt(num_arr[1]);
+//                    split user input 0,0 into {"0","0"}
+                    String[] num_arr = atom_coordinates.split(",");
+
+//                    converting each number string in array to actual integers
+//                    like {"0","0"} to:
+//                      row_index = 0;
+//                      col_index = 0;
+                    row_index = Integer.parseInt(num_arr[0]);
+                    col_index = Integer.parseInt(num_arr[1]);
+                }
+
 
 //                need function to edit item Node at index i of linked list, then within it can check if second integer
 //                is in array of columns for that row
@@ -76,10 +98,21 @@ public class Main {
 //                    row.put(col_index, true);
 
 
-                    valid_input = board.setBoolean(row_index, col_index);
+                    if (user == 'a') {
+                        valid_input = board.setBoolean(row_index, col_index);
+                    }
 
                     ArrayList<Integer> temp = new ArrayList<>(Arrays.asList(row_index,col_index));
-                    atoms.add(temp);
+
+
+                    if (atoms.contains(temp)) {
+                        System.out.println("Atom already inputted");
+                        i--;
+                    } else {
+                        atoms.add(temp);
+                    }
+
+
 
 //                    ensures break out of loop (even though condition should break anyway)
                     break;
@@ -170,7 +203,7 @@ public class Main {
 
 
 
-        atoms_coordinates = atomsInput(board_data);
+        atoms_coordinates = atomsInput(board_data, 'p');
 //        atomsCompare(atoms_map, board_data);
 
 //        ArrayList<ArrayList<Integer>> atoms_user_coordinates = atomsInput(board_data);
