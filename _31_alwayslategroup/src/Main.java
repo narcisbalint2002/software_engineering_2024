@@ -28,8 +28,8 @@ public class Main {
 //
 //        set max height to anything less than or equal to max width (but probably something that makes the overall
 //        shape of board look hexagonal)
-        int max_width = 9;
-        int max_height = 5;
+        int max_width = 15;
+        int max_height = 9;
 
         int current_height = 0;
         int current_width = max_width - max_height - 1;
