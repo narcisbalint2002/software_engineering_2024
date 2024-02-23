@@ -133,7 +133,7 @@ public class Main {
 //                  so setAtom does this, it goes to specified row and column, setting false to true for that
 //                  coordinate, meaning an atom is there
 //                getAtom ONLY checks IF the coordinate is valid, exact same as setAtom but doesnt edit it
-                valid_input = board.getAtom(row_index, col_index);
+                valid_input = board.getAtom(row_index, col_index, board.size());
 
                 if (!valid_input) {
 //                    mostly done to alert user that coordinates they typed were invalid
@@ -155,13 +155,13 @@ public class Main {
 //                    meaning we actually update the board, NOT just check it
 //                      for this, we use setAtom instead of getAtom
                     if (user == 'a') {
-                        valid_input = board.setAtom(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index, board.size());
                     }
 
 //                    this is JUST an option for debugging, will set atoms using input,
 //                    for DEVELOPERS ONLY, would never actually be done by player
                     else if (user == 'd') {
-                        valid_input = board.setAtom(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index, board.size());
                     }
 
 //                    temporary list, this is the current coordinate list to be added to
