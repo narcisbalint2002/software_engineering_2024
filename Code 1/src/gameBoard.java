@@ -6,17 +6,6 @@ import javax.swing.JPanel;
 
 public class gameBoard extends JPanel {
 
-    static class hexagon{
-        protected  int first;
-        protected  int second;
-
-        public hexagon(int first, int second)
-        {
-            this.first = first;
-            this.second = second;
-        }
-    }
-
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
 
     //CONSTRUCTOR
@@ -32,17 +21,6 @@ public class gameBoard extends JPanel {
     private void initialiseHexagonsCoordinates(ArrayList<hexagon> list)
     {
         //Here we have to calculate the coordinates of the hexagons.
-
-        /*The gameboard has the following mount of hexagons on each row
-         * 5
-         * 6
-         * 7
-         * 8
-         * 9
-         * 8
-         * 7
-         * 6
-         * 5*/
 
         /*I will need x, y to reppresent the 2 coordinates and I will also need 2 nested loop for rows and columns.*/
 

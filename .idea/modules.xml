@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Code 1/Code 1.iml" filepath="$PROJECT_DIR$/Code 1/Code 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_31_alwayslategroup/_31_alwayslategroup.iml" filepath="$PROJECT_DIR$/_31_alwayslategroup/_31_alwayslategroup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/software_engineering_2024.iml" filepath="$PROJECT_DIR$/.idea/software_engineering_2024.iml" />
+    </modules>
+  </component>
+</project>
