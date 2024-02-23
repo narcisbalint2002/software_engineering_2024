@@ -10,7 +10,14 @@ import java.util.Scanner;
 
 public class Main {
 
-
+// Nested arraylists, where each nested list is row, and each integer in nested lists represents column
+//    e.g.
+//          {
+//              {0,1,2,3,4},        <--- row 0 (i.e. index 0)
+//              {-1,0,1,2,3,4},     <--- row 1 (i.e. index 1)
+//              ...
+//          }
+    public static ArrayList<ArrayList<Integer>> board_coordinates_list = new ArrayList<>();
 
 //    total number of atoms in board
     public static final int NUM_ATOMS = 6;
@@ -39,6 +46,12 @@ public class Main {
 //            temporary new hashmap to be added for current row
             HashMap<Integer, Boolean> new_map = new HashMap<Integer, Boolean>();
 
+//            temporary row, will contain list of integers, will be added to board_coordinate_list,
+//            which is then to be used to assign the correct indexes to each hexagonal button on the board
+//            in our GUI, because the hashmap doesnt actually have the keys sorted, while in arraylists they
+//            will keep the order you add them in and actually can be sorted easily
+            ArrayList<Integer> temp_row = new ArrayList<>();
+
 //            used for loops
             int i = 0;
 
@@ -56,11 +69,17 @@ public class Main {
             while (count < current_width) {
 //                System.out.printf("%d ", i);
 
+//                add current column number to current row
+                temp_row.add(i);
+
 //                for current column in node row, set it to not have atom
                 new_map.put(i, false);
                 count++;
                 i++;
             }
+
+//            add list of all columns in current row to main list of all rows and respective column numbers
+            board_coordinates_list.add(temp_row);
 
 //            add hashmap to row
             board_data.addLast(new_map);
@@ -112,19 +131,43 @@ public class Main {
                 }
 //                if not ai/computer, then HAS to be player
                 else {
-                    Scanner input = new Scanner(System.in);
-                    System.out.printf("\nEnter valid coordinates for atom %d, separated by comma:\n\te.g. 0,0\n", i+1);
-                    String atom_coordinates = input.nextLine();
 
+                    // variable for while loop below, which is done to catch exceptions if user inputs wrong format
+                    // (instead of having it end entire program, simply asks again)
+                    boolean input_received = false;
+
+//                    this while loop runs while the user does not input correct atom coordinate format,
+//                    e.g.
+//                          0.0 instead of 0,0
+                    while (!input_received) {
+                        // input for coordinates for testing
+                        Scanner input = new Scanner(System.in);
+                        System.out.printf("\nEnter valid coordinates for atom %d, separated by comma:\n\te.g. 0,0\n", i+1);
+                        String atom_coordinates = input.nextLine();
+
+//                        try this block of code for an exception
+                        try {
 //                    split user input 0,0 into {"0","0"}
-                    String[] num_arr = atom_coordinates.split(",");
+                            String[] num_arr = atom_coordinates.split(",");
 
 //                    converting each number string in array to actual integers
 //                    like {"0","0"} to:
 //                      row_index = 0;
 //                      col_index = 0;
-                    row_index = Integer.parseInt(num_arr[0]);
-                    col_index = Integer.parseInt(num_arr[1]);
+                            row_index = Integer.parseInt(num_arr[0]);
+                            col_index = Integer.parseInt(num_arr[1]);
+
+//                            if code got this far exception was not met, therefore user input was valid,
+//                            exit out of loop by changing boolean to true
+                            input_received = true;
+                        }
+//                        if we get specific exception, do not update while loop condition, ask again for input
+                        catch (NumberFormatException e) {
+                            System.out.println("Use correct format 0,0 or else...");
+                        }
+
+                    }
+
                 }
 
 
@@ -133,7 +176,7 @@ public class Main {
 //                  so setAtom does this, it goes to specified row and column, setting false to true for that
 //                  coordinate, meaning an atom is there
 //                getAtom ONLY checks IF the coordinate is valid, exact same as setAtom but doesnt edit it
-                valid_input = board.getAtom(row_index, col_index);
+                valid_input = board.getAtom(row_index, col_index, board.size());
 
                 if (!valid_input) {
 //                    mostly done to alert user that coordinates they typed were invalid
@@ -155,13 +198,13 @@ public class Main {
 //                    meaning we actually update the board, NOT just check it
 //                      for this, we use setAtom instead of getAtom
                     if (user == 'a') {
-                        valid_input = board.setAtom(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index, board.size());
                     }
 
 //                    this is JUST an option for debugging, will set atoms using input,
 //                    for DEVELOPERS ONLY, would never actually be done by player
                     else if (user == 'd') {
-                        valid_input = board.setAtom(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index, board.size());
                     }
 
 //                    temporary list, this is the current coordinate list to be added to
@@ -213,7 +256,12 @@ public class Main {
 
 
 //        print board
-        System.out.println("\n\n" + board);
+        System.out.println("\n\n" + board + "\n");
+
+        //        this is just for showcasing the arraylist of all possible coordinates in the board
+        for (int i = 0; i < board_coordinates_list.size(); i++) {
+            System.out.println(board_coordinates_list.get(i));
+        }
 
 
 //        returns an arraylist of arraylists of coordinates, so basically:
@@ -230,12 +278,12 @@ public class Main {
 //          this will just be used for testing (normally only AI sets, player just checks if
 //          inputted coordinates are in the board)
         //    create nested arraylist (arraylists inside an arraylist)
-        ArrayList<ArrayList<Integer>> atoms_coordinates = atomsInput(board, 'd');
+        ArrayList<ArrayList<Integer>> atoms_coordinates_list = atomsInput(board, 'd');
 
 
-//        this is just for showcasing the arraylist of all coordinates
-        for (int i = 0; i < atoms_coordinates.size(); i++) {
-            System.out.println(atoms_coordinates.get(i));
+//        this is just for showcasing the arraylist of coordinates for all placed atoms currently in the board
+        for (int i = 0; i < atoms_coordinates_list.size(); i++) {
+            System.out.println(atoms_coordinates_list.get(i));
         }
 
 

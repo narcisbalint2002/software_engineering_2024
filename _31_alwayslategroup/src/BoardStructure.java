@@ -73,9 +73,9 @@ public class BoardStructure<E> {
 //    used to set atom from false to true for specific coordinate in board, seems to work (seen by printing out board
 //    after using this function), ALSO it returns a boolean, it returns true if the coordinate was found and set, false
 //    if it did not exist in the board (i used this to determine invalid input in while loop)
-    public boolean setAtom(int row_index, int col_index) {
-        //        cannot put negative rows
-        if (row_index < 0) {
+    public boolean setAtom(int row_index, int col_index, int height) {
+//        cannot put rows that are not in board
+        if ((row_index < 0)  || (row_index >= height)) {
             return false;
         }
 
@@ -95,9 +95,9 @@ public class BoardStructure<E> {
     }
 
 //    this is SAME as function above, but is instead ONLY for checking if a coordinate is valid
-    public boolean getAtom(int row_index, int col_index) {
-//        cannot put negative rows
-        if (row_index < 0) {
+    public boolean getAtom(int row_index, int col_index, int height) {
+//        cannot put rows that are not in board
+        if ((row_index < 0)  || (row_index >= height)) {
             return false;
         }
 
