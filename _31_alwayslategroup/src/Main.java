@@ -3,10 +3,16 @@
 
 import org.w3c.dom.Node;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -235,7 +241,32 @@ public class Main {
         return atoms;
     }
 
+    public static void gameBoardFullScreen(JFrame aFrame)
+    {
+        Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
+        aFrame.setSize(screen_size.width, screen_size.height);
+        aFrame.setLocationRelativeTo(null);
+    }
+
     public static void main(String[] args) {
+
+        /*Narcis code -------------------------------------------------------------------------------------------------------------*/
+
+        //Create new Frame
+
+        JFrame frame = new JFrame("Game board");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.add(new gameBoard());
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        gameBoardFullScreen(frame);
+
+        /*Narcis code end ----------------------------------------------------------------------------------------------------------*/
+
 
 //        entire linked list of board
         BoardStructure board = new BoardStructure();
