@@ -1,10 +1,8 @@
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap; // import the HashMap class
 
-public class DoublyLinkedList<E> {
+public class BoardStructure<E> {
 
     private static class Node<E> {
         private HashMap<Integer, Boolean> data;
@@ -37,7 +35,7 @@ public class DoublyLinkedList<E> {
     private Node<E> tail;
     private int size = 0;
 
-    public DoublyLinkedList() {
+    public BoardStructure() {
         head = new Node<E>(new HashMap<Integer, Boolean>(), null, null);
         tail = new Node<E>(new HashMap<Integer, Boolean>(), head, null);
         head.next = tail;
@@ -75,7 +73,12 @@ public class DoublyLinkedList<E> {
 //    used to set atom from false to true for specific coordinate in board, seems to work (seen by printing out board
 //    after using this function), ALSO it returns a boolean, it returns true if the coordinate was found and set, false
 //    if it did not exist in the board (i used this to determine invalid input in while loop)
-    public boolean setBoolean(int row_index, int col_index) {
+    public boolean setAtom(int row_index, int col_index) {
+        //        cannot put negative rows
+        if (row_index < 0) {
+            return false;
+        }
+
 //        first we get the hashmap of the node we need to edit in the linked list,
 //        i.e. we get the possible columns for a specific row index
         HashMap<Integer, Boolean> row = get(row_index);
@@ -92,7 +95,12 @@ public class DoublyLinkedList<E> {
     }
 
 //    this is SAME as function above, but is instead ONLY for checking if a coordinate is valid
-    public boolean getBoolean(int row_index, int col_index) {
+    public boolean getAtom(int row_index, int col_index) {
+//        cannot put negative rows
+        if (row_index < 0) {
+            return false;
+        }
+
 //        first we get the hashmap of the node we need to edit in the linked list,
 //        i.e. we get the possible columns for a specific row index
         HashMap<Integer, Boolean> row = get(row_index);
@@ -180,7 +188,7 @@ public class DoublyLinkedList<E> {
 
 
 //  //// ill be honest i have no idea how to use this
-//    private class DoublyLinkedListIterator<E> implements Iterator<E> {
+//    private class BoardStructureIterator<E> implements Iterator<E> {
 //        Node<E> curr = (Node<E>) head.next;
 //        public boolean hasNext() {
 //            return curr != tail;
@@ -192,7 +200,7 @@ public class DoublyLinkedList<E> {
 //        }
 //    }
 //    public Iterator<E> iterator() {
-//        return new DoublyLinkedListIterator<E>();
+//        return new BoardStructureIterator<E>();
 //    }
 
     private E remove(Node<E> n) {
@@ -288,7 +296,7 @@ public class DoublyLinkedList<E> {
     }
 
     public static void main(String[] args) {
-        DoublyLinkedList<Integer> ll = new DoublyLinkedList<Integer>();
+        BoardStructure<Integer> ll = new BoardStructure<Integer>();
 //        ll.addFirst(0);
 //        ll.addFirst(1);
 //        ll.addFirst(2);

@@ -10,15 +10,14 @@ import java.util.Scanner;
 
 public class Main {
 
-//    create nested arraylist (arraylists inside an arraylist)
-    public static ArrayList<ArrayList<Integer>> atoms_coordinates = new ArrayList<>();
+
 
 //    total number of atoms in board
-    public static int num_atoms = 3;
+    public static final int NUM_ATOMS = 6;
 
 //    creates board
-    public static void boardCreate(DoublyLinkedList board_data) {
-        //        set the max width to the total number of hexagons (including those in between)
+    public static void boardCreate(BoardStructure board_data) {
+//        set the max width to the total number of hexagons (including those in between)
 //        e.g.
 //                  O O O
 //                 O O O O
@@ -28,8 +27,8 @@ public class Main {
 //
 //        set max height to anything less than or equal to max width (but probably something that makes the overall
 //        shape of board look hexagonal)
-        int max_width = 9;
-        int max_height = 5;
+        int max_width = 15;
+        int max_height = 9;
 
         int current_height = 0;
         int current_width = max_width - max_height - 1;
@@ -87,7 +86,7 @@ public class Main {
 //              {1,0},
 //              {2,0}
 //          }
-    public static ArrayList<ArrayList<Integer>> atomsInput(DoublyLinkedList board, char user) {
+    public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, char user) {
 //////                    IGNORE - was from when this was hashmap
 ////        create a hashmap that will have placement of atoms in format:
 ////          {row1=col1, row2=col1, row3=col1}
@@ -99,7 +98,7 @@ public class Main {
         int col_index = -1;
 
 //        currently set to place x atoms
-        for (int i = 0; i < num_atoms; i++) {
+        for (int i = 0; i < NUM_ATOMS; i++) {
 //            condition for while loop reset to ensure runs every time, this will run while input not valid,
 //            i.e. while coordinates inputted by user cannot be found in the board, meaning they dont exist
             boolean valid_input = false;
@@ -131,10 +130,10 @@ public class Main {
 
 //                need function to edit item Node at index i of linked list, then within it can check if second integer
 //                is in array of columns for that row
-//                  so setBoolean does this, it goes to specified row and column, setting false to true for that
+//                  so setAtom does this, it goes to specified row and column, setting false to true for that
 //                  coordinate, meaning an atom is there
-//                getBoolean ONLY checks IF the coordinate is valid, exact same as setBoolean but doesnt edit it
-                valid_input = board.getBoolean(row_index, col_index);
+//                getAtom ONLY checks IF the coordinate is valid, exact same as setAtom but doesnt edit it
+                valid_input = board.getAtom(row_index, col_index);
 
                 if (!valid_input) {
 //                    mostly done to alert user that coordinates they typed were invalid
@@ -154,15 +153,15 @@ public class Main {
 //                    if function is run for AI/computer, then this must be start of game,
 //                    so it is currently setter's turn to set atoms, so we SET the atoms,
 //                    meaning we actually update the board, NOT just check it
-//                      for this, we use setBoolean instead of getBoolean
+//                      for this, we use setAtom instead of getAtom
                     if (user == 'a') {
-                        valid_input = board.setBoolean(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index);
                     }
 
 //                    this is JUST an option for debugging, will set atoms using input,
 //                    for DEVELOPERS ONLY, would never actually be done by player
                     else if (user == 'd') {
-                        valid_input = board.setBoolean(row_index, col_index);
+                        valid_input = board.setAtom(row_index, col_index);
                     }
 
 //                    temporary list, this is the current coordinate list to be added to
@@ -196,7 +195,7 @@ public class Main {
     public static void main(String[] args) {
 
 //        entire linked list of board
-        DoublyLinkedList board = new DoublyLinkedList();
+        BoardStructure board = new BoardStructure();
 
 //        creates board in variable board_data
         boardCreate(board);
@@ -210,7 +209,7 @@ public class Main {
 
 ////        sets specific row and column to be true, meaning atom will be there
 ////        (could be used in tests in future)
-//        board.setBoolean(1,2);
+//        board.setAtom(1,2);
 
 
 //        print board
@@ -230,7 +229,8 @@ public class Main {
 //        - 'd' means developer, so basically is exactly like player BUT also sets atoms,
 //          this will just be used for testing (normally only AI sets, player just checks if
 //          inputted coordinates are in the board)
-        atoms_coordinates = atomsInput(board, 'd');
+        //    create nested arraylist (arraylists inside an arraylist)
+        ArrayList<ArrayList<Integer>> atoms_coordinates = atomsInput(board, 'd');
 
 
 //        this is just for showcasing the arraylist of all coordinates
