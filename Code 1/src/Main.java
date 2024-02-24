@@ -120,14 +120,14 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
             //A stands for A.I. which tells the code that the atoms have to be randomly placed by the A.I.
             if (user == 'a') {
 
-                /*Random generation of pair of coordinates.*/
+                /*Random generation of pairs of coordinates.*/
                 row_index = (int) (Math.random() * (row_max - row_min + 1)) + row_min;
                 col_index = (int) (Math.random() * (col_max - col_min + 1)) + col_min;
 
 
                 //System.out.printf("\natom %d:  %d,%d\n", i + 1, row_index, col_index);
             }
-                /*In case the developer wants to manually input the atoms, he can do so using the console.*/
+                /*In case the developer wants to manually input the atoms, he can do so using the console. You just need to change the value of the variable "user" from "a" to "d"*/
                 else {
 
                     boolean input_received = false;
@@ -170,7 +170,8 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
 
                 if (!valid_input) {
 
-                    System.out.println("Invalid coordinates (not in board)");
+                    /*The following code has been commented, because the A.I is randomly choosing the atoms, so the player does not have to know if invalid coordinates have been extracted.*/
+                    //System.out.println("Invalid coordinates (not in board)");
                 } else {
 
                     if (user == 'a') {
@@ -188,7 +189,8 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
 
                     /*If an atom has been previously placed on the same hexagon, we make sure the count for atoms placed stays the same and we let the user know as well. The program will then ask the user for new coordinates.*/
                     if (atoms.contains(temp)) {
-                        System.out.println("Atom already inputted");
+                        //Same reason as previously described.
+                        // System.out.println("Atom already inputted");
                         i--;
                     }
 
@@ -221,6 +223,7 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
         //Create new Frame
 
         JFrame frame = new JFrame("Game board");
@@ -243,12 +246,9 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
         boardCreate(board);
 
         /*Here we are printing the default board to make sure the rows and columns are properly indexed.*/
-        System.out.println("\n\n" + board + "\n");
 
-        /*This is another piece of code used for testing.*/
-        for (int i = 0; i < board_coordinates_list.size(); i++) {
-            System.out.println(board_coordinates_list.get(i));
-        }
+        System.out.println("The following structure is the default board with no atoms set.");
+        System.out.println("\n" + board + "\n");
 
 
 //        returns an arraylist of arraylists of coordinates, so basically:
@@ -268,14 +268,41 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
         ArrayList<ArrayList<Integer>> atoms_coordinates_list = atomsInput(board, 'a');
 
 
-     /*Code used to test if the atoms have been correctly stored.*/
+        String  want = null;
+
+        System.out.println("\nDo you want to print the game board including the positions of the atoms? YES/NO:");
+        want = scanner.nextLine();
+
+        while(want.toUpperCase().compareTo("NO") != 0 && want.toUpperCase().compareTo("YES") != 0)
+        {
+                System.out.println("Please enter a valid value!");
+                want = scanner.nextLine();
+        }
+
+        if(want.toUpperCase().compareTo("NO") == 0)
+            System.exit(0);
+        else
+        /*Final print of the board including the positions of the atoms.*/ {
+
+        System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
+
+        /*This is another piece of code used for testing.
+
+        for (int i = 0; i < board_coordinates_list.size(); i++) {
+                 System.out.println(board_coordinates_list.get(i));
+            }
+             */
+
+         /*Code used to test if the atoms have been correctly stored. I've commented the code because in the final version this feature will, obviously, not be available.*/
+
         for (int i = 0; i < atoms_coordinates_list.size(); i++) {
             System.out.println(atoms_coordinates_list.get(i));
         }
 
-        /*Final print of the board including the positions of the atoms.*/
-        System.out.println("\n\n" + board);
-
+            System.out.println("And the following structure is the game board including the position of the atoms:");
+            System.out.println("\n" + board);
+            System.exit(0);
+        }
 
     }
 }

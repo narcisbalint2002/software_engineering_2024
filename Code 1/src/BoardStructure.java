@@ -5,6 +5,11 @@ import java.util.HashMap; // import the HashMap class
 public class BoardStructure<E> {
 
     private static class Node<E> {
+
+        /*Each node of the doubly linked list will contain:
+        * - data
+        * - pointer to the next node
+        * - pointer to the previous node*/
         private HashMap<Integer, Boolean> data;
         private Node<E> next;
         private Node<E> prev;
