@@ -111,30 +111,42 @@ public class Main {
 //              {1,0},
 //              {2,0}
 //          }
-    public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, char user) {
+public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, char user) {
 //////                    IGNORE - was from when this was hashmap
 ////        create a hashmap that will have placement of atoms in format:
 ////          {row1=col1, row2=col1, row3=col1}
 //        HashMap<Integer, Integer> atoms = new HashMap<>();
 
-        ArrayList<ArrayList<Integer>> atoms = new ArrayList<>();
+    ArrayList<ArrayList<Integer>> atoms = new ArrayList<>();
 
-        int row_index = -1;
-        int col_index = -1;
+    int row_index = -1;
+    int col_index = -1;
+
+
+    // defining integer ranges for random number generation for board
+    // (no need to check for valid coordinates, while loop below will
+    //  regenerate random coordinates if not valid)
+    int row_min = 0;
+    int row_max = board.size() - 1;
+    int col_min = (board.size() / 2) * -1;
+    int col_max = (board.size() / 2);
 
 //        currently set to place x atoms
-        for (int i = 0; i < NUM_ATOMS; i++) {
+    for (int i = 0; i < NUM_ATOMS; i++) {
 //            condition for while loop reset to ensure runs every time, this will run while input not valid,
 //            i.e. while coordinates inputted by user cannot be found in the board, meaning they dont exist
-            boolean valid_input = false;
+        boolean valid_input = false;
 
 //            while loop to run while current coordinates NOT valid
-            while (!valid_input) {
-                if (user == 'a') {
-//                    put code to generate random numbers here (instead of two zeros)
-                    row_index = 0;
-                    col_index = 0;
-                }
+        while (!valid_input) {
+            if (user == 'a') {
+//                    put code to generate random numbers here with ranges min-max (inclusive)
+                row_index = (int) (Math.random() * (row_max - row_min + 1)) + row_min;
+                col_index = (int) (Math.random() * (col_max - col_min + 1)) + col_min;
+
+                // // uncomment line below to see output of atom generation)
+                // System.out.printf("\natom %d:  %d,%d\n", i + 1, row_index, col_index);
+            }
 //                if not ai/computer, then HAS to be player
                 else {
 
