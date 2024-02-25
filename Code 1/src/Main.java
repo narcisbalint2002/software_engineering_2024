@@ -292,7 +292,6 @@ public static ArrayList<ArrayList<Integer>> atomsInput(BoardStructure board, cha
                  System.out.println(board_coordinates_list.get(i));
             }
              */
-
          /*Code used to test if the atoms have been correctly stored. I've commented the code because in the final version this feature will, obviously, not be available.*/
 
         for (int i = 0; i < atoms_coordinates_list.size(); i++) {

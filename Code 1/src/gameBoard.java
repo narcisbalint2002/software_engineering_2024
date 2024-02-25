@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
-public class gameBoard extends JPanel {
+public class gameBoard extends JPanel{
 
 
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
@@ -69,7 +69,7 @@ public class gameBoard extends JPanel {
 
         for(int i = 0; i < hexagons.size(); i++)
         {
-            drawSingleHexagon(g, hexagons.get(i).first, hexagons.get(i).second);
+            drawSingleHexagon(g, hexagons.get(i).first, hexagons.get(i).second, i);
         }
     }
 
@@ -78,7 +78,7 @@ public class gameBoard extends JPanel {
        The function has been implemented using information from the website https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fwww.w3schools.com%2Fjava%2Fdefault.asp
        */
 
-    public void drawSingleHexagon(Graphics g, int x, int y)
+    public void drawSingleHexagon(Graphics g, int x, int y, int index)
     {
         //This is the length of the side of a hexagon.
         int sideLength = 40; // Adjust this value as needed
@@ -97,7 +97,7 @@ public class gameBoard extends JPanel {
         g.setColor(Color.black); // Set fill color to black
         g.fillPolygon(xPoints, yPoints, 6);
         g.setColor(Color.white);
-        g.drawString("1, 2", x -170, y - 260);
+        g.drawString("" + hexagons.get(index).getPosition(), x, y);
 
     }
 
