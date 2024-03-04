@@ -6,6 +6,12 @@ public class Atom {
     private List<List<Integer>> circleOfInfluence;
 
     public Atom(int x, int y) {
+
+        //Need to add checks here for the coordinate ranges and throw exceptions.
+        if(!Utility.inRange(x, y)){
+            throw new IllegalArgumentException("Arguments out of range - Atoms Contstructor");
+        }
+
         this.x = x;
         this.y = y;
         this.circleOfInfluence = new ArrayList<>();
@@ -28,7 +34,7 @@ public class Atom {
     public int getX() {
         return x;
     }
-    
+
     public int getY() {
         return y;
     }
@@ -46,10 +52,15 @@ public class Atom {
     }
 
     public void addToCircleOfInfluence(int x, int y) {
-        List<Integer> coordinate = new ArrayList<>();
-        coordinate.add(x);
-        coordinate.add(y);
-        circleOfInfluence.add(coordinate);
+
+        if(!Utility.inRange(x, y)){
+            throw new IllegalArgumentException("Arguments out of range - Atoms addCOI");
+        }
+
+            List<Integer> coordinate = new ArrayList<>();
+            coordinate.add(x);
+            coordinate.add(y);
+            circleOfInfluence.add(coordinate);
     }
 
     @Override
