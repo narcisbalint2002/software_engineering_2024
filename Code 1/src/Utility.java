@@ -92,11 +92,14 @@ public final class Utility {
     }
 
     public static boolean containsPair(ArrayList<int[]> coordinates, int firstNumber, int secondNumber) {
-        int[][] list = new int[0][];
-        for (int[] pair : list) {
-            if (pair[0] == firstNumber && pair[1] == secondNumber) {
+
+
+        for (int[] pair : coordinates) {
+
+            if(pair[0]==firstNumber && pair[1]==secondNumber) {
                 return true;
             }
+
         }
         return false;
     }
