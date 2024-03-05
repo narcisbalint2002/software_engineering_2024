@@ -22,7 +22,7 @@ public class Ray {
 //        String output = new String("\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\n Y-Direction: " + y_direction + "\n");
 //        return output;
 
-        return "\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\n Y-Direction: " + y_direction + "\n";
+        return "\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\nY-Direction: " + y_direction + "\n";
     }
 
     // set methods
@@ -43,11 +43,11 @@ public class Ray {
         return coordinate;
     }
 
-    public int getX_direction() {
+    public int getXDirection() {
         return x_direction;
     }
 
-    public int getY_direction() {
+    public int getYDirection() {
         return y_direction;
     }
 }
