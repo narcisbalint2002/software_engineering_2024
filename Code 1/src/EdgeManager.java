@@ -2,34 +2,47 @@ import java.util.ArrayList;
 
 public class EdgeManager {
 
-
+    /*
+     * contains all edge nodes, every edge has a unique number, and has a ray object for that coordinate, in that
+     * specific direction, because in board, hexagons will have more than one side rays can be shot from, this means
+     * they have up to 3 possible directions (most have 2, corners have 3), this basically creates all those rays at
+     * the beginning so when needed they can be accessed
+     */
     ArrayList<Edge> edge_list = new ArrayList<>();
+
+    /*
+     * these methods below do the exact same as their child methods,
+     * theyre just done for convenience, so the method call is shorter
+     * "Manager" is just added so they dont have the same name, less
+     * confusion in getting them mixed up
+     */
 
     public int getEdgeNumManager(int i) {
         return edge_list.get(i).getEdgeNum();
     }
-
-    public void setNumManager(int index, int num) {
+    public void setEdgeNumManager(int index, int num) {
         edge_list.get(index).setEdgeNum(num);
     }
-
     public ArrayList<Integer> getCoordinateManager(int i) {
         return edge_list.get(i).ray_obj.getCoordinate();
     }
-
     public int getXDirectionManager(int i) {
         return edge_list.get(i).ray_obj.getXDirection();
     }
-
     public int getYDirectionManager(int i) {
         return edge_list.get(i).ray_obj.getYDirection();
     }
 
+    // class constructor, auto-constructs edge list with all edge nodes, each containing respective ray
     public EdgeManager() {
+        // for iteration
         int i;
 
-
-
+        /*
+        * much of the maths below is just modulus and addition done as a way to find some pattern in iteratively
+        * generating all the edge numbers as well as respective coordinates and directions, dont trip over it too much,
+        * the important thing is it works, and it just takes advantage of the pattern each edge has in its layout
+        * */
 
         // loop for top left edge
         for (i = 0; i < 10; i++) {
@@ -167,7 +180,7 @@ public class EdgeManager {
 
     public static void main(String args[]) {
 
-//        // UNCOMMENT TO PRINT ENTIRE EDGE LIST
+//        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
 //        EdgeManager board_edge_list = new EdgeManager();
 //        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
 //            System.out.println(board_edge_list.edge_list.get(j).toString());

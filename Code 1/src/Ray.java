@@ -3,20 +3,22 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.ArrayList;
 
 public class Ray {
-    // list of coordinates ray is at
+    // list of coordinates ray is at (x, y)
     ArrayList<Integer> coordinate;
 
-    // ray directions
+    // ray directions (will ONLY ever be -1, 0 or 1)
     int x_direction;
     int y_direction;
 
 
+    // set the coordinates and direction ray is going in
     public Ray(ArrayList<Integer> c, int x, int y) {
         coordinate = c;
         x_direction = x;
         y_direction = y;
     }
 
+    // returns string of current ray properties
     @Override
     public String toString() {
 //        String output = new String("\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\n Y-Direction: " + y_direction + "\n");
@@ -38,7 +40,7 @@ public class Ray {
         this.y_direction = y_direction;
     }
 
-    // getter methods
+    // get methods
     public ArrayList<Integer> getCoordinate() {
         return coordinate;
     }

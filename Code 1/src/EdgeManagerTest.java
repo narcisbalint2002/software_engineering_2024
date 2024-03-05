@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeManagerTest {
 
-    // test to check correct edge numbers for particular indexes
+    // test to check correct edge numbers for particular edge indexes
     @Test
     public void EdgeNumberChecks() {
         EdgeManager test_edge = new EdgeManager();
@@ -17,7 +17,7 @@ class EdgeManagerTest {
         Assertions.assertEquals(9, test_edge.getEdgeNumManager(8));
     }
 
-    // test to check if the rays that share same corner are correct
+    // test to check if the edges that share same coordinate are correct
     @Test
     public void CornerCoordinatesCheck() {
         EdgeManager test_edge = new EdgeManager();
@@ -58,7 +58,7 @@ class EdgeManagerTest {
     }
 
 
-    // test to check correct edge numbers for particular indexes
+    // test to check correct direction for particular edge indexes
     @Test
     public void DirectionChecks() {
         EdgeManager test_edge = new EdgeManager();
