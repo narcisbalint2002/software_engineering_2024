@@ -47,6 +47,7 @@ public class AtomManager {
             //Check if coordinates are in appropiate range and not Duplicates.
             if (Utility.inRange(firstNumber, secondNumber) && !Utility.containsPair(coordinates, firstNumber, secondNumber)) {
                 int[] pair = {firstNumber, secondNumber};
+                //call createAtom here, so it makes atom object with these coordinates and adds to atoms arrlist in this class.
                 coordinates.add(pair);
                 System.out.println("(" + firstNumber + ", " + secondNumber + ")");
                 count++;
