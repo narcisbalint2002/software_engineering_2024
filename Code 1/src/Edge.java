@@ -5,10 +5,10 @@ public class Edge {
     // edge number value
     int edge_num;
     // ray object for this particular edge (both set to -1 as default value, this SHOULD NOT be kept same)
-    Ray ray_obj = new Ray(new ArrayList<>(), -1, -1);
+    Ray ray_obj = new Ray(new Coordinate(), -1, -1);
 
     // edge class constructor, changes edge number and ray properties
-    public Edge(int e, ArrayList<Integer> c, int x, int y) {
+    public Edge(int e, Coordinate c, int x, int y) {
         edge_num = e;
         ray_obj.setCoordinate(c);
         ray_obj.setX_direction(x);

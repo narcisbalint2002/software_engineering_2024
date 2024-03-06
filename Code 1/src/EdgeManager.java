@@ -23,7 +23,7 @@ public class EdgeManager {
     public void setEdgeNumManager(int index, int num) {
         edge_list.get(index).setEdgeNum(num);
     }
-    public ArrayList<Integer> getCoordinateManager(int i) {
+    public Coordinate getCoordinateManager(int i) {
         return edge_list.get(i).ray_obj.getCoordinate();
     }
     public int getXDirectionManager(int i) {
@@ -47,10 +47,10 @@ public class EdgeManager {
         // loop for top left edge
         for (i = 0; i < 10; i++) {
             // (a new arraylist NEEDS to be created each time otherwise same values of old arraylist are added
-            ArrayList<Integer> temp_c = new ArrayList<>();
+            Coordinate temp_c = new Coordinate();
 
-            temp_c.add(i / 2);          // some quick maths
-            temp_c.add((i / 2) * -1);   // some more quick maths
+            temp_c.x = i / 2;          // some quick maths
+            temp_c.y = (i / 2) * -1;   // some more quick maths
 
 
             // if edge index is even
@@ -69,9 +69,9 @@ public class EdgeManager {
         for (i = 10; i < 19; i++) {
             // similar concept to that above, but basically needed % because this time
             // we start at 10 instead of 0, similar will apply later on
-            ArrayList<Integer> temp_c = new ArrayList<>();
-            temp_c.add( 4 + (((i + 1) % 10) / 2)); // quick maths
-            temp_c.add(-4); // columns all same
+            Coordinate temp_c = new Coordinate();
+            temp_c.x = 4 + (((i + 1) % 10) / 2); // quick maths
+            temp_c.y = -4; // columns all same
 
 
             // if edge index is even
@@ -89,10 +89,10 @@ public class EdgeManager {
         // loop for bottom edge
         for (i = 19; i < 28; i++) {
             // start at 19
-            ArrayList<Integer> temp_c = new ArrayList<>();
+            Coordinate temp_c = new Coordinate();
 
-            temp_c.add(8);           // some quick maths
-            temp_c.add((4 - (((i + 1) % 19) / 2)) * -1);    // some more quick maths
+            temp_c.x = 8;           // some quick maths
+            temp_c.y = (4 - (((i + 1) % 19) / 2)) * -1;    // some more quick maths
 
 
 
@@ -112,10 +112,10 @@ public class EdgeManager {
         // loop for bottom right edge
         for (i = 28; i < 37; i++) {
             // start at 28
-            ArrayList<Integer> temp_c = new ArrayList<>();
+            Coordinate temp_c = new Coordinate();
 
-            temp_c.add(8 - (((i + 1) % 28) / 2));           // some quick maths
-            temp_c.add(((i + 1) % 28) / 2);    // some more quick maths
+            temp_c.x = 8 - (((i + 1) % 28) / 2);           // some quick maths
+            temp_c.y = ((i + 1) % 28) / 2;    // some more quick maths
 
 
             // if edge index is even
@@ -134,9 +134,9 @@ public class EdgeManager {
         // loop for top right edge
         for (i = 37; i < 46; i++) {
             // start at 37
-            ArrayList<Integer> temp_c = new ArrayList<>();
-            temp_c.add(4 - (((i + 1) % 37) / 2)); // some quick maths
-            temp_c.add(4); // all y are 4
+            Coordinate temp_c = new Coordinate();
+            temp_c.x = 4 - (((i + 1) % 37) / 2); // some quick maths
+            temp_c.y = 4; // all y are 4
 
 
 
@@ -156,9 +156,9 @@ public class EdgeManager {
         // loop for top edge
         for (i = 46; i < 54; i++) {
             // start at 46
-            ArrayList<Integer> temp_c = new ArrayList<>();
-            temp_c.add(0);           // some quick maths
-            temp_c.add(4 - (((i + 1) % 46) / 2)); // some more quick maths
+            Coordinate temp_c = new Coordinate();
+            temp_c.x = 0;           // some quick maths
+            temp_c.y = 4 - (((i + 1) % 46) / 2); // some more quick maths
 
 
             // if edge index is even
@@ -179,7 +179,6 @@ public class EdgeManager {
     }
 
     public static void main(String args[]) {
-
 //        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
 //        EdgeManager board_edge_list = new EdgeManager();
 //        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
