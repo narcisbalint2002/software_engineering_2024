@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ray {
     // list of coordinates ray is at (x, y)
-    ArrayList<Integer> coordinate;
+    Coordinate coordinates;
 
     // ray directions (will ONLY ever be -1, 0 or 1)
     int x_direction;
@@ -12,8 +12,8 @@ public class Ray {
 
 
     // set the coordinates and direction ray is going in
-    public Ray(ArrayList<Integer> c, int x, int y) {
-        coordinate = c;
+    public Ray(Coordinate c, int x, int y) {
+        coordinates = c;
         x_direction = x;
         y_direction = y;
     }
@@ -24,12 +24,12 @@ public class Ray {
 //        String output = new String("\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\n Y-Direction: " + y_direction + "\n");
 //        return output;
 
-        return "\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\nY-Direction: " + y_direction + "\n";
+        return "\nCoordinates: " + coordinates.toString() + "\nX-Direction: " + x_direction + "\nY-Direction: " + y_direction + "\n";
     }
 
     // set methods
-    public void setCoordinate(ArrayList<Integer> coordinate) {
-        this.coordinate = coordinate;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinates = coordinate;
     }
 
     public void setX_direction(int x_direction) {
@@ -41,8 +41,8 @@ public class Ray {
     }
 
     // get methods
-    public ArrayList<Integer> getCoordinate() {
-        return coordinate;
+    public Coordinate getCoordinate() {
+        return coordinates;
     }
 
     public int getXDirection() {
