@@ -19,6 +19,27 @@ public final class Utility {
 
     }
 
+    public static void set_trajectories(){ //In Progress - Abdullah
+
+        //                           Trajectory(trajectory                 , right_direction            , left_direction             );
+        Trajectory trajectory1 = new Trajectory(new Coordinate(-1, 0), new Coordinate(-1, 1), new Coordinate(0, -1));
+        Trajectory trajectory2 = new Trajectory(new Coordinate(-1, 1), new Coordinate(0, 1), new Coordinate(-1, 0));
+        Trajectory trajectory3 = new Trajectory(new Coordinate(0, 1), new Coordinate(1, 0), new Coordinate(-1, 1));
+        Trajectory trajectory4 = new Trajectory(new Coordinate(0, -1), new Coordinate(-1, 0), new Coordinate(1, -1));
+        Trajectory trajectory5 = new Trajectory(new Coordinate(1, 0), new Coordinate(+1, -1), new Coordinate(0, 1));
+        Trajectory trajectory6 = new Trajectory(new Coordinate(1, -1), new Coordinate(0, -1), new Coordinate(+1, 0));
+
+
+
+        System.out.println("Trajectory 1:\n" + trajectory1.toString()+"\n");
+        System.out.println("Trajectory 2:\n" + trajectory2.toString()+"\n");
+        System.out.println("Trajectory 3:\n" + trajectory3.toString()+"\n");
+        System.out.println("Trajectory 4:\n" + trajectory4.toString()+"\n");
+        System.out.println("Trajectory 5:\n" + trajectory5.toString()+"\n");
+        System.out.println("Trajectory 6:\n" + trajectory6.toString()+"\n");
+
+    }
+
 
 
 
