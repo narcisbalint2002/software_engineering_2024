@@ -28,6 +28,8 @@ public class Edge {
         return edge_num;
     }
 
+    public Ray getRayObj() {return ray_obj;};
+
     // toString of Edge incorporates Ray toString
     @Override
     public String toString() {
