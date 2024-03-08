@@ -180,9 +180,9 @@ public class EdgeManager {
 
     public static void main(String args[]) {
 //        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
-//        EdgeManager board_edge_list = new EdgeManager();
-//        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
-//            System.out.println(board_edge_list.edge_list.get(j).toString());
-//        }
+        EdgeManager board_edge_list = new EdgeManager();
+        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
+            System.out.println(board_edge_list.edge_list.get(j).toString());
+        }
     }
 }

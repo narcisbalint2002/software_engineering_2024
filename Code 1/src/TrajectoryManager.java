@@ -39,6 +39,7 @@ public class TrajectoryManager {
 
 
     public class Trajectory {
+        //not actual coordinate but direction (1, -1) can only  be 0, -1, 1.
         private final Coordinate trajectory_direction;
         private final Coordinate right_direction;
         private final Coordinate left_direction;

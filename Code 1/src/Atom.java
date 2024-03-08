@@ -36,19 +36,16 @@ public class Atom extends Coordinate {
 
     public void addToCircleOfInfluence(Coordinate c) {
 
-        if(!Utility.inRange(c.getX(), c.getY())){
+        if(Utility.inRange(c.getX(), c.getY())){
             //throw new IllegalArgumentException("Arguments out of range - Atoms addCOI");
 
             /*Since atoms near edge will lead to COI out of range.
               i need to still be able to continue programme.
               for now i will add -1000, -1000 to indicate c.o.i out of board.
              */
-            circleOfInfluence.add(new Coordinate(-1000, -1000));
-        }
-
             Coordinate temp = new Coordinate(c.getX(), c.getY());
-
             circleOfInfluence.add(temp);
+        }
     }
 
     @Override

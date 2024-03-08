@@ -9,12 +9,12 @@ public final class Utility {
 
     public static void calculate_Tracjectory(Ray ray){ //In Progress
 
-
         //First check if ray.coordinate is an atom, to reflected it straight back.
 
         //Then check if ray.coordinate is in C.O.I of another atom - if Yes find out where those atoms coordinate is even multiple.
 
         //We calculate new trajectory of ray.
+
 
     }
 
