@@ -9,6 +9,7 @@ public class EdgeManager {
      * the beginning so when needed they can be accessed
      */
     ArrayList<Edge> edge_list = new ArrayList<>();
+    TrajectoryManager trajectory_obj = new TrajectoryManager();
 
     /*
      * these methods below do the exact same as their child methods,
@@ -26,17 +27,20 @@ public class EdgeManager {
     public Coordinate getCoordinateManager(int i) {
         return edge_list.get(i).ray_obj.getCoordinate();
     }
-    public int getXDirectionManager(int i) {
-        return edge_list.get(i).ray_obj.getXDirection();
+    public int getTrajectoryIndexManager(int i) {
+        return edge_list.get(i).ray_obj.getTrajectoryIndex();
     }
-    public int getYDirectionManager(int i) {
-        return edge_list.get(i).ray_obj.getYDirection();
+    public Trajectory getTrajectoryManager(int i) {
+        return edge_list.get(i).ray_obj.getTrajectory();
     }
 
     // class constructor, auto-constructs edge list with all edge nodes, each containing respective ray
     public EdgeManager() {
         // for iteration
         int i;
+
+        // index for trajectory list (is an enum)
+        int traj_index;
 
         /*
         * much of the maths below is just modulus and addition done as a way to find some pattern in iteratively
@@ -55,12 +59,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, 1, 0);
+                traj_index = TrajectoryName.DOWN_RIGHT.getTrajectoryIndex(); // this means going down and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index); // starting trajectory of ray from this edge
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, 0, 1);
+                traj_index = TrajectoryName.RIGHT.getTrajectoryIndex(); // this means going right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -76,12 +84,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, -1, 1);
+                traj_index = TrajectoryName.UP_RIGHT.getTrajectoryIndex(); // this means going up and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, 0, 1);
+                traj_index = TrajectoryName.RIGHT.getTrajectoryIndex(); // this means going right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -98,12 +110,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, -1, 1);
+                traj_index = TrajectoryName.UP_RIGHT.getTrajectoryIndex(); // this means going up and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, -1, 0);
+                traj_index = TrajectoryName.UP_LEFT.getTrajectoryIndex(); // this means going up and left
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -120,12 +136,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, 0, -1);
+                traj_index = TrajectoryName.LEFT.getTrajectoryIndex(); // this means going left
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, -1, 0);
+                traj_index = TrajectoryName.UP_LEFT.getTrajectoryIndex(); // this means going up and left
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -143,12 +163,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, 0, -1);
+                traj_index = TrajectoryName.LEFT.getTrajectoryIndex(); // this means going left
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, 1, -1);
+                traj_index = TrajectoryName.DOWN_LEFT.getTrajectoryIndex(); // this means going up and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -163,12 +187,16 @@ public class EdgeManager {
 
             // if edge index is even
             if (i % 2 == 0) {
-                Edge temp_edge = new Edge(i + 1, temp_c, 1, 0);
+                traj_index = TrajectoryName.DOWN_RIGHT.getTrajectoryIndex(); // this means going down and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
             // otherwise must be odd index
             else {
-                Edge temp_edge = new Edge(i + 1, temp_c, 1, -1);
+                traj_index = TrajectoryName.DOWN_LEFT.getTrajectoryIndex(); // this means going up and right
+                Trajectory temp_traj = trajectory_obj.getTrajectory(traj_index);
+                Edge temp_edge = new Edge(i + 1, temp_c, traj_index, temp_traj);
                 edge_list.add(temp_edge);
             }
         }
@@ -180,9 +208,9 @@ public class EdgeManager {
 
     public static void main(String args[]) {
 //        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
-        EdgeManager board_edge_list = new EdgeManager();
-        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
-            System.out.println(board_edge_list.edge_list.get(j).toString());
-        }
+//        EdgeManager board_edge_list = new EdgeManager();
+//        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
+//            System.out.println(board_edge_list.edge_list.get(j).toString());
+//        }
     }
 }

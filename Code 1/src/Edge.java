@@ -4,15 +4,19 @@ public class Edge {
 
     // edge number value
     int edge_num;
+
+
     // ray object for this particular edge (both set to -1 as default value, this SHOULD NOT be kept same)
-    Ray ray_obj = new Ray(new Coordinate(), -1, -1);
+    Ray ray_obj = new Ray(new Coordinate(), -1, new Trajectory());
+
+
 
     // edge class constructor, changes edge number and ray properties
-    public Edge(int e, Coordinate c, int x, int y) {
+    public Edge(int e, Coordinate c, int t_i, Trajectory t) {
         edge_num = e;
         ray_obj.setCoordinate(c);
-        ray_obj.setX_direction(x);
-        ray_obj.setY_direction(y);
+        ray_obj.setTrajectoryIndex(t_i);
+        ray_obj.setTrajectory(t);
     }
 
     // set/get methods, self explanatory
