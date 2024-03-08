@@ -7,7 +7,7 @@ public final class Utility {
         throw new AssertionError("Utility should not be instantiated");
     }
 
-    public static void calculate_Tracjectory(Ray ray){ //In Progress
+    public static void calculate_Trajectory(Ray ray){ //In Progress
 
         //First check if ray.coordinate is an atom, to reflected it straight back.
 

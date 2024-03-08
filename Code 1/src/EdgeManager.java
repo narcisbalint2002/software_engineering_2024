@@ -18,6 +18,38 @@ public class EdgeManager {
      * confusion in getting them mixed up
      */
 
+    // returns an Edge node based on index inputted as argument
+    public Edge edgeInput(int index) {
+        return edge_list.get(index);
+    }
+
+    // when we reach the edge of the board with a ray, we are at a particular set of coordinates with a particular
+    // trajectory, with BOTH of these, we can find the edge of that coordinate with the OPPOSITE trajectory (meaning
+    // it is pointing at where the ray came from), this means we successfully found our exit edge of our ray
+    public Edge findEdgeByCoordinateAndTrajectory(Coordinate c, Trajectory t) {
+        // reverse the trajectory by multiplying its x and y by -1
+        Trajectory temp_traj = new Trajectory();
+        temp_traj.getTrajectory_direction().x = (t.getTrajectory_direction().getX()) * -1;
+        temp_traj.getTrajectory_direction().y = (t.getTrajectory_direction().getY()) * -1;
+
+        // goes thru entire edge list to see if current ray coordinates and inverse trajectory match any of those in list
+        // the idea is that we meet an edge that shares the coordinate, but the trajectory will be opposite so we multiply its x and y by -1
+        for (int i = 0; i < edge_list.size(); i++) {
+
+            System.out.println(getCoordinateManager(i).toString());
+            System.out.println(c.toString());
+            System.out.println(getTrajectoryManager(i).toString());
+            System.out.println(temp_traj.toString());
+
+
+            if ((getCoordinateManager(i).toString().equals(c.toString())) && (getTrajectoryManager(i).toString().equals(temp_traj.toString()))) {
+                return edge_list.get(i);
+            }
+        }
+        // if we didnt find we lose :( (this shouldnt happen)
+        return null;
+    }
+
     public int getEdgeNumManager(int i) {
         return edge_list.get(i).getEdgeNum();
     }
