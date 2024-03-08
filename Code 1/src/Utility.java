@@ -30,27 +30,64 @@ public final class Utility {
 
 
         if(isAtom(current, atoms)){
-            System.out.println("Atom is at Ray coordinate");
+            System.out.println("DIRECT HIT");
         }else if(isAtom(front, atoms)){
-            System.out.println("Ray is absorbed.");
+            System.out.println("DIRECT HIT");
         }else if(isAtom(right, atoms)) {
             //Since atom is on the right, we go left.
             Coordinate temp = new Coordinate(current.getX() + trajectory.getLeft_direction().getX(),current.getY() + trajectory.getLeft_direction().getY());
             newTrajectory(ray, trajectories, left, temp);
-            System.out.println("Ray Coordiantes and Trajectory Changed - R");
+            System.out.println("Ray Coordinates and Trajectory Changed - R");
 
         }else if(isAtom(left, atoms)){
 
             Coordinate temp = new Coordinate(current.getX() + trajectory.getRight_direction().getX(),current.getY() + trajectory.getRight_direction().getY());
             newTrajectory(ray, trajectories, right, temp);
-            System.out.println("Ray Coordiantes and Trajectory Changed - L");
+            System.out.println("Ray Coordinates and Trajectory Changed - L");
 
         }else {
-            System.out.println("Ray Coordiantes changed and Trajectory NOT CHANGED");
+            System.out.println("Ray Coordinates changed and Trajectory NOT CHANGED");
             ray.coordinates = new Coordinate(current.getX() + trajectory.getTrajectory_direction().getX(),
                     current.getY() + trajectory.getTrajectory_direction().getY());
         }
 
+    }
+
+    public static void changeTrajectoryLeft(Ray ray) {
+        // changes coordinates of ray to left
+        int x_new = ray.coordinates.getX() + ray.trajectory.getLeft_direction().getX();
+        int y_new = ray.coordinates.getY() + ray.trajectory.getLeft_direction().getY();
+
+        // sets coordinates to new ones
+        ray.setCoordinate(new Coordinate(x_new, y_new));
+
+
+        Trajectory tempT = null;
+        TrajectoryManager traj_manager = new TrajectoryManager();
+        for (Trajectory t : traj_manager.trajectories) {
+            if ((ray.getTrajectory().getLeft_direction().getX() == t.getTrajectory_direction().getX()) && (ray.getTrajectory().getLeft_direction().getY() == t.getTrajectory_direction().getY())) {
+                tempT = t;
+            }
+        }
+        ray.setTrajectory(tempT);
+    }
+    public static void changeTrajectoryRight(Ray ray) {
+        // changes coordinates of ray to left
+        int x_new = ray.coordinates.getX() + ray.trajectory.getRight_direction().getX();
+        int y_new = ray.coordinates.getY() + ray.trajectory.getRight_direction().getY();
+
+        // sets coordinates to new ones
+        ray.setCoordinate(new Coordinate(x_new, y_new));
+
+
+        Trajectory tempT = null;
+        TrajectoryManager traj_manager = new TrajectoryManager();
+        for (Trajectory t : traj_manager.trajectories) {
+            if ((ray.getTrajectory().getRight_direction().getX() == t.getTrajectory_direction().getX()) && (ray.getTrajectory().getRight_direction().getY() == t.getTrajectory_direction().getY())) {
+                tempT = t;
+            }
+        }
+        ray.setTrajectory(tempT);
     }
 
     private static void newTrajectory(Ray ray, ArrayList<Trajectory> trajectories, Coordinate right, Coordinate temp) {

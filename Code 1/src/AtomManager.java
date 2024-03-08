@@ -30,7 +30,7 @@ public class AtomManager {
 
         System.out.println("Generated pairs:");
 
-        while (count < 6) {
+        while (count < Main.NUM_ATOMS) {
             //Hard coded numbers; CHANGE after board implementation.
             int row = random.nextInt(9);
             int column = random.nextInt(9) - 4;
