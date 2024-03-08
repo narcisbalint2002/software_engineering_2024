@@ -73,29 +73,64 @@ class EdgeManagerTest {
     public void DirectionChecks() {
         EdgeManager test_edge = new EdgeManager();
 
+        int index;
+        int trajectory_index;
+        TrajectoryManager test_trajectory_manager = new TrajectoryManager();
+        Trajectory test_trajectory;
+
         // here is just testing the ray directions based on indexes of edge list
         // (index 0 in edge list is edge 1, index 1 is edge 2, etc.)
+        index = 0;
+        trajectory_index = TrajectoryName.DOWN_RIGHT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
 
-        Assertions.assertEquals(1, test_edge.getXDirectionManager(0));
-        Assertions.assertEquals(0, test_edge.getYDirectionManager(0));
 
-        Assertions.assertEquals(1, test_edge.getXDirectionManager(53));
-        Assertions.assertEquals(-1, test_edge.getYDirectionManager(53));
 
-        Assertions.assertEquals(-1, test_edge.getXDirectionManager(18));
-        Assertions.assertEquals(1, test_edge.getYDirectionManager(18));
+        index = 53;
+        trajectory_index = TrajectoryName.DOWN_LEFT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
 
-        Assertions.assertEquals(0, test_edge.getXDirectionManager(9));
-        Assertions.assertEquals(1, test_edge.getYDirectionManager(9));
 
-        Assertions.assertEquals(0, test_edge.getXDirectionManager(36));
-        Assertions.assertEquals(-1, test_edge.getYDirectionManager(36));
+        index = 18;
+        trajectory_index = TrajectoryName.UP_RIGHT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
 
-        Assertions.assertEquals(1, test_edge.getXDirectionManager(45));
-        Assertions.assertEquals(-1, test_edge.getYDirectionManager(45));
 
-        Assertions.assertEquals(-1, test_edge.getXDirectionManager(31));
-        Assertions.assertEquals(0, test_edge.getYDirectionManager(31));
+
+        index = 9;
+        trajectory_index = TrajectoryName.RIGHT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
+
+
+        index = 36;
+        trajectory_index = TrajectoryName.LEFT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
+
+
+        index = 45;
+        trajectory_index = TrajectoryName.DOWN_LEFT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
+
+
+        index = 31;
+        trajectory_index = TrajectoryName.UP_LEFT.getTrajectoryIndex(); // this is the direction to in
+        test_trajectory = test_trajectory_manager.trajectories.get(trajectory_index);
+        Assertions.assertEquals(trajectory_index, test_edge.getTrajectoryIndexManager(index));
+        Assertions.assertEquals(test_trajectory.toString(), test_edge.getTrajectoryManager(index).toString());
+
+
     }
 
 }
