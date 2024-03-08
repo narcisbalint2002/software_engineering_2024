@@ -41,7 +41,6 @@ public class GameLogic {
 
             EdgeManager board_edge_list = new EdgeManager();
 
-            int test = 0;
 
             // runs while user does not have final guess of atom coordinates
             while(!final_guess) {
@@ -61,11 +60,8 @@ public class GameLogic {
 
                 current_ray.rayPath(board_edge_list);
 
-                if (test==2) {
-                    break;
-                }
 
-                test++;
+
 
 
                 current_player.ray_list.add(current_ray);

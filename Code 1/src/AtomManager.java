@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class AtomManager {
-    private List<Atom> atoms;
+    private ArrayList<Atom> atoms;
 
     public AtomManager() {
         this.atoms = new ArrayList<>();
@@ -47,7 +47,7 @@ public class AtomManager {
 
     }
 
-    public List<Atom> getAtoms() {
+    public ArrayList<Atom> getAtoms() {
         return atoms;
     }
 
