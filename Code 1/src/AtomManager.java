@@ -25,7 +25,7 @@ public class AtomManager {
 
     public void setter_generatingAtoms() {
         ArrayList<int[]> coordinates = new ArrayList<>();
-        Random random = new Random();
+        Random random = new Random(1);
         int count = 0;
 
         System.out.println("Generated pairs:");
