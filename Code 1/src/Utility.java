@@ -7,7 +7,6 @@ public final class Utility {
         throw new AssertionError("Utility should not be instantiated");
     }
 
-
     public static void calculate_Tracjectory(Ray ray){ //In Progress
 
 
@@ -18,8 +17,6 @@ public final class Utility {
         //We calculate new trajectory of ray.
 
     }
-
-
 
 
     public static boolean inRange(int x, int y){ //In Progress for Liam.

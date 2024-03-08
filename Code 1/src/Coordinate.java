@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Coordinate {
 
     // coordinates
@@ -6,6 +8,7 @@ public class Coordinate {
 
     // constructs using parameters
     public Coordinate(int x, int y) {
+
         this.x = x;
         this.y = y;
     }
@@ -15,6 +18,23 @@ public class Coordinate {
     {
         this(-1, -1);
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
 
     @Override
     public String toString() {

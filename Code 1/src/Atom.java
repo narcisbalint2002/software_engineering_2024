@@ -1,27 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Atom {
-    private int x, y;
-    private List<List<Integer>> circleOfInfluence;
+public class Atom extends Coordinate {
+
+    private List<Coordinate> circleOfInfluence;
 
     public Atom(int x, int y) {
+        super(x, y);
 
         //Need to add checks here for the coordinate ranges and throw exceptions.
         if(!Utility.inRange(x, y)){
             throw new IllegalArgumentException("Arguments out of range - Atoms Contstructor");
         }
 
-        this.x = x;
-        this.y = y;
         this.circleOfInfluence = new ArrayList<>();
-
-        this.addToCircleOfInfluence(x, y+1);
-        this.addToCircleOfInfluence(x, y-1);
-        this.addToCircleOfInfluence(x-1, y);
-        this.addToCircleOfInfluence(x-1, y+1);
-        this.addToCircleOfInfluence(x+1, y);
-        this.addToCircleOfInfluence(x+1, y-1);
+        addToCircleOfInfluence(new Coordinate(x, y + 1));
+        addToCircleOfInfluence(new Coordinate(x, y - 1));
+        addToCircleOfInfluence(new Coordinate(x - 1, y));
+        addToCircleOfInfluence(new Coordinate(x - 1, y + 1));
+        addToCircleOfInfluence(new Coordinate(x + 1, y));
+        addToCircleOfInfluence(new Coordinate(x + 1, y - 1));
     }
 
     public static void main(String[] args) { //TESTING PURPOSES
@@ -31,46 +29,36 @@ public class Atom {
         System.out.println(atom.toString());
     }
 
-    public int getX() {
-        return x;
-    }
 
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public List<List<Integer>> getCircleOfInfluence() {
+    public List<Coordinate> getCircleOfInfluence() {
         return circleOfInfluence;
     }
 
-    public void addToCircleOfInfluence(int x, int y) {
+    public void addToCircleOfInfluence(Coordinate c) {
 
-        if(!Utility.inRange(x, y)){
-            throw new IllegalArgumentException("Arguments out of range - Atoms addCOI");
+        if(!Utility.inRange(c.getX(), c.getY())){
+            //throw new IllegalArgumentException("Arguments out of range - Atoms addCOI");
+
+            /*Since atoms near edge will lead to COI out of range.
+              i need to still be able to continue programme.
+              for now i will add -1000, -1000 to indicate c.o.i out of board.
+             */
+            circleOfInfluence.add(new Coordinate(-1000, -1000));
         }
 
-            List<Integer> coordinate = new ArrayList<>();
-            coordinate.add(x);
-            coordinate.add(y);
-            circleOfInfluence.add(coordinate);
+            Coordinate temp = new Coordinate(c.getX(), c.getY());
+
+            circleOfInfluence.add(temp);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Atom at ").append("(").append(x).append(", ").append(y).append(")").append("\n");
+        sb.append("Atom at ").append("(").append(this.getX()).append(", ").append(this.getY()).append(")").append("\n");
         sb.append("Circle of Influence: [");
         for (int i = 0; i < circleOfInfluence.size(); i++) {
-            List<Integer> coordinate = circleOfInfluence.get(i);
-            sb.append("(").append(coordinate.get(0)).append(", ").append(coordinate.get(1)).append(")");
+            Coordinate coordinate = circleOfInfluence.get(i);
+            sb.append("(").append(coordinate.getX()).append(", ").append(coordinate.getY()).append(")");
             if (i < circleOfInfluence.size() - 1) {
                 sb.append(", ");
             }
