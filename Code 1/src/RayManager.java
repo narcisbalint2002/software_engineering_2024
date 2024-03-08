@@ -42,7 +42,8 @@ public class RayManager {
 
             // ADD CHECKS FOR LEFT AND RIGHT DIRECTIONS
 
-            System.out.println("\n\n--WOAH--");
+            // // only used to verify if ray is moving
+//            System.out.println("\n\n--WOAH--");
 
             // sets current ray coordinates to be hexagon in front (so moves one hexagon forward)
             // this is for IF THE ABOVE CHECK FOR CIRCLES OF INFLUENCE EITHER SIDE IS FALSE

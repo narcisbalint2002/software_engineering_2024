@@ -68,6 +68,11 @@ public class GameLogic {
                 test++;
 
 
+                current_player.ray_list.add(current_ray);
+
+                System.out.println("\nRay entered: " + current_ray.ray_entrance_edge);
+                System.out.println("Ray exited: " + current_ray.ray_exit_edge);
+
 
                 final_guess = current_player.playerGuess();
             }

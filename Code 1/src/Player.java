@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
@@ -7,6 +8,10 @@ public class Player {
 
     // dumb players score
     int score;
+
+
+    // list of rays (each ray has entrance and exit points)
+    ArrayList<RayManager> ray_list = new ArrayList<>();
 
 
 

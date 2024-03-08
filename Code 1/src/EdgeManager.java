@@ -27,26 +27,33 @@ public class EdgeManager {
     // trajectory, with BOTH of these, we can find the edge of that coordinate with the OPPOSITE trajectory (meaning
     // it is pointing at where the ray came from), this means we successfully found our exit edge of our ray
     public Edge findEdgeByCoordinateAndTrajectory(Coordinate c, Trajectory t) {
-        // reverse the trajectory by multiplying its x and y by -1
-        Trajectory temp_traj = new Trajectory();
-        temp_traj.getTrajectory_direction().x = (t.getTrajectory_direction().getX()) * -1;
-        temp_traj.getTrajectory_direction().y = (t.getTrajectory_direction().getY()) * -1;
+        //// reverse the trajectory by multiplying its x and y by -1
+        int traj_x = t.getTrajectory_direction().getX() * -1;
+        int traj_y = t.getTrajectory_direction().getY() * -1;
 
         // goes thru entire edge list to see if current ray coordinates and inverse trajectory match any of those in list
         // the idea is that we meet an edge that shares the coordinate, but the trajectory will be opposite so we multiply its x and y by -1
         for (int i = 0; i < edge_list.size(); i++) {
 
-            System.out.println(getCoordinateManager(i).toString());
-            System.out.println(c.toString());
-            System.out.println(getTrajectoryManager(i).toString());
-            System.out.println(temp_traj.toString());
+//            System.out.println(getCoordinateManager(i).toString());
+//            System.out.println(c.toString());
+//            System.out.println(getTrajectoryManager(i).toString());
+//            System.out.println("Trajectory: (" + traj_x + ", " +  traj_y + ")");
 
+            // here we are getting the current x and y coordinates AND x and y direction the current edge stores
+            int current_x = getCoordinateManager(i).getX();
+            int current_y = getCoordinateManager(i).getY();
+            int current_x_trajectory = getTrajectoryManager(i).getTrajectory_direction().getX();
+            int current_y_trajectory = getTrajectoryManager(i).getTrajectory_direction().getY();
 
-            if ((getCoordinateManager(i).toString().equals(c.toString())) && (getTrajectoryManager(i).toString().equals(temp_traj.toString()))) {
+            // comparing current coordinate and trajectory to arguments passed in (except the trajectory is inverted because opposite direction)
+            if ((current_x == c.getX()) && (current_y == c.getY()) && (current_x_trajectory == traj_x) && (current_y_trajectory == traj_y)) {
+//                System.out.println("FOUND");
                 return edge_list.get(i);
             }
+
         }
-        // if we didnt find we lose :( (this shouldnt happen)
+        // if we didnt find we lose :( (ideally this shouldnt happen)
         return null;
     }
 
