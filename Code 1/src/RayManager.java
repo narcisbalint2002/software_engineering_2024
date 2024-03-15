@@ -45,6 +45,32 @@ public class RayManager {
         return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getLeft_direction().getY();
     }
 
+    public Coordinate getNextFront() {
+        int new_front_x = getNextFrontX();
+        int new_front_y = getNextFrontY();
+        return new Coordinate(new_front_x, new_front_y);
+    }
+    public Coordinate getNextRight() {
+        int new_right_x = getNextRightX();
+        int new_right_y = getNextRightY();
+        return new Coordinate(new_right_x, new_right_y);
+    }
+    public Coordinate getNextLeft() {
+        int new_left_x = getNextLeftX();
+        int new_left_y = getNextLeftY();
+        return new Coordinate(new_left_x, new_left_y);
+    }
+
+//    public void setNextRight(Coordinate old_right) {
+//        old_right.x = getNextRightX();
+//        old_right.y = getNextRightY();
+//    }
+//
+//    public void setNextLeft(Coordinate old_left) {
+//        old_left.x = getNextLeftX();
+//        old_left.y = getNextLeftY();
+//    }
+
     public void rayPath(EdgeManager board_edge_list, AtomManager atomManager) {
 
         Coordinate front = new Coordinate(getNextFrontX(), getNextFrontY());
@@ -87,26 +113,19 @@ public class RayManager {
                 Utility.changeTrajectoryRight(current_ray);
                 System.out.println("Ray Coordinates and Trajectory Changed - L");
 
-            }else {
+            }
+            // check for if NO circles of influence either side
+            else {
                 System.out.println("Ray Coordinates changed and Trajectory NOT CHANGED - MOVED FORWARD");
                 current_ray.setCoordinate(front);
+//                front = getNextFront();
+//                right = getNextRight();
+//                left = getNextLeft();
+                front = new Coordinate(getNextFrontX(), getNextFrontY());
+                right = new Coordinate(getNextRightX(), getNextRightY());
+                left = new Coordinate(getNextLeftX(), getNextLeftY());
+
             }
-
-
-
-            // ADD CHECKS FOR LEFT AND RIGHT DIRECTIONS
-
-
-            // // only used to verify if ray is moving
-//            System.out.println("\n\n--WOAH--");
-
-
-
-
-            // sets current ray coordinates to be hexagon in front (so moves one hexagon forward)
-            // this is for IF THE ABOVE CHECK FOR CIRCLES OF INFLUENCE EITHER SIDE IS FALSE
-            current_ray.coordinates.setX(getNextFrontX());
-            current_ray.coordinates.setY(getNextFrontY());
         }
 
 

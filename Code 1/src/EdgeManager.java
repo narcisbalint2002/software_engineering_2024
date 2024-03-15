@@ -19,7 +19,7 @@ public class EdgeManager {
      */
 
     // returns an Edge node based on index inputted as argument
-    public Edge edgeInput(int index) {
+    public Edge getEdge(int index) {
         return edge_list.get(index);
     }
 

@@ -6,6 +6,18 @@ import java.util.Scanner;
 public class AtomManager {
     private ArrayList<Atom> atoms;
 
+
+    // this is ONLY really for testing, so it generates empty board,
+    // then we can specify atom coordinates and test if the ray path
+    // is correct with those specified atoms (instead of random atoms,
+    // to avoid the risk of seed producing different results if we
+    // change the code further down the line)
+    // also, ANY character can be passed in and this will trigger
+    public AtomManager(char any_character) {
+        this.atoms = new ArrayList<>();
+    }
+
+    // by default no arguments means will generate 6 atoms as normal
     public AtomManager() {
         this.atoms = new ArrayList<>();
         setter_generatingAtoms();

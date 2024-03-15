@@ -17,7 +17,7 @@ public class GameLogic {
         // all players in the game (to compare score at the end)
         ArrayList<Player> players = new ArrayList<>();
 
-        AtomManager atomManager = new AtomManager();
+        AtomManager atom_manager = new AtomManager();
 
 
         // CHANGE TO HOWEVER MANY PLAYERS THERE ARE
@@ -36,7 +36,7 @@ public class GameLogic {
 
             //// set all atoms in board
 //            Board.setAtoms(board);
-            System.out.println(atomManager);
+            System.out.println(atom_manager);
 
 //            // terminal printing (for debugging)
 //            Board.printBoard(board);
@@ -51,8 +51,8 @@ public class GameLogic {
                 // player choose whether want to guess final atoms
                 Scanner user_input = new Scanner(System.in);  // Create a Scanner object
                 System.out.println("Edge number (as per diagrams)? ");
-                int end_game = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
-                Edge current_edge = board_edge_list.edgeInput(end_game);
+                int edge_index = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
+                Edge current_edge = board_edge_list.getEdge(edge_index);
 
                 // works
                 System.out.println(current_edge.toString());
@@ -61,7 +61,7 @@ public class GameLogic {
                 // loop for current ray
                 RayManager current_ray = new RayManager(current_edge);
 
-                current_ray.rayPath(board_edge_list, atomManager);
+                current_ray.rayPath(board_edge_list, atom_manager);
 
 
 
