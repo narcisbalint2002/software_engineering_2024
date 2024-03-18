@@ -45,6 +45,14 @@ public class GameLogic {
             EdgeManager board_edge_list = new EdgeManager();
 
 
+            // // here you can create atoms manually for playing around with
+//            atom_manager.createAtom(1,1);
+//            atom_manager.createAtom(3,-3);
+//            atom_manager.createAtom(7,-3);
+//            atom_manager.createAtom(7,1);
+//            atom_manager.createAtom(4,4);
+
+
             // runs while user does not have final guess of atom coordinates
             while(!final_guess) {
 

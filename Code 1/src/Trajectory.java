@@ -1,5 +1,5 @@
 public class Trajectory {
-    //not actual coordinate but direction (1, -1) can only  be 0, -1, 1.
+    // not actual coordinate but direction (1, -1) can only  be 0, -1, 1.
     private final Coordinate trajectory_direction;
     private final Coordinate right_direction;
     private final Coordinate left_direction;
@@ -24,11 +24,11 @@ public class Trajectory {
     }
 
     public Coordinate getRight_direction(){
-        return trajectory_direction;
+        return right_direction;
     }
 
     public Coordinate getLeft_direction(){
-        return trajectory_direction;
+        return left_direction;
     }
 
     public void setTrajectory_direction(int x, int y){

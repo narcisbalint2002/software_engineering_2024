@@ -53,14 +53,53 @@ public final class Utility {
 
     }
 
+    public static void changeTrajectory(Ray ray, char new_direction) {
+
+
+        Trajectory tempT = null;
+        TrajectoryManager traj_manager = new TrajectoryManager();
+
+        // checks for direction we are CHANGING INTO (must be right, left or backwards 'r','l','b' )
+        if (new_direction == 'r') {
+            for (Trajectory t : traj_manager.trajectories) {
+                if ((ray.getTrajectory().getRight_direction().getX() == t.getTrajectory_direction().getX()) && (ray.getTrajectory().getRight_direction().getY() == t.getTrajectory_direction().getY())) {
+                    tempT = t;
+                }
+            }
+        }
+        else if (new_direction == 'l') {
+            for (Trajectory t : traj_manager.trajectories) {
+                if ((ray.getTrajectory().getLeft_direction().getX() == t.getTrajectory_direction().getX()) && (ray.getTrajectory().getLeft_direction().getY() == t.getTrajectory_direction().getY())) {
+                    tempT = t;
+                }
+            }
+        }
+        // go back whence you came from (multiply current direction by -1)
+        else if (new_direction == 'b') {
+            for (Trajectory t : traj_manager.trajectories) {
+                if (((ray.getTrajectory().getTrajectory_direction().getX() * -1) == t.getTrajectory_direction().getX()) && ((ray.getTrajectory().getTrajectory_direction().getY() * -1) == t.getTrajectory_direction().getY())) {
+                    tempT = t;
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("New Ray Direction MUST be right, left or backwards ('r','l','b')");
+        }
+
+        // set new trajectory to new one found
+        ray.setTrajectory(tempT);
+    }
+
     public static void changeTrajectoryLeft(Ray ray) {
         // changes coordinates of ray to left
         int x_new = ray.coordinates.getX() + ray.trajectory.getLeft_direction().getX();
         int y_new = ray.coordinates.getY() + ray.trajectory.getLeft_direction().getY();
 
-        // sets coordinates to new ones
-        ray.setCoordinate(new Coordinate(x_new, y_new));
-
+        // if new x and y are NOT in range
+        if(Utility.inRange(x_new, y_new)) {
+            // sets coordinates to new ones
+            ray.setCoordinate(new Coordinate(x_new, y_new));
+        }
 
         Trajectory tempT = null;
         TrajectoryManager traj_manager = new TrajectoryManager();
@@ -76,8 +115,14 @@ public final class Utility {
         int x_new = ray.coordinates.getX() + ray.trajectory.getRight_direction().getX();
         int y_new = ray.coordinates.getY() + ray.trajectory.getRight_direction().getY();
 
-        // sets coordinates to new ones
-        ray.setCoordinate(new Coordinate(x_new, y_new));
+
+        // if new x and y are NOT in range
+        if(Utility.inRange(x_new, y_new)) {
+            // sets coordinates to new ones
+            ray.setCoordinate(new Coordinate(x_new, y_new));
+        }
+
+
 
 
         Trajectory tempT = null;
