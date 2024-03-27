@@ -9,7 +9,7 @@ public class hexagon {
     {
         this.first = first;
         this.second = second;
-      position = p;
+        position = p;
         p++;
     }
 

@@ -227,12 +227,12 @@ public class Main {
         //Create new Frame
 
         JFrame frame = new JFrame("Game board");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         /*Add a new object of the class gameBoard to our frame.*/
         frame.add(new gameBoard());
 
-        frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -294,13 +294,7 @@ public class Main {
              */
          /*Code used to test if the atoms have been correctly stored. I've commented the code because in the final version this feature will, obviously, not be available.*/
 
-
-
             GameLogic.gameLoop();
-
-
-
-
 
 //        for (int i = 0; i < atoms_coordinates_list.size(); i++) {
 //            System.out.println(atoms_coordinates_list.get(i));
