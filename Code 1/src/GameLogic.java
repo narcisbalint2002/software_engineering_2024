@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class GameLogic {
 
 
+    // variable used in gameBoard for mouse event click for current edge
+    public static int current_edge_num;
 
     private GameLogic() {
         throw new AssertionError("GameLogic should not be instantiated");
@@ -20,7 +22,9 @@ public class GameLogic {
         AtomManager atom_manager = new AtomManager();
 
 
-        // CHANGE TO HOWEVER MANY PLAYERS THERE ARE
+
+
+        // CHANGE TO HOWEVER MANY PLAYERS THERE ARE (RIGHT NOW 1 FOR TESTING ONLY 1 GAME)
         while (games_played < 1) {
 
             Player current_player = new Player();
@@ -56,11 +60,32 @@ public class GameLogic {
             // runs while user does not have final guess of atom coordinates
             while(!final_guess) {
 
-                // player choose whether want to guess final atoms
-                Scanner user_input = new Scanner(System.in);  // Create a Scanner object
-                System.out.println("Edge number (as per diagrams)? ");
-                int edge_index = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
-                Edge current_edge = board_edge_list.getEdge(edge_index);
+                // // OLD CODE, can delete once made sure all else works well
+//                // player choose whether want to guess final atoms
+//                Scanner user_input = new Scanner(System.in);  // Create a Scanner object
+//                System.out.println("Edge number (as per diagrams)? ");
+//                int edge_index = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
+                current_edge_num = -1;
+
+                // waits for user input, this will update when mouse click event for edge is triggered
+                // !!WIP!!
+                // need to also implement a check for if the edge was already chosen,
+                //  OR
+                // can instead just grey it out and remove its ability to be clicked in Swing file
+                // (this option may be better)
+                while (current_edge_num == -1) {
+                    // player choose whether want to guess final atoms
+                    Scanner user_input = new Scanner(System.in);  // Create a Scanner object
+                }
+
+                // if player clicked button during above loop to input final guess of all atoms
+                if (current_edge_num == -2) {
+                    System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played);
+                    break;
+                }
+
+                // current edge number (as per diagrams) used to get edge (by subtracting 1 to get edge index)
+                Edge current_edge = board_edge_list.getEdge(current_edge_num - 1);
 
                 // works
                 System.out.println(current_edge.toString());
@@ -81,7 +106,9 @@ public class GameLogic {
                 System.out.println("Ray exited: " + current_ray.ray_exit_edge);
 
 
-                final_guess = current_player.playerGuess();
+//                // once final guess button is implemented, this method can be modified to be outside while loop
+//                // AND to actually take in input for all 6 atom coordinates
+//                final_guess = current_player.playerGuess();
             }
 
 

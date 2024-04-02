@@ -268,42 +268,53 @@ public class Main {
 //        ArrayList<ArrayList<Integer>> atoms_coordinates_list = atomsInput(board, 'a');
 
 
-        String  want = null;
+//        String  want = null;
+//
+//        System.out.println("\nDo you want to print the game board including the positions of the atoms? YES/NO:");
+//        want = scanner.nextLine();
+//
+//        while(want.toUpperCase().compareTo("NO") != 0 && want.toUpperCase().compareTo("YES") != 0)
+//        {
+//                System.out.println("Please enter a valid value!");
+//                want = scanner.nextLine();
+//        }
+//
+//        if(want.toUpperCase().compareTo("NO") == 0)
+//            System.exit(0);
+//        else
+//        /*Final print of the board including the positions of the atoms.*/ {
+//
+//        System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
+//
+//        /*This is another piece of code used for testing.
+//
+//        for (int i = 0; i < board_coordinates_list.size(); i++) {
+//                 System.out.println(board_coordinates_list.get(i));
+//            }
+//             */
+//         /*Code used to test if the atoms have been correctly stored. I've commented the code because in the final version this feature will, obviously, not be available.*/
+//
+//            GameLogic.gameLoop();
+//
+////        for (int i = 0; i < atoms_coordinates_list.size(); i++) {
+////            System.out.println(atoms_coordinates_list.get(i));
+////        }
+////
+////            System.out.println("And the following structure is the game board including the position of the atoms:");
+////            System.out.println("\n" + board);
+//            System.exit(0);
+//        }
 
-        System.out.println("\nDo you want to print the game board including the positions of the atoms? YES/NO:");
-        want = scanner.nextLine();
 
-        while(want.toUpperCase().compareTo("NO") != 0 && want.toUpperCase().compareTo("YES") != 0)
-        {
-                System.out.println("Please enter a valid value!");
-                want = scanner.nextLine();
-        }
 
-        if(want.toUpperCase().compareTo("NO") == 0)
-            System.exit(0);
-        else
-        /*Final print of the board including the positions of the atoms.*/ {
 
-        System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
 
-        /*This is another piece of code used for testing.
-
-        for (int i = 0; i < board_coordinates_list.size(); i++) {
-                 System.out.println(board_coordinates_list.get(i));
-            }
-             */
-         /*Code used to test if the atoms have been correctly stored. I've commented the code because in the final version this feature will, obviously, not be available.*/
+            // all we need for game loop
+            System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
 
             GameLogic.gameLoop();
 
-//        for (int i = 0; i < atoms_coordinates_list.size(); i++) {
-//            System.out.println(atoms_coordinates_list.get(i));
-//        }
-//
-//            System.out.println("And the following structure is the game board including the position of the atoms:");
-//            System.out.println("\n" + board);
             System.exit(0);
-        }
 
     }
 }

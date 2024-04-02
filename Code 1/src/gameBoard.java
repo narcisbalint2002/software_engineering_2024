@@ -12,6 +12,29 @@ import java.util.Random;
 
 public class gameBoard extends JPanel{
 
+    public static class EndGame {
+        private int x = 1000;
+        private int y = 100;
+
+
+        private static final int BUTTON_SIZE_Y = 75;
+
+        private static final int BUTTON_SIZE_X = BUTTON_SIZE_Y * 3;
+
+        public boolean isClicked(int clickX, int clickY) {
+            // return true if button is clicked
+            return ((clickX >= x) && (clickX <= x + BUTTON_SIZE_X)) && ((clickY >= y) && (clickY <= y + BUTTON_SIZE_Y));
+        }
+
+        public void draw(Graphics g) {
+            // Draw the black hexagon
+            g.setColor(Color.black); // Set fill color to black
+            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, 10, 10);
+            g.setColor(Color.white);
+            g.drawString("GUESS ATOMS", x + (BUTTON_SIZE_Y / 2), y + (BUTTON_SIZE_Y / 2));
+        }
+    }
+
     private static class NumberInfo {
         private int x;
         private int y;
@@ -29,6 +52,7 @@ public class gameBoard extends JPanel{
         }
 
         public boolean isClicked(int clickX, int clickY) {
+            // return true based on if the valid edge button coordinates are clicked
             return clickX >= x && clickX <= x + NUMBER_SIZE && clickY >= y && clickY <= y + NUMBER_SIZE;
         }
 
@@ -42,6 +66,9 @@ public class gameBoard extends JPanel{
     private static final Font FONT = new Font("Arial", Font.PLAIN, 20);
 
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
+
+    EndGame end_game_button = new EndGame();
+
     //CONSTRUCTOR
     public gameBoard(){
 
@@ -57,10 +84,18 @@ public class gameBoard extends JPanel{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // case for if final guess button is clicked
+                if (end_game_button.isClicked(e.getX(), e.getY())) {
+                    // set as -2 (in GameLogic class this will trigger the final guess)
+                    GameLogic.current_edge_num = -2;
+                    repaint();
+                    return;
+                }
                 // Check if the click occurred within the bounds of any number
                 for (gameBoard.NumberInfo numberInfo : numbers) {
                     if (numberInfo.isClicked(e.getX(), e.getY())) {
-                        System.out.println("Clicked number: " + numberInfo.getNumber());
+                        // update static variable to the valid edge number
+                        GameLogic.current_edge_num = numberInfo.getNumber();
                         repaint(); // Repaint to update the display
                         return; // Exit loop if a number is clicked
                     }
@@ -173,6 +208,10 @@ public class gameBoard extends JPanel{
             g.setFont(FONT);
             numberInfo.draw(g);
         }
+
+        // draws end game button (when clicked will end game)
+        end_game_button.draw(g);
+
     }
 
 
