@@ -80,7 +80,7 @@ public class GameLogic {
 
                 // if player clicked button during above loop to input final guess of all atoms
                 if (current_edge_num == -2) {
-                    System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played);
+                    System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
                     break;
                 }
 

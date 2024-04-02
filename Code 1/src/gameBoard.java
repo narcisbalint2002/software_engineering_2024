@@ -112,16 +112,25 @@ public class gameBoard extends JPanel{
         //Here we have to calculate the coordinates of the hexagons.
 
         /*I will need x, y to represent the 2 coordinates and I will also need 2 nested loops for rows and columns.*/
-
         int x = 400, y = 60;
         int n = 5, index_edges = 1; //Starts at 5 ends at 9
         int index_buttons = 0;
         int index_left = 1, index_right = 46, index_top = 54, index_bottom = 19;
 
+
         for(int i = 0; i < 9; i++)
         {
+
+            // these are for valid coordinates of hexagons for the data in our board
+            int row = i;
+            int col = -4;
+
             for(int j = 0; j < n; j++)
             {
+                // making sure right coordinates printed on hexagons
+                while (!Utility.inRange(row, col)) {
+                    col++;
+                }
 
                 if(j == 0)
                 {
@@ -170,8 +179,10 @@ public class gameBoard extends JPanel{
                 numbers.add(new NumberInfo(x - 45, y + 30, index_bottom++));
                 numbers.add(new NumberInfo(x + 22, y + 30, index_bottom++));
             }
-                hexagons.add(new hexagon(x, y));
+                hexagons.add(new hexagon(x, y, row, col));
                 x += 100;
+
+                col++; // increment current column
             }
 
             if(i < 4) {
@@ -200,7 +211,7 @@ public class gameBoard extends JPanel{
 
         for(int i = 0; i < hexagons.size(); i++)
         {
-            drawSingleHexagon(g, hexagons.get(i).first, hexagons.get(i).second, i);
+            drawSingleHexagon(g, hexagons.get(i).first, hexagons.get(i).second, hexagons.get(i).row, hexagons.get(i).col);
         }
 
         for(NumberInfo numberInfo : numbers){
@@ -219,7 +230,7 @@ public class gameBoard extends JPanel{
        The function has been implemented using information from the website https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fwww.w3schools.com%2Fjava%2Fdefault.asp
        */
 
-    public void drawSingleHexagon(Graphics g, int x, int y, int index)
+    public void drawSingleHexagon(Graphics g, int x, int y, int row, int col)
     {
         //This is the length of the side of a hexagon.
         int sideLength = 50; // Adjust this value as needed
@@ -238,6 +249,10 @@ public class gameBoard extends JPanel{
         g.setColor(Color.black); // Set fill color to black
         g.fillPolygon(xPoints, yPoints, 6);
         g.setColor(Color.white);
+
+        // draw coordinates onto atoms
+        String coords = Integer.toString(row) + ", " + Integer.toString(col);
+        g.drawString(coords, x + (sideLength / 10), y + (sideLength / 10));
 
     }
 }
