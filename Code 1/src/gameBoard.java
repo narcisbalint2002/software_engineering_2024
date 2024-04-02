@@ -41,6 +41,7 @@ public class gameBoard extends JPanel{
         private int number;
         private static final int NUMBER_SIZE = 20;
 
+
         public NumberInfo(int x, int y, int number) {
             this.x = x;
             this.y = y;
@@ -96,6 +97,7 @@ public class gameBoard extends JPanel{
                     if (numberInfo.isClicked(e.getX(), e.getY())) {
                         // update static variable to the valid edge number
                         GameLogic.current_edge_num = numberInfo.getNumber();
+                        // update edge number to new colour
                         repaint(); // Repaint to update the display
                         return; // Exit loop if a number is clicked
                     }
