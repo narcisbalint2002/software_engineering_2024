@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class RayManager {
 
 
@@ -50,6 +52,61 @@ public class RayManager {
         int new_left_x = getNextLeftX();
         int new_left_y = getNextLeftY();
         return new Coordinate(new_left_x, new_left_y);
+    }
+
+//    // loop through numbers list to change particular edge
+//    public void edgeUpdate(int ray_entrance, int ray_exit) {
+//
+//        // colour updates, for absorbed, then reflection, then every other path
+//        Color new_color = Color.BLACK;
+//        if (ray_exit == -1) {
+//            new_color = Color.GREEN;
+//        } else if (ray_entrance == ray_exit_edge) {
+//            new_color = Color.RED;
+//        } else {
+//            new_color = Color.BLUE;
+//        }
+//
+////        gameBoard.numbers.get(ray_entrance - 1).color = new_color;
+////
+////        if (ray_exit > 0) {
+////            gameBoard.numbers.get(ray_exit - 1).color = new_color;
+////        }
+//
+//        int edge_number = ray_entrance;
+//
+//        // loop for all numbers in gameBoard list
+//        for (int i = 0; i < gameBoard.numbers.size(); i++) {
+//            // set current edge data as a variable (easier to read)
+//            gameBoard.NumberInfo edge_data = gameBoard.numbers.get(i);
+//            // if edge number passed in matches edge data number, update size to 0 (not clickable),
+//            // then also change colour to that passed in
+//            if (edge_number == edge_data.getNumber()) {
+////                edge_data.number_size = 0;
+//                edge_data.color = new_color;
+//                if ((ray_exit > 0) && (edge_number != ray_exit)) {
+//                    edge_number = ray_exit;
+//                    i = 0;
+//                }
+//            }
+//        }
+//    }
+
+    // loop through numbers list to change particular edge
+    public void edgeUpdate(int edge_number, Color new_color) {
+
+
+        // loop for all numbers in gameBoard list
+        for (int i = 0; i < gameBoard.numbers.size(); i++) {
+            // set current edge data as a variable (easier to read)
+            gameBoard.NumberInfo edge_data = gameBoard.numbers.get(i);
+            // if edge number passed in matches edge data number, update size to 0 (not clickable),
+            // then also change colour to that passed in
+            if (edge_number == edge_data.getNumber()) {
+//                edge_data.number_size = 0;
+                edge_data.color = new_color;
+            }
+        }
     }
 
     public void rayPath(EdgeManager board_edge_list, AtomManager atomManager) {
@@ -152,9 +209,14 @@ public class RayManager {
         // if direct hit, exit is -1, otherwise its an edge we can find in the board
         if (direct_hit) {
             ray_exit_edge = -1;
+            // update entrance edge number in gameBoard class to green for "absorbed"
+            edgeUpdate(ray_entrance_edge, Color.GREEN);
+
         }
-        // if totl reflection, we know came out same way came in
+        // if total reflection, we know came out same way came in
         else if (total_reflection) {
+            // update entrance edge number in gameBoard class to red for "reflection"
+            edgeUpdate(ray_entrance_edge, Color.RED);
             ray_exit_edge = ray_entrance_edge;
         }
         else {
@@ -178,7 +240,13 @@ public class RayManager {
 
             // ray exit edge is the edge number from the exit edge we JUST found above
             ray_exit_edge = edge_found.getEdgeNum();
+
+
+            // update BOTH entrance and exit edge numbers in gameBoard class to blue for "path"
+            edgeUpdate(ray_entrance_edge, Color.BLUE);
+            edgeUpdate(ray_exit_edge, Color.BLUE);
         }
+
 
     }
 

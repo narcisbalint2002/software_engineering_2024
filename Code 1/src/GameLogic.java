@@ -76,6 +76,11 @@ public class GameLogic {
                 while (current_edge_num == -1) {
                     // player choose whether want to guess final atoms
                     Scanner user_input = new Scanner(System.in);  // Create a Scanner object
+
+                    // to ensure new edge inputted is not already an entrance/exit point
+                    if ((current_edge_num > 0) && (current_player.edgeCheck(current_edge_num))) {
+                        current_edge_num = -1;
+                    }
                 }
 
                 // if player clicked button during above loop to input final guess of all atoms
@@ -91,16 +96,18 @@ public class GameLogic {
                 System.out.println(current_edge.toString());
 
 
-                // loop for current ray
+                // create a new manager for the ray from specified edge and calculate its path (i.e. entrance and exit)
                 RayManager current_ray = new RayManager(current_edge);
-
                 current_ray.rayPath(board_edge_list, atom_manager);
 
 
 
 
 
+                // a ray has been shot so add it to list of rays player had (for entrance and exit points)
                 current_player.ray_list.add(current_ray);
+                // since a ray has been shot, score incremented
+                current_player.score++;
 
                 System.out.println("\nRay entered: " + current_ray.ray_entrance_edge);
                 System.out.println("Ray exited: " + current_ray.ray_exit_edge);

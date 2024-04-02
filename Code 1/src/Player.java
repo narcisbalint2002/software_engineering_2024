@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Player {
 
-    // number of rays this stupid player has shot
-    int num_rays = 0;
+    // number of rays this stupid player has shot (can just be calculated from length of ray_list)
+    int num_rays;
 
     // dumb players score
     int score;
@@ -16,7 +16,18 @@ public class Player {
 
 
     public Player() {
-        // does nothing
+        // player starts with no score
+        score = 0;
+    }
+
+    public boolean edgeCheck(int edge_num) {
+        // checks through all edges ray has been shot from, if matches, returns true, otherwise edge not used yet
+        for (int i = 0; i < ray_list.size(); i++) {
+            if ((edge_num == ray_list.get(i).ray_entrance_edge) || (edge_num == ray_list.get(i).ray_exit_edge)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // FUTURE IDEA: could be a function that is hooked up to a button on screen to do final guesses, then when

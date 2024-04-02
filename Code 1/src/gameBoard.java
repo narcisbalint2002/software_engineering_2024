@@ -35,11 +35,20 @@ public class gameBoard extends JPanel{
         }
     }
 
-    private static class NumberInfo {
+    public static class NumberInfo {
         private int x;
         private int y;
         private int number;
-        private static final int NUMBER_SIZE = 20;
+        public int number_size = 20;
+
+        /* set color to black by default indicating not clicked yet, these are ALL the states:
+         *          !! IMPORTANT !! -- some of these MAY CHANGE due to visibility on white background
+         *      black   -   default (clickable)
+         *      blue    -   enters and exits different edges
+         *      red     -   reflect back to same edge
+         *      green   -   absorbed
+         */
+        public Color color = Color.BLACK;
 
 
         public NumberInfo(int x, int y, int number) {
@@ -54,16 +63,16 @@ public class gameBoard extends JPanel{
 
         public boolean isClicked(int clickX, int clickY) {
             // return true based on if the valid edge button coordinates are clicked
-            return clickX >= x && clickX <= x + NUMBER_SIZE && clickY >= y && clickY <= y + NUMBER_SIZE;
+            return clickX >= x && clickX <= x + number_size && clickY >= y && clickY <= y + number_size;
         }
 
         public void draw(Graphics g) {
-            g.drawString(Integer.toString(number), x, y + NUMBER_SIZE);
+            g.drawString(Integer.toString(number), x, y + number_size);
         }
     }
 
 
-    private static List<NumberInfo> numbers;
+    public static List<NumberInfo> numbers;
     private static final Font FONT = new Font("Arial", Font.PLAIN, 20);
 
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
@@ -97,7 +106,17 @@ public class gameBoard extends JPanel{
                     if (numberInfo.isClicked(e.getX(), e.getY())) {
                         // update static variable to the valid edge number
                         GameLogic.current_edge_num = numberInfo.getNumber();
-                        // update edge number to new colour
+
+                        // should all probably be done in GameLogic class
+                        /* update edge number colour accordingly indicating ray state (absorbed, reflected, etc.)
+                         *      AND
+                         * making it unclickable by making its size 0 (if its 0 pixels wide cannot be clicked)
+                         *
+                         * ONLY changes number so NOT clickable
+                         */
+//                        numberInfo.number_size = 0;
+
+
                         repaint(); // Repaint to update the display
                         return; // Exit loop if a number is clicked
                     }
@@ -217,10 +236,12 @@ public class gameBoard extends JPanel{
         }
 
         for(NumberInfo numberInfo : numbers){
-            g.setColor(Color.black);
+            g.setColor(numberInfo.color);
             g.setFont(FONT);
             numberInfo.draw(g);
         }
+
+        g.setColor(Color.black);
 
         // draws end game button (when clicked will end game)
         end_game_button.draw(g);
