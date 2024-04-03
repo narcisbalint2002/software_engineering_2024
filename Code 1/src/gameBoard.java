@@ -30,26 +30,40 @@ public class gameBoard extends JPanel{
 //        scale = new_scale;
 //    }
 
-    public static class ScreenScale {
-        private int x = dynamicScale(100);
-        private int y = dynamicScale(100);
+    // // this is DYNAMIC
+//    public static class ScreenScale {
+//        private int x = dynamicScale(100);
+//        private int y = dynamicScale(100);
+//
+//
+//        private static int BUTTON_SIZE_Y = dynamicScale(75);
+//
+//        private static int BUTTON_SIZE_X = dynamicScale(BUTTON_SIZE_Y * 2);
+//
+//        public boolean isClicked(int clickX, int clickY) {
+//            int dynamic_clickX = dynamicScale(clickX);
+//            int dynamic_clickY = dynamicScale(clickY);
+//            // return true based on if the valid edge button coordinates are clicked
+//            return dynamic_clickX >= x && dynamic_clickX <= x + BUTTON_SIZE_X && dynamic_clickY >= y && dynamic_clickY <= y + BUTTON_SIZE_Y;
+//        }
+        public static class ScreenScale {
+            private int x = 0;
+            private int y = 0;
 
 
-        private static int BUTTON_SIZE_Y = dynamicScale(75);
+            private static int BUTTON_SIZE_Y = 75;
 
-        private static int BUTTON_SIZE_X = dynamicScale(BUTTON_SIZE_Y * 2);
+            private static int BUTTON_SIZE_X = BUTTON_SIZE_Y * 2;
 
-        public boolean isClicked(int clickX, int clickY) {
-            int dynamic_clickX = dynamicScale(clickX);
-            int dynamic_clickY = dynamicScale(clickY);
-            // return true based on if the valid edge button coordinates are clicked
-            return dynamic_clickX >= x && dynamic_clickX <= x + BUTTON_SIZE_X && dynamic_clickY >= y && dynamic_clickY <= y + BUTTON_SIZE_Y;
-        }
+            public boolean isClicked(int clickX, int clickY) {
+                // return true based on if the valid edge button coordinates are clicked
+                return clickX >= x && clickX <= x + BUTTON_SIZE_X && clickY >= y && clickY <= y + BUTTON_SIZE_Y;
+            }
 
         public void draw(Graphics g) {
             // Draw the black hexagon
             g.setColor(Color.black); // Set fill color to black
-            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, dynamicScale(10), dynamicScale(10));
+            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, 10, 10);
             g.setColor(Color.white);
             g.drawString("SCALE", x + (BUTTON_SIZE_Y / 2), y + BUTTON_SIZE_Y / 2);
         }
@@ -210,7 +224,10 @@ public class gameBoard extends JPanel{
         int x = dynamicScale(400), y = dynamicScale(60);
         int n = 5, index_edges = 1; //Starts at 5 ends at 9
         int index_buttons = 0;
-        int index_left = dynamicScale(1), index_right = dynamicScale(46), index_top = dynamicScale(54), index_bottom = dynamicScale(19);
+        int index_left = 1, index_right = 46, index_top = 54, index_bottom = 19;
+
+//
+//        int index_left = dynamicScale(1), index_right = dynamicScale(46), index_top = dynamicScale(54), index_bottom = dynamicScale(19);
 
 
         for(int i = 0; i < 9; i++)
@@ -331,12 +348,12 @@ public class gameBoard extends JPanel{
 
         g.setColor(Color.black);
 
-        // draws scale button (when clicked will cycle scale)
-        screen_scale_button.draw(g);
 
         // draws end game button (when clicked will end game)
         end_game_button.draw(g);
 
+        // draws scale button (when clicked will cycle scale)
+        screen_scale_button.draw(g);
     }
 
 

@@ -226,7 +226,7 @@ public class Main {
         // set width to screen size
         width = screen_size.width;
         height = screen_size.height;
-        aFrame.setSize(gameBoard.dynamicScale(width), gameBoard.dynamicScale(height));
+        aFrame.setSize(width, height);
 
         aFrame.setLocationRelativeTo(null);
     }

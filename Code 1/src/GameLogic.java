@@ -94,6 +94,7 @@ public class GameLogic {
                         cycleScale();
                         ongoing_input = -1;
                     }
+
                 }
 
                 // if player clicked button during above loop to input final guess of all atoms
