@@ -5,10 +5,19 @@ public class GameLogic {
 
 
     // variable used in gameBoard for mouse event click for current edge
-    public static int current_edge_num;
+    public static int ongoing_input;
 
     private GameLogic() {
         throw new AssertionError("GameLogic should not be instantiated");
+    }
+
+    private static void cycleScale() {
+        // double scale until too large
+        if ((Main.scale > 4.0) || ((Main.scale * 1000) > Main.width)) {
+            Main.scale = 0.25;
+        } else {
+            Main.scale *= 2;
+        }
     }
 
     public static void gameLoop() {
@@ -65,7 +74,7 @@ public class GameLogic {
 //                Scanner user_input = new Scanner(System.in);  // Create a Scanner object
 //                System.out.println("Edge number (as per diagrams)? ");
 //                int edge_index = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
-                current_edge_num = -1;
+                ongoing_input = -1;
 
                 // waits for user input, this will update when mouse click event for edge is triggered
                 // !!WIP!!
@@ -73,24 +82,28 @@ public class GameLogic {
                 //  OR
                 // can instead just grey it out and remove its ability to be clicked in Swing file
                 // (this option may be better)
-                while (current_edge_num == -1) {
+                while (ongoing_input == -1) {
                     // player choose whether want to guess final atoms
                     Scanner user_input = new Scanner(System.in);  // Create a Scanner object
 
                     // to ensure new edge inputted is not already an entrance/exit point
-                    if ((current_edge_num > 0) && (current_player.edgeCheck(current_edge_num))) {
-                        current_edge_num = -1;
+                    if ((ongoing_input > 0) && (current_player.edgeCheck(ongoing_input))) {
+                        ongoing_input = -1;
+                    }
+                    if (ongoing_input == -3) {
+                        cycleScale();
+                        ongoing_input = -1;
                     }
                 }
 
                 // if player clicked button during above loop to input final guess of all atoms
-                if (current_edge_num == -2) {
+                if (ongoing_input == -2) {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
                     break;
                 }
 
                 // current edge number (as per diagrams) used to get edge (by subtracting 1 to get edge index)
-                Edge current_edge = board_edge_list.getEdge(current_edge_num - 1);
+                Edge current_edge = board_edge_list.getEdge(ongoing_input - 1);
 
                 // works
                 System.out.println(current_edge.toString());

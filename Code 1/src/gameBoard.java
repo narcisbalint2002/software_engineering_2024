@@ -12,24 +12,69 @@ import java.util.Random;
 
 public class gameBoard extends JPanel{
 
-    public static class EndGame {
-        private int x = 1000;
-        private int y = 100;
+    public static int dynamicScale(int value) {
+        return (int) ((double) value * Main.scale);
+    }
 
 
-        private static final int BUTTON_SIZE_Y = 75;
 
-        private static final int BUTTON_SIZE_X = BUTTON_SIZE_Y * 3;
+//    // scale user defines (can be changed via button)
+//    public double scale = 1.0;
+//
+//
+//    // ability to change scale using setter/getter methods
+//    public double getScale() {
+//        return scale;
+//    }
+//    public void setScale(double new_scale) {
+//        scale = new_scale;
+//    }
+
+    public static class ScreenScale {
+        private int x = dynamicScale(100);
+        private int y = dynamicScale(100);
+
+
+        private static int BUTTON_SIZE_Y = dynamicScale(75);
+
+        private static int BUTTON_SIZE_X = dynamicScale(BUTTON_SIZE_Y * 2);
 
         public boolean isClicked(int clickX, int clickY) {
-            // return true if button is clicked
-            return ((clickX >= x) && (clickX <= x + BUTTON_SIZE_X)) && ((clickY >= y) && (clickY <= y + BUTTON_SIZE_Y));
+            int dynamic_clickX = dynamicScale(clickX);
+            int dynamic_clickY = dynamicScale(clickY);
+            // return true based on if the valid edge button coordinates are clicked
+            return dynamic_clickX >= x && dynamic_clickX <= x + BUTTON_SIZE_X && dynamic_clickY >= y && dynamic_clickY <= y + BUTTON_SIZE_Y;
         }
 
         public void draw(Graphics g) {
             // Draw the black hexagon
             g.setColor(Color.black); // Set fill color to black
-            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, 10, 10);
+            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, dynamicScale(10), dynamicScale(10));
+            g.setColor(Color.white);
+            g.drawString("SCALE", x + (BUTTON_SIZE_Y / 2), y + BUTTON_SIZE_Y / 2);
+        }
+    }
+
+    public static class EndGame {
+        private int x = dynamicScale(1000);
+        private int y = dynamicScale(100);
+
+
+        private static int BUTTON_SIZE_Y = dynamicScale(75);
+
+        private static int BUTTON_SIZE_X = dynamicScale(BUTTON_SIZE_Y * 3);
+
+        public boolean isClicked(int clickX, int clickY) {
+            int dynamic_clickX = dynamicScale(clickX);
+            int dynamic_clickY = dynamicScale(clickY);
+            // return true based on if the valid edge button coordinates are clicked
+            return dynamic_clickX >= x && dynamic_clickX <= x + BUTTON_SIZE_X && dynamic_clickY >= y && dynamic_clickY <= y + BUTTON_SIZE_Y;
+        }
+
+        public void draw(Graphics g) {
+            // Draw the black hexagon
+            g.setColor(Color.black); // Set fill color to black
+            g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, dynamicScale(10), dynamicScale(10));
             g.setColor(Color.white);
             g.drawString("GUESS ATOMS", x + (BUTTON_SIZE_Y / 2), y + (BUTTON_SIZE_Y / 2));
         }
@@ -39,7 +84,7 @@ public class gameBoard extends JPanel{
         private int x;
         private int y;
         private int number;
-        public int number_size = 20;
+        public int number_size = dynamicScale(20);
 
         /* set color to black by default indicating not clicked yet, these are ALL the states:
          *          !! IMPORTANT !! -- some of these MAY CHANGE due to visibility on white background
@@ -56,8 +101,8 @@ public class gameBoard extends JPanel{
 
 
         public NumberInfo(int x, int y, int number) {
-            this.x = x;
-            this.y = y;
+            this.x = dynamicScale(x);
+            this.y = dynamicScale(y);
             this.number = number;
         }
 
@@ -81,8 +126,10 @@ public class gameBoard extends JPanel{
         }
 
         public boolean isClicked(int clickX, int clickY) {
+            int dynamic_clickX = dynamicScale(clickX);
+            int dynamic_clickY = dynamicScale(clickY);
             // return true based on if the valid edge button coordinates are clicked
-            return clickX >= x && clickX <= x + number_size && clickY >= y && clickY <= y + number_size;
+            return dynamic_clickX >= x && dynamic_clickX <= x + number_size && dynamic_clickY >= y && dynamic_clickY <= y + number_size;
         }
 
         public void draw(Graphics g) {
@@ -92,14 +139,17 @@ public class gameBoard extends JPanel{
 
 
     public static List<NumberInfo> numbers;
-    private static final Font FONT = new Font("Arial", Font.PLAIN, 20);
+    private static final Font FONT = new Font("Arial", Font.PLAIN, dynamicScale(20));
 
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
 
+
+    ScreenScale screen_scale_button = new ScreenScale();
     EndGame end_game_button = new EndGame();
 
     //CONSTRUCTOR
     public gameBoard(){
+
 
         /*When a new object of type gameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
         about the coordinates used in the main class.
@@ -116,7 +166,12 @@ public class gameBoard extends JPanel{
                 // case for if final guess button is clicked
                 if (end_game_button.isClicked(e.getX(), e.getY())) {
                     // set as -2 (in GameLogic class this will trigger the final guess)
-                    GameLogic.current_edge_num = -2;
+                    GameLogic.ongoing_input = -2;
+                    repaint();
+                    return;
+                } else if (screen_scale_button.isClicked(e.getX(), e.getY())) {
+                    // set as -3 (in GameLogic class this will trigger the final guess)
+                    GameLogic.ongoing_input = -3;
                     repaint();
                     return;
                 }
@@ -124,7 +179,7 @@ public class gameBoard extends JPanel{
                 for (gameBoard.NumberInfo numberInfo : numbers) {
                     if (numberInfo.isClicked(e.getX(), e.getY())) {
                         // update static variable to the valid edge number
-                        GameLogic.current_edge_num = numberInfo.getNumber();
+                        GameLogic.ongoing_input = numberInfo.getNumber();
 
                         // should all probably be done in GameLogic class
                         /* update edge number colour accordingly indicating ray state (absorbed, reflected, etc.)
@@ -152,10 +207,10 @@ public class gameBoard extends JPanel{
         //Here we have to calculate the coordinates of the hexagons.
 
         /*I will need x, y to represent the 2 coordinates and I will also need 2 nested loops for rows and columns.*/
-        int x = 400, y = 60;
+        int x = dynamicScale(400), y = dynamicScale(60);
         int n = 5, index_edges = 1; //Starts at 5 ends at 9
         int index_buttons = 0;
-        int index_left = 1, index_right = 46, index_top = 54, index_bottom = 19;
+        int index_left = dynamicScale(1), index_right = dynamicScale(46), index_top = dynamicScale(54), index_bottom = dynamicScale(19);
 
 
         for(int i = 0; i < 9; i++)
@@ -175,16 +230,16 @@ public class gameBoard extends JPanel{
                 if(j == 0)
                 {
                     if(i < 4) {
-                        numbers.add(new NumberInfo(x - 35, y - 60, index_left++));
-                        numbers.add(new NumberInfo(x - 60, y - 20, index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(35), y - dynamicScale(60), index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(60), y - dynamicScale(20), index_left++));
                     }
                     else if (i > 4){
-                        numbers.add(new NumberInfo(x - 90, y - 45, index_left++));
-                        numbers.add(new NumberInfo(x - 70, y - 15, index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(90), y - dynamicScale(45), index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(70), y - dynamicScale(15), index_left++));
                     } else {    //If it's the middle row
 
-                        numbers.add(new NumberInfo(x - 35, y - 60, index_left++));
-                        numbers.add(new NumberInfo(x - 70, y - 15, index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(35), y - dynamicScale(60), index_left++));
+                        numbers.add(new NumberInfo(x - dynamicScale(70), y - dynamicScale(15), index_left++));
 
                     }
 
@@ -193,49 +248,49 @@ public class gameBoard extends JPanel{
             {
                 if(i < 4)
                 {
-                    numbers.add(new NumberInfo(x + 25, y - 60, index_right--));
-                    numbers.add(new NumberInfo(x + 45, y - 15, index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(25), y - dynamicScale(60), index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(45), y - dynamicScale(15), index_right--));
 
                 } else if ( i > 4 )
                 {
-                    numbers.add(new NumberInfo(x + 65, y - 45, index_right--));
-                    numbers.add(new NumberInfo(x + 45, y - 15, index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(65), y - dynamicScale(45), index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(45), y - dynamicScale(15), index_right--));
                 } else { //If it's the middle row
 
-                    numbers.add(new NumberInfo(x + 15, y - 60 , index_right--));
-                    numbers.add(new NumberInfo(x + 45, y - 15, index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(15), y - dynamicScale(60) , index_right--));
+                    numbers.add(new NumberInfo(x + dynamicScale(45), y - dynamicScale(15), index_right--));
 
                 }
             }
 
             if(i == 0 && j != 0) //top row
                 {
-                    numbers.add(new NumberInfo(x - 80, y - 60, index_top--));
-                    numbers.add(new NumberInfo(x - 40, y - 60,index_top--));
+                    numbers.add(new NumberInfo(x - dynamicScale(80), y - dynamicScale(60), index_top--));
+                    numbers.add(new NumberInfo(x - dynamicScale(40), y - dynamicScale(60), index_top--));
                 }
 
             if(i == 8)
             {
-                numbers.add(new NumberInfo(x - 45, y + 30, index_bottom++));
-                numbers.add(new NumberInfo(x + 22, y + 30, index_bottom++));
+                numbers.add(new NumberInfo(x - dynamicScale(45), y + dynamicScale(30), index_bottom++));
+                numbers.add(new NumberInfo(x + dynamicScale(22), y + dynamicScale(30), index_bottom++));
             }
                 hexagons.add(new hexagon(x, y, row, col));
-                x += 100;
+                x += dynamicScale(100);
 
                 col++; // increment current column
             }
 
             if(i < 4) {
-                x = x - (100 * n) - 50;
+                x = x - (dynamicScale(100) * n) - dynamicScale(50);
                 n++;
             }
 
             else{
-                x = x - (100 * n) + 50;
+                x = x - (dynamicScale(100) * n) + dynamicScale(50);
                 n--;
             }
 
-            y += 80;
+            y += dynamicScale(80);
 
         }
         //Here we have the exact number of hexagons in the array list.
@@ -246,6 +301,20 @@ public class gameBoard extends JPanel{
     {
         int index = 0;
         super.paintComponent(g);
+
+
+
+        // typecasts Graphics to Graphics2D, this is done so we can adjust the board according to user GUI scale
+        Graphics2D g2 = (Graphics2D) g;
+        g2.translate(Main.width/2, Main.height/2);
+        g2.scale(Main.scale, Main.scale);
+        g2.translate(-(Main.width)/2, -(Main.height)/2);
+
+
+
+
+
+
 
         //Here I'm going through the whole list of hexagons and display them.
 
@@ -262,6 +331,9 @@ public class gameBoard extends JPanel{
 
         g.setColor(Color.black);
 
+        // draws scale button (when clicked will cycle scale)
+        screen_scale_button.draw(g);
+
         // draws end game button (when clicked will end game)
         end_game_button.draw(g);
 
@@ -275,7 +347,10 @@ public class gameBoard extends JPanel{
     public void drawSingleHexagon(Graphics g, int x, int y, int row, int col)
     {
         //This is the length of the side of a hexagon.
-        int sideLength = 50; // Adjust this value as needed
+        int sideLength = dynamicScale(50); // Adjust this value as needed
+
+        int dynamic_x = dynamicScale(x);
+        int dynamic_y = dynamicScale(y);
 
         int[] xPoints = new int[6];
         int[] yPoints = new int[6];
@@ -283,8 +358,8 @@ public class gameBoard extends JPanel{
         // Calculate the points of the hexagon6
         for (int i = 0; i < 6; i++) {
             double angleRadians = Math.toRadians(60 * i + 90); // 60 degrees for each point
-            xPoints[i] = (int) (x + sideLength * Math.cos(angleRadians));
-            yPoints[i] = (int) (y + sideLength * Math.sin(angleRadians));
+            xPoints[i] = (int) (dynamic_x + sideLength * Math.cos(angleRadians));
+            yPoints[i] = (int) (dynamic_y + sideLength * Math.sin(angleRadians));
         }
 
         // Draw the black hexagon
@@ -294,7 +369,7 @@ public class gameBoard extends JPanel{
 
         // draw coordinates onto atoms
         String coords = Integer.toString(row) + ", " + Integer.toString(col);
-        g.drawString(coords, x + (sideLength / 10), y + (sideLength / 10));
+        g.drawString(coords, dynamic_x + (sideLength / 10), dynamic_y + (sideLength / 10));
 
     }
 }

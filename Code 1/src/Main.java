@@ -26,6 +26,12 @@ public class Main {
     public static final int NUM_ATOMS = 6;
 
 
+
+    public static int width = 0;
+    public static int height = 0;
+    public static double scale = 1.0;
+
+
 //    //The following method implements the game board functionally, which means is storing in memory the coordinates of each of the hexagons.
 //    public static void boardCreate(BoardStructure board_data) {
 //
@@ -217,7 +223,11 @@ public class Main {
     public static void gameBoardFullScreen(JFrame aFrame)
     {
         Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
-        aFrame.setSize(screen_size.width, screen_size.height);
+        // set width to screen size
+        width = screen_size.width;
+        height = screen_size.height;
+        aFrame.setSize(gameBoard.dynamicScale(width), gameBoard.dynamicScale(height));
+
         aFrame.setLocationRelativeTo(null);
     }
 
@@ -230,8 +240,10 @@ public class Main {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        gameBoard board = new gameBoard();
         /*Add a new object of the class gameBoard to our frame.*/
-        frame.add(new gameBoard());
+        frame.add(board);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
