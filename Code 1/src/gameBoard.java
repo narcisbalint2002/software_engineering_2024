@@ -48,7 +48,11 @@ public class gameBoard extends JPanel{
          *      red     -   reflect back to same edge
          *      green   -   absorbed
          */
-        public Color color = Color.BLACK;
+        private Color color = Color.BLACK;
+
+        private Font font = FONT;
+
+
 
 
         public NumberInfo(int x, int y, int number) {
@@ -59,6 +63,21 @@ public class gameBoard extends JPanel{
 
         public int getNumber() {
             return number;
+        }
+        public Color getColor() {
+            return color;
+        }
+        public Font getFont() {
+            return font;
+        }
+        public void setNumber(int new_num) {
+            number = new_num;
+        }
+        public void setColor(Color new_color) {
+            color = new_color;
+        }
+        public void setFont(Font new_font) {
+            font = new_font;
         }
 
         public boolean isClicked(int clickX, int clickY) {
@@ -237,7 +256,7 @@ public class gameBoard extends JPanel{
 
         for(NumberInfo numberInfo : numbers){
             g.setColor(numberInfo.color);
-            g.setFont(FONT);
+            g.setFont(numberInfo.font);
             numberInfo.draw(g);
         }
 

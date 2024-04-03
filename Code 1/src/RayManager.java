@@ -93,7 +93,7 @@ public class RayManager {
 //    }
 
     // loop through numbers list to change particular edge
-    public void edgeUpdate(int edge_number, Color new_color) {
+    public void edgeUpdate(int entrance, int exit, Color new_color) {
 
 
         // loop for all numbers in gameBoard list
@@ -102,9 +102,16 @@ public class RayManager {
             gameBoard.NumberInfo edge_data = gameBoard.numbers.get(i);
             // if edge number passed in matches edge data number, update size to 0 (not clickable),
             // then also change colour to that passed in
-            if (edge_number == edge_data.getNumber()) {
+            if (entrance == edge_data.getNumber()) {
 //                edge_data.number_size = 0;
-                edge_data.color = new_color;
+                edge_data.setFont(edge_data.getFont().deriveFont(Font.BOLD));
+                edge_data.setColor(new_color);
+            }
+
+            if (exit == edge_data.getNumber()) {
+                edge_data.setNumber(entrance);
+                edge_data.setFont(edge_data.getFont().deriveFont(Font.BOLD));
+                edge_data.setColor(new_color);
             }
         }
     }
@@ -210,14 +217,14 @@ public class RayManager {
         if (direct_hit) {
             ray_exit_edge = -1;
             // update entrance edge number in gameBoard class to green for "absorbed"
-            edgeUpdate(ray_entrance_edge, Color.GREEN);
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.GREEN);
 
         }
         // if total reflection, we know came out same way came in
         else if (total_reflection) {
-            // update entrance edge number in gameBoard class to red for "reflection"
-            edgeUpdate(ray_entrance_edge, Color.RED);
             ray_exit_edge = ray_entrance_edge;
+            // update entrance edge number in gameBoard class to red for "reflection"
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.RED);
         }
         else {
 
@@ -243,8 +250,7 @@ public class RayManager {
 
 
             // update BOTH entrance and exit edge numbers in gameBoard class to blue for "path"
-            edgeUpdate(ray_entrance_edge, Color.BLUE);
-            edgeUpdate(ray_exit_edge, Color.BLUE);
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.BLUE);
         }
 
 
