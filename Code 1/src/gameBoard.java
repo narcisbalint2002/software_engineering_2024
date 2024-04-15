@@ -12,7 +12,14 @@ import java.util.Random;
 
 public class gameBoard extends JPanel{
 
+    // this does NOTHING because i am using function 2 (just below) instead to test,
+    // also because rest of code uses this and i dont want to change it all back then
+    // have to change it again
     public static int dynamicScale(int value) {
+        return (int) ((double) value * 1.0);
+    }
+
+    public static int dynamicScale2(int value) {
         return (int) ((double) value * Main.scale);
     }
 
@@ -46,14 +53,41 @@ public class gameBoard extends JPanel{
 //            // return true based on if the valid edge button coordinates are clicked
 //            return dynamic_clickX >= x && dynamic_clickX <= x + BUTTON_SIZE_X && dynamic_clickY >= y && dynamic_clickY <= y + BUTTON_SIZE_Y;
 //        }
+
+        void ScreenScaleButton() {
+
+            Button scale_button = new Button("Scale");
+            int x = 0;
+            int y = 0;
+            int BUTTON_SIZE_Y = 75;
+            int BUTTON_SIZE_X = BUTTON_SIZE_Y * 2;
+
+
+            scale_button.setBounds(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y);
+            add(scale_button);
+            scale_button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            scale_button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    GameLogic.ongoing_input = -3;
+
+                    // Draw the black hexagon
+                    scale_button.setBackground(Color.BLACK); // Set fill color to black
+                    scale_button.setForeground(Color.WHITE);
+                    scale_button.repaint();
+
+                }
+            });
+    }
+
         public static class ScreenScale {
             private int x = 0;
             private int y = 0;
-
-
             private static int BUTTON_SIZE_Y = 75;
-
             private static int BUTTON_SIZE_X = BUTTON_SIZE_Y * 2;
+
+
 
             public boolean isClicked(int clickX, int clickY) {
                 // return true based on if the valid edge button coordinates are clicked
@@ -70,6 +104,9 @@ public class gameBoard extends JPanel{
     }
 
     public static class EndGame {
+
+
+
         private int x = dynamicScale(1000);
         private int y = dynamicScale(100);
 
@@ -156,6 +193,7 @@ public class gameBoard extends JPanel{
     private static final Font FONT = new Font("Arial", Font.PLAIN, dynamicScale(20));
 
     ArrayList<hexagon> hexagons = new ArrayList<hexagon>();
+    ArrayList<Polygon> hex_list = new ArrayList<Polygon>();
 
 
     ScreenScale screen_scale_button = new ScreenScale();
@@ -163,6 +201,7 @@ public class gameBoard extends JPanel{
 
     //CONSTRUCTOR
     public gameBoard(){
+
 
 
         /*When a new object of type gameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
@@ -173,10 +212,33 @@ public class gameBoard extends JPanel{
 
         initialiseHexagonsCoordinates(hexagons);
 
+
+
         // Add mouse click listener
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+                super.mouseClicked(e);
+
+                // only run if final button was clicked
+                if (GameLogic.ongoing_input == -2) {
+                    for (hexagon h : hexagons) {
+                        // if hex clicked, update points
+                        if(h.polygon.contains(e.getPoint())) {
+                            Player.current_atom.x = h.row;
+                            Player.current_atom.y = h.col;
+                        }
+                    }
+                }
+
+
+//                // !!! WIP !!! -- this does update it BUT only when mouse clicked, NEED to be updating every time
+//                //                board is repainted, so PROBABLY need to look into repaint() function and see WHAT
+//                //                its doing
+//                // this UPDATES the button scale to show in top left when mouse is clicked
+//                screen_scale_button.draw(getGraphics());
+
                 // case for if final guess button is clicked
                 if (end_game_button.isClicked(e.getX(), e.getY())) {
                     // set as -2 (in GameLogic class this will trigger the final guess)
@@ -187,6 +249,8 @@ public class gameBoard extends JPanel{
                     // set as -3 (in GameLogic class this will trigger the final guess)
                     GameLogic.ongoing_input = -3;
                     repaint();
+                    // this DOES NOT work, it just ends up updating it for a split second before resetting the board
+                    screen_scale_button.draw(getGraphics());
                     return;
                 }
                 // Check if the click occurred within the bounds of any number
@@ -210,6 +274,8 @@ public class gameBoard extends JPanel{
                     }
                 }
             }
+
+
         });
 
     }
@@ -337,23 +403,31 @@ public class gameBoard extends JPanel{
 
         for(int i = 0; i < hexagons.size(); i++)
         {
-            drawSingleHexagon(g, hexagons.get(i).first, hexagons.get(i).second, hexagons.get(i).row, hexagons.get(i).col);
+            drawSingleHexagon(g2, hexagons.get(i));
         }
 
         for(NumberInfo numberInfo : numbers){
-            g.setColor(numberInfo.color);
-            g.setFont(numberInfo.font);
-            numberInfo.draw(g);
+            g2.setColor(numberInfo.color);
+            g2.setFont(numberInfo.font);
+            numberInfo.draw(g2);
         }
 
-        g.setColor(Color.black);
+        g2.setColor(Color.black);
 
 
         // draws end game button (when clicked will end game)
-        end_game_button.draw(g);
+        end_game_button.draw(g2);
+
+
+        // FUCKING BROKEN -- DO NOT UNCOMMENT (is supposed to be actual button for scaling)
+//        ScreenScaleButton();
+
+
+//        // to allow hand cursor to change when hovering over an object
+//        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // draws scale button (when clicked will cycle scale)
-        screen_scale_button.draw(g);
+        screen_scale_button.draw(g2);
     }
 
 
@@ -361,31 +435,38 @@ public class gameBoard extends JPanel{
        The function has been implemented using information from the website https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fwww.w3schools.com%2Fjava%2Fdefault.asp
        */
 
-    public void drawSingleHexagon(Graphics g, int x, int y, int row, int col)
+    public void drawSingleHexagon(Graphics g, hexagon h)
     {
         //This is the length of the side of a hexagon.
         int sideLength = dynamicScale(50); // Adjust this value as needed
 
-        int dynamic_x = dynamicScale(x);
-        int dynamic_y = dynamicScale(y);
+        int dynamic_x = dynamicScale(h.first);
+        int dynamic_y = dynamicScale(h.second);
 
         int[] xPoints = new int[6];
         int[] yPoints = new int[6];
 
+        Polygon p = new Polygon();
+
         // Calculate the points of the hexagon6
         for (int i = 0; i < 6; i++) {
             double angleRadians = Math.toRadians(60 * i + 90); // 60 degrees for each point
-            xPoints[i] = (int) (dynamic_x + sideLength * Math.cos(angleRadians));
-            yPoints[i] = (int) (dynamic_y + sideLength * Math.sin(angleRadians));
+//            xPoints[i] = (int) (dynamic_x + sideLength * Math.cos(angleRadians));
+//            yPoints[i] = (int) (dynamic_y + sideLength * Math.sin(angleRadians));
+
+            p.addPoint((int) (dynamic_x + sideLength * Math.cos(angleRadians)), (int) (dynamic_y + sideLength * Math.sin(angleRadians)));
         }
 
         // Draw the black hexagon
         g.setColor(Color.black); // Set fill color to black
-        g.fillPolygon(xPoints, yPoints, 6);
+        g.fillPolygon(p);
+//        hex_list.add(p);
+        h.polygon = p;
+//        g.fillPolygon(xPoints, yPoints, 6);
         g.setColor(Color.white);
 
         // draw coordinates onto atoms
-        String coords = Integer.toString(row) + ", " + Integer.toString(col);
+        String coords = Integer.toString(h.row) + ", " + Integer.toString(h.col);
         g.drawString(coords, dynamic_x + (sideLength / 10), dynamic_y + (sideLength / 10));
 
     }

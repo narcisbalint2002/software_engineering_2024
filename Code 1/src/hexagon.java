@@ -1,9 +1,13 @@
+import java.awt.*;
+
 public class hexagon {
 
     protected  int first;
     protected  int second;
     public static int p = 0;
     private int position;
+
+    public Polygon polygon;
 
     protected int row;
     protected int col;

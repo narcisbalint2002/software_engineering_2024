@@ -226,7 +226,8 @@ public class Main {
         // set width to screen size
         width = screen_size.width;
         height = screen_size.height;
-        aFrame.setSize(width, height);
+//        aFrame.setSize(gameBoard.dynamicScale2(width), gameBoard.dynamicScale2(height));
+        aFrame.setSize(gameBoard.dynamicScale(width), gameBoard.dynamicScale(height));
 
         aFrame.setLocationRelativeTo(null);
     }
@@ -324,7 +325,7 @@ public class Main {
             // all we need for game loop
             System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
 
-            GameLogic.gameLoop();
+            GameLogic.gameLoop(board);
 
             System.exit(0);
 

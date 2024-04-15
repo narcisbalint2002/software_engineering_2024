@@ -20,7 +20,7 @@ public class GameLogic {
         }
     }
 
-    public static void gameLoop() {
+    public static void gameLoop(gameBoard board_thing) {
         // at start, games played is 0
         int games_played = 0;
 
@@ -29,7 +29,6 @@ public class GameLogic {
         ArrayList<Player> players = new ArrayList<>();
 
         AtomManager atom_manager = new AtomManager();
-
 
 
 
@@ -69,6 +68,8 @@ public class GameLogic {
             // runs while user does not have final guess of atom coordinates
             while(!final_guess) {
 
+
+
                 // // OLD CODE, can delete once made sure all else works well
 //                // player choose whether want to guess final atoms
 //                Scanner user_input = new Scanner(System.in);  // Create a Scanner object
@@ -95,11 +96,15 @@ public class GameLogic {
                         ongoing_input = -1;
                     }
 
+
                 }
 
                 // if player clicked button during above loop to input final guess of all atoms
                 if (ongoing_input == -2) {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
+
+                    current_player.playerGuess(atom_manager.getAtoms());
+                    System.out.println(current_player.player_atoms);
                     break;
                 }
 
