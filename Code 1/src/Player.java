@@ -35,20 +35,42 @@ public class Player {
         return false;
     }
 
-    public boolean atomCheck(ArrayList<Atom> atoms, Coordinate atom_coords) {
+    public boolean atomCheck(Coordinate atom_coords) {
+
         // checks through all atoms in list, if coords already there, return true, because atom ALREADY guessed
-        for (int i = 0; i < atoms.size(); i++) {
-            if ((atom_coords.getX() == atoms.get(i).getX()) && (atom_coords.getY() == atoms.get(i).getY())) {
+        for (int i = 0; i < player_atoms.size(); i++) {
+//            System.out.printf("\nAtom %d: [%d, %d]", i + 1, atoms.get(i).getX(), atoms.get(i).getY());
+
+            if ((atom_coords.getX() == player_atoms.get(i).getX()) && (atom_coords.getY() == player_atoms.get(i).getY())) {
                 return true;
             }
         }
         return false;
     }
 
+    public void calculatePoints(ArrayList<Atom> atoms) {
+        for (int i = 0; i < Main.NUM_ATOMS; i++) {
+            // for every INCORRECT atom, 5 points added (MORE POINTS IS BAD)
+            if (!Utility.isAtom(player_atoms.get(i), atoms)) {
+                score += 5;
+                // if not an atom, paint red to display where players guess was and that it was wrong
+//                GameLogic.board
+            } else {
+                // otherwise guess was right, so display green for correct guess
+
+
+                // later, need to then go through actual atoms and those that were NOT changed to green mustve NOT been
+                // discovered so change those to orange
+
+            }
+        }
+    }
+
+
     // FUTURE IDEA: could be a function that is hooked up to a button on screen to do final guesses, then when
     // clicked returns true, which causes user to go into state of choosing atom coordinates to guess (by clicking
     // their hexagons on board)
-    public boolean playerGuess(ArrayList<Atom> atoms) {
+    public void playerGuess() {
 
         int atoms_guessed = 0;
         // run loop while not all atoms guessed
@@ -56,22 +78,33 @@ public class Player {
             // player choice for atoms
             Scanner final_guess = new Scanner(System.in);  // Create a Scanner object
 
+//            System.out.println("IM STUCK");
+////            System.out.println(atoms);
+//
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                System.out.println();;
+//            }
+
             // if we did get a new atom guess
-            if ((current_atom.x != -1) && (current_atom.y != -1)) {
+            if ((current_atom.getX() != -1) && (current_atom.getY() != -1)) {
+                System.out.printf("\nx: %d, y: %d", current_atom.x, current_atom.y);
+
                 // need check for if already guessed atom
-                if (atomCheck(atoms, current_atom)) {
-                    current_atom.x = -1;
-                    current_atom.y = -1;
-                } else {
-                    player_atoms.add(current_atom);
+                if (!atomCheck(current_atom)) {
+                    Coordinate new_atom = new Coordinate(current_atom.getX(), current_atom.getY());
+                    player_atoms.add(new_atom);
                     atoms_guessed++;
                 }
+                current_atom.x = -1;
+                current_atom.y = -1;
             }
 
         }
 
 
-        return false;
+
 
 
 //        // player choose whether want to guess final atoms

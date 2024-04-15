@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,6 +7,8 @@ public class GameLogic {
 
     // variable used in gameBoard for mouse event click for current edge
     public static int ongoing_input;
+
+    public static gameBoard board = new gameBoard();
 
     private GameLogic() {
         throw new AssertionError("GameLogic should not be instantiated");
@@ -20,7 +23,7 @@ public class GameLogic {
         }
     }
 
-    public static void gameLoop(gameBoard board_thing) {
+    public static void gameLoop() {
         // at start, games played is 0
         int games_played = 0;
 
@@ -28,30 +31,55 @@ public class GameLogic {
         // all players in the game (to compare score at the end)
         ArrayList<Player> players = new ArrayList<>();
 
-        AtomManager atom_manager = new AtomManager();
+
+
+        // BELOW may NOT work for multiple players (because board is updated throughout,
+        // so maybe needs to be reconstructed after each player, this is simple as all
+        // that needs to be done is copy below code INTO GameLogic.gameLoop() method)
+
+        Scanner scanner = new Scanner(System.in);
+        //Create new Frame
+
+        JFrame frame = new JFrame("Game board");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+//        gameBoard board = new gameBoard();
+        /*Add a new object of the class gameBoard to our frame.*/
+        frame.add(board);
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        Main.gameBoardFullScreen(frame);
+
 
 
 
         // CHANGE TO HOWEVER MANY PLAYERS THERE ARE (RIGHT NOW 1 FOR TESTING ONLY 1 GAME)
-        while (games_played < 1) {
+        while (games_played < Main.NUM_PLAYERS) {
+
+            // create new atoms
+            AtomManager atom_manager = new AtomManager();
 
             Player current_player = new Player();
             boolean final_guess = false; // while not final guess of ALL atom positions on board
 
 
             // create board with all lists and nodes
-            ArrayList<Board.List> board = new ArrayList<>();
-            Board.initialiseBoard(board);
+            ArrayList<Board.List> board_list = new ArrayList<>();
+            Board.initialiseBoard(board_list);
 
             // terminal printing (for debugging)
-            Board.printBoard(board);
+            Board.printBoard(board_list);
 
             //// set all atoms in board
-//            Board.setAtoms(board);
+//            Board.setAtoms(board_list);
             System.out.println(atom_manager);
 
 //            // terminal printing (for debugging)
-//            Board.printBoard(board);
+//            Board.printBoard(board_list);
 
 
             EdgeManager board_edge_list = new EdgeManager();
@@ -103,8 +131,15 @@ public class GameLogic {
                 if (ongoing_input == -2) {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
 
-                    current_player.playerGuess(atom_manager.getAtoms());
-                    System.out.println(current_player.player_atoms);
+                    current_player.playerGuess();
+                    System.out.println("\nPlayer" + Main.NUM_PLAYERS + " Atom Guesses: " + current_player.player_atoms);
+
+
+                    current_player.calculatePoints(atom_manager.getAtoms());
+                    System.out.printf("Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
+
+//                    current_player.revealAtoms();
+
                     break;
                 }
 
@@ -136,12 +171,13 @@ public class GameLogic {
 //                // AND to actually take in input for all 6 atom coordinates
 //                final_guess = current_player.playerGuess();
             }
-
-
+            // add new player to players list
+            players.add(current_player);
             games_played++;
         }
 
 
     }
+
 
 }

@@ -443,8 +443,8 @@ public class gameBoard extends JPanel{
         int dynamic_x = dynamicScale(h.first);
         int dynamic_y = dynamicScale(h.second);
 
-        int[] xPoints = new int[6];
-        int[] yPoints = new int[6];
+//        int[] xPoints = new int[6];
+//        int[] yPoints = new int[6];
 
         Polygon p = new Polygon();
 

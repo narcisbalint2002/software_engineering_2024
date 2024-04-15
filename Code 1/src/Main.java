@@ -25,6 +25,8 @@ public class Main {
     //The number of atoms to be placed.
     public static final int NUM_ATOMS = 6;
 
+    public static final int NUM_PLAYERS = 1;
+
 
 
     public static int width = 0;
@@ -234,22 +236,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        //Create new Frame
 
-        JFrame frame = new JFrame("Game board");
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-        gameBoard board = new gameBoard();
-        /*Add a new object of the class gameBoard to our frame.*/
-        frame.add(board);
-
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        gameBoardFullScreen(frame);
+//        // BELOW may NOT work for multiple players (because board is updated throughout,
+//        // so maybe needs to be reconstructed after each player, this is simple as all
+//        // that needs to be done is copy below code INTO GameLogic.gameLoop() method)
+//
+//        Scanner scanner = new Scanner(System.in);
+//        //Create new Frame
+//
+//        JFrame frame = new JFrame("Game board");
+//
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//
+//        gameBoard board = new gameBoard();
+//        /*Add a new object of the class gameBoard to our frame.*/
+//        frame.add(board);
+//
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//
+//        gameBoardFullScreen(frame);
 
 
 //        /*This data structure will store our board. */
@@ -325,7 +332,7 @@ public class Main {
             // all we need for game loop
             System.out.print("\nThe following coordinates represent the positions of the atoms:\n");
 
-            GameLogic.gameLoop(board);
+            GameLogic.gameLoop();
 
             System.exit(0);
 
