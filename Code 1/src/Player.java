@@ -53,15 +53,16 @@ public class Player {
         for (int i = 0; i < Main.NUM_ATOMS; i++) {
 
 
+            // need to also display actual atoms and those that were NOT changed to green mustve NOT been
+            // discovered so change those to orange
+            GameLogic.board.changeHexagonColour(atoms.get(i).getX(), atoms.get(i).getY(), Color.ORANGE);
+
             // for every INCORRECT atom, 5 points added (MORE POINTS IS BAD)
             if (!Utility.isAtom(player_atoms.get(i), atoms)) {
                 score += 5;
                 // if not an atom, paint red to display where players guess was and that it was wrong
                 GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.RED);
 
-                // need to also display actual atoms and those that were NOT changed to green mustve NOT been
-                // discovered so change those to orange
-                GameLogic.board.changeHexagonColour(atoms.get(i).getX(), atoms.get(i).getY(), Color.ORANGE);
             } else {
                 // otherwise guess was right, so display green for correct guess
                 GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.GREEN);
@@ -94,7 +95,7 @@ public class Player {
             // if we did get a new atom guess (by default coordinates are (-1,-1), which are flagged as invalid because
             // there is no -1 row, BUT there are -1 columns, so this check needs to be done ONLY for rows of -1)
             if (current_atom.getX() != -1) {
-                System.out.printf("\nx: %d, y: %d", current_atom.x, current_atom.y);
+                System.out.printf("\nx: %d, y: %d", current_atom.getX(), current_atom.getY());
 
                 // need check for if NOT already in list, if it is then we will undo the guess
                 if (atomCheck(current_atom) == null) {

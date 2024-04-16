@@ -138,7 +138,7 @@ public class GameLogic {
                     current_player.calculatePoints(atom_manager.getAtoms());
                     System.out.printf("Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
 
-                    board.repaint();
+//                    board.repaint();
 
 //                    current_player.revealAtoms();
 

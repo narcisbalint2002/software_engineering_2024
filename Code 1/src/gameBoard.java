@@ -115,6 +115,8 @@ public class gameBoard extends JPanel{
 
         private static int BUTTON_SIZE_X = dynamicScale(BUTTON_SIZE_Y * 3);
 
+        public String text = "GUESS ATOMS";
+
         public boolean isClicked(int clickX, int clickY) {
             int dynamic_clickX = dynamicScale(clickX);
             int dynamic_clickY = dynamicScale(clickY);
@@ -127,7 +129,7 @@ public class gameBoard extends JPanel{
             g.setColor(Color.black); // Set fill color to black
             g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, dynamicScale(10), dynamicScale(10));
             g.setColor(Color.white);
-            g.drawString("GUESS ATOMS", x + (BUTTON_SIZE_Y / 2), y + (BUTTON_SIZE_Y / 2));
+            g.drawString(text, x + (BUTTON_SIZE_Y / 2), y + (BUTTON_SIZE_Y / 2));
         }
     }
 
