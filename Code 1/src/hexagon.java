@@ -12,10 +12,12 @@ public class hexagon {
     protected int row;
     protected int col;
 
+    public Color color;
+
 
     // construct hexagon using pixels on screen x and y for DRAWING ONLY (first, second),
     // and coordinates in the rest of our program for data (row, col)
-    public hexagon(int first, int second, int row, int col)
+    public hexagon(int first, int second, int row, int col, Color color)
     {
         // add drawing coords
         this.first = first;
@@ -26,7 +28,12 @@ public class hexagon {
         // next hexagon
         position = p;
         p++;
+        this.color = color;
     }
+
+
+    public int getRow() { return row; }
+    public int getCol() { return col; }
 
     public int getPosition()
     {

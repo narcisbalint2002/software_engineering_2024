@@ -357,7 +357,7 @@ public class gameBoard extends JPanel{
                 numbers.add(new NumberInfo(x - dynamicScale(45), y + dynamicScale(30), index_bottom++));
                 numbers.add(new NumberInfo(x + dynamicScale(22), y + dynamicScale(30), index_bottom++));
             }
-                hexagons.add(new hexagon(x, y, row, col));
+                hexagons.add(new hexagon(x, y, row, col, Color.BLACK));
                 x += dynamicScale(100);
 
                 col++; // increment current column
@@ -377,6 +377,16 @@ public class gameBoard extends JPanel{
 
         }
         //Here we have the exact number of hexagons in the array list.
+    }
+
+    // change hexagon's polygon (i.e. actual drawing on-screen) colour
+    public void changeHexagonColour(int row, int col, Color new_color) {
+        // for each hexagon in list, check if row and col matches, if it does, change colour to that specified in arguments
+        for (int i = 0; i < hexagons.size(); i++) {
+            if ((hexagons.get(i).getRow() == row) && (hexagons.get(i).getCol() == col)) {
+                hexagons.get(i).color = new_color;
+            }
+        }
     }
 
     @Override
@@ -458,9 +468,8 @@ public class gameBoard extends JPanel{
         }
 
         // Draw the black hexagon
-        g.setColor(Color.black); // Set fill color to black
+        g.setColor(h.color); // Set fill color to black
         g.fillPolygon(p);
-//        hex_list.add(p);
         h.polygon = p;
 //        g.fillPolygon(xPoints, yPoints, 6);
         g.setColor(Color.white);

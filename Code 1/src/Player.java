@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,32 +36,35 @@ public class Player {
         return false;
     }
 
-    public boolean atomCheck(Coordinate atom_coords) {
+    public Coordinate atomCheck(Coordinate atom_coords) {
 
         // checks through all atoms in list, if coords already there, return true, because atom ALREADY guessed
         for (int i = 0; i < player_atoms.size(); i++) {
 //            System.out.printf("\nAtom %d: [%d, %d]", i + 1, atoms.get(i).getX(), atoms.get(i).getY());
 
             if ((atom_coords.getX() == player_atoms.get(i).getX()) && (atom_coords.getY() == player_atoms.get(i).getY())) {
-                return true;
+                return player_atoms.get(i);
             }
         }
-        return false;
+        return null;
     }
 
     public void calculatePoints(ArrayList<Atom> atoms) {
         for (int i = 0; i < Main.NUM_ATOMS; i++) {
+
+
             // for every INCORRECT atom, 5 points added (MORE POINTS IS BAD)
             if (!Utility.isAtom(player_atoms.get(i), atoms)) {
                 score += 5;
                 // if not an atom, paint red to display where players guess was and that it was wrong
-//                GameLogic.board
+                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.RED);
+
+                // need to also display actual atoms and those that were NOT changed to green mustve NOT been
+                // discovered so change those to orange
+                GameLogic.board.changeHexagonColour(atoms.get(i).getX(), atoms.get(i).getY(), Color.ORANGE);
             } else {
                 // otherwise guess was right, so display green for correct guess
-
-
-                // later, need to then go through actual atoms and those that were NOT changed to green mustve NOT been
-                // discovered so change those to orange
+                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.GREEN);
 
             }
         }
@@ -91,11 +95,20 @@ public class Player {
             if ((current_atom.getX() != -1) && (current_atom.getY() != -1)) {
                 System.out.printf("\nx: %d, y: %d", current_atom.x, current_atom.y);
 
-                // need check for if already guessed atom
-                if (!atomCheck(current_atom)) {
+                // need check for if NOT already in list, if it is then we will undo the guess
+                if (atomCheck(current_atom) == null) {
                     Coordinate new_atom = new Coordinate(current_atom.getX(), current_atom.getY());
                     player_atoms.add(new_atom);
+                    // update display of new hexagon to show the one we are guessing
+                    GameLogic.board.changeHexagonColour(new_atom.getX(), new_atom.getY(), Color.GRAY);
+                    GameLogic.board.repaint();
                     atoms_guessed++;
+                } else {
+                    player_atoms.remove(atomCheck(current_atom));
+                    // update display of new hexagon to reset one we are guessing
+                    GameLogic.board.changeHexagonColour(current_atom.getX(), current_atom.getY(), Color.BLACK);
+                    GameLogic.board.repaint();
+                    atoms_guessed--;
                 }
                 current_atom.x = -1;
                 current_atom.y = -1;

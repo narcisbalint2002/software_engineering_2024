@@ -132,15 +132,21 @@ public class GameLogic {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
 
                     current_player.playerGuess();
-                    System.out.println("\nPlayer" + Main.NUM_PLAYERS + " Atom Guesses: " + current_player.player_atoms);
+                    System.out.println("\nPlayer " + Main.NUM_PLAYERS + " Atom Guesses: " + current_player.player_atoms);
 
 
                     current_player.calculatePoints(atom_manager.getAtoms());
                     System.out.printf("Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
 
+                    board.repaint();
+
 //                    current_player.revealAtoms();
 
-                    break;
+                    while (true) {
+
+                    }
+
+//                    break;
                 }
 
                 // current edge number (as per diagrams) used to get edge (by subtracting 1 to get edge index)
