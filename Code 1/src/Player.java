@@ -91,8 +91,9 @@ public class Player {
 //                System.out.println();;
 //            }
 
-            // if we did get a new atom guess
-            if ((current_atom.getX() != -1) && (current_atom.getY() != -1)) {
+            // if we did get a new atom guess (by default coordinates are (-1,-1), which are flagged as invalid because
+            // there is no -1 row, BUT there are -1 columns, so this check needs to be done ONLY for rows of -1)
+            if (current_atom.getX() != -1) {
                 System.out.printf("\nx: %d, y: %d", current_atom.x, current_atom.y);
 
                 // need check for if NOT already in list, if it is then we will undo the guess
