@@ -50,12 +50,14 @@ public class Player {
     }
 
     public void calculatePoints(ArrayList<Atom> atoms) {
-        for (int i = 0; i < Main.NUM_ATOMS; i++) {
 
 
+        for (int j = 0; j < Main.NUM_ATOMS; j++) {
             // need to also display actual atoms and those that were NOT changed to green mustve NOT been
             // discovered so change those to orange
-            GameLogic.board.changeHexagonColour(atoms.get(i).getX(), atoms.get(i).getY(), Color.ORANGE);
+            GameLogic.board.changeHexagonColour(atoms.get(j).getX(), atoms.get(j).getY(), Color.ORANGE);
+        }
+        for (int i = 0; i < Main.NUM_ATOMS; i++) {
 
             // for every INCORRECT atom, 5 points added (MORE POINTS IS BAD)
             if (!Utility.isAtom(player_atoms.get(i), atoms)) {
