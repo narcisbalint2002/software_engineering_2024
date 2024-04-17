@@ -64,11 +64,9 @@ public class Player {
                 score += 5;
                 // if not an atom, paint red to display where players guess was and that it was wrong
                 GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.RED);
-
             } else {
                 // otherwise guess was right, so display green for correct guess
                 GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.GREEN);
-
             }
         }
         // update board
