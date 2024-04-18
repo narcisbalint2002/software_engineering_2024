@@ -217,14 +217,14 @@ public class RayManager {
         if (direct_hit) {
             ray_exit_edge = -1;
             // update entrance edge number in gameBoard class to green for "absorbed"
-            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.GREEN);
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(0, 167, 59));
 
         }
         // if total reflection, we know came out same way came in
         else if (total_reflection) {
             ray_exit_edge = ray_entrance_edge;
             // update entrance edge number in gameBoard class to red for "reflection"
-            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.RED);
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(251, 7, 7));
         }
         else {
 
@@ -250,7 +250,7 @@ public class RayManager {
 
 
             // update BOTH entrance and exit edge numbers in gameBoard class to blue for "path"
-            edgeUpdate(ray_entrance_edge, ray_exit_edge, Color.BLUE);
+            edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(9, 119, 210));
         }
 
 

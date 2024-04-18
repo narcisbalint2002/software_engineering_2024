@@ -55,7 +55,7 @@ public class Player {
         for (int j = 0; j < Main.NUM_ATOMS; j++) {
             // need to also display actual atoms and those that were NOT changed to green mustve NOT been
             // discovered so change those to orange
-            GameLogic.board.changeHexagonColour(atoms.get(j).getX(), atoms.get(j).getY(), Color.ORANGE);
+            GameLogic.board.changeHexagonColour(atoms.get(j).getX(), atoms.get(j).getY(), new Color(255, 165, 0));
         }
         for (int i = 0; i < Main.NUM_ATOMS; i++) {
 
@@ -63,10 +63,10 @@ public class Player {
             if (!Utility.isAtom(player_atoms.get(i), atoms)) {
                 score += 5;
                 // if not an atom, paint red to display where players guess was and that it was wrong
-                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.RED);
+                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), new Color(251, 7, 7));
             } else {
                 // otherwise guess was right, so display green for correct guess
-                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), Color.GREEN);
+                GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), new Color(0, 167, 59));
             }
         }
         // update board

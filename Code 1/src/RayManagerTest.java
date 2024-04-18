@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RayManagerTest {
 
+    gameBoard test_board = new gameBoard();
+
     // test to check correct entrance and exit points for ray with NO atoms in its path
     @Test
     public void rayNoAtoms() {
