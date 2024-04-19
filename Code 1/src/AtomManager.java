@@ -37,7 +37,15 @@ public class AtomManager {
 
     public void setter_generatingAtoms() {
         ArrayList<int[]> coordinates = new ArrayList<>();
-        Random random = new Random(1);
+        Random random;
+
+        // if seed is 0, use random seed, otherwise use assigned seed
+        if (Main.SEED == 0) {
+            random = new Random();
+        } else {
+            random = new Random(Main.SEED);
+        }
+
         int count = 0;
 
         System.out.println("Generated pairs:");

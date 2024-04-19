@@ -27,6 +27,9 @@ public class Main {
 
     public static final int NUM_PLAYERS = 1;
 
+    // seed (if 0 will used random seed in AtomManager.setter_generatingAtoms method, seed 1 was used heavily for testing)
+    public static final int SEED = 0;
+
 
 
     public static int width = 0;
