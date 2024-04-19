@@ -8,7 +8,6 @@ public class Atom extends Coordinate {
     public Atom(int x, int y) {
         super(x, y);
 
-        //Need to add checks here for the coordinate ranges and throw exceptions.
         if(!Utility.inRange(x, y)){
             throw new IllegalArgumentException("Arguments out of range - Atoms Contstructor");
         }
@@ -40,8 +39,8 @@ public class Atom extends Coordinate {
             //throw new IllegalArgumentException("Arguments out of range - Atoms addCOI");
 
             /*Since atoms near edge will lead to COI out of range.
-              i need to still be able to continue programme.
-              for now i will add -1000, -1000 to indicate c.o.i out of board.
+              I need to still be able to continue programme.
+              I will add -1000, -1000 to indicate c.o.i out of board.
              */
             Coordinate temp = new Coordinate(c.getX(), c.getY());
             circleOfInfluence.add(temp);

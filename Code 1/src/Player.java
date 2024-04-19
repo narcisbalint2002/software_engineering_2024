@@ -69,6 +69,12 @@ public class Player {
                 GameLogic.board.changeHexagonColour(player_atoms.get(i).getX(), player_atoms.get(i).getY(), new Color(0, 167, 59));
             }
         }
+
+        String s = "Player Score: " + String.valueOf(score);
+
+        GameLogic.board.getGraphics().setColor(Color.BLACK);
+        GameLogic.board.getGraphics().drawString(s, 500, 20);
+
         // update board
         GameLogic.board.repaint();
     }

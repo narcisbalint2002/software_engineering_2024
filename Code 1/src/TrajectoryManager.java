@@ -10,13 +10,11 @@ public class TrajectoryManager {
     }
 
 
-
-
     public static void main(String[] args) {//TESTING PURPOSES
         TrajectoryManager t = new TrajectoryManager();
     }
 
-    public void set_trajectories(){ //In Progress - Abdullah
+    public void set_trajectories(){
 
         //                           Trajectory(trajectory                 , right_direction            , left_direction             );
         Trajectory trajectory1 = new Trajectory(new Coordinate(-1, 0), new Coordinate(-1, 1), new Coordinate(0, -1));
@@ -32,11 +30,6 @@ public class TrajectoryManager {
         trajectories.add(trajectory4);
         trajectories.add(trajectory5);
         trajectories.add(trajectory6);
-
-//        // Printing trajectories (UNCOMMENT if u want to print)
-//        for (Trajectory trajectory : trajectories) {
-//            System.out.println(trajectory.toString()+"\n");
-//        }
     }
 
     public ArrayList<Trajectory> getTrajectoriesList() {

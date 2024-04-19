@@ -142,9 +142,19 @@ public class GameLogic {
 
 //                    current_player.revealAtoms();
 
-                    while (true) {
+                    board.end_game_button.text = "NEXT ROUND";
+                    board.repaint();
 
+                    ongoing_input = -1;
+
+                    while(ongoing_input==-1){
+                        Scanner user_input = new Scanner(System.in);
                     }
+
+                    break;
+//                    while (true) {
+//
+//                    }
 
 //                    break;
                 }
