@@ -133,7 +133,7 @@ public class RayManager {
         Coordinate left = new Coordinate(getNextLeftX(), getNextLeftY());
 
         /* this is JUST done to check atoms that arent directly in front of ray (this would affect certain edges LIKE
-         * for example shoothing a ray from edge 36, which would begin in (4,4) but if theres an atom in (5,3) the
+         * for example shooting a ray from edge 36, which would begin in (4,4) but if theres an atom in (5,3) the
          * circle of influence should reflect it out, so this accounts for that) */
         Utility.changeTrajectory(current_ray, 'b'); // flip ray temporarily
         Coordinate right_back = new Coordinate(getNextRightX(), getNextRightY());
