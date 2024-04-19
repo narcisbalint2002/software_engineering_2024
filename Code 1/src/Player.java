@@ -70,6 +70,12 @@ public class Player {
             }
         }
 
+        if (score < 10) {
+            GameLogic.board.player_points_text.color = new Color(0, 167, 59);
+        } else if (score < 20) {
+            GameLogic.board.player_points_text.color = new Color(255, 165, 0);
+        }
+
         String s = "Player Score: " + score;
 
 //        GameLogic.board.getGraphics().setColor(Color.BLACK);

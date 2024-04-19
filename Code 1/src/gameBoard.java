@@ -116,13 +116,14 @@ public class gameBoard extends JPanel{
 
         public String text = "";
         public boolean invisible = true; // not visible until end of game
+        public Color color = Color.RED;
 
 
         public void draw(Graphics g) {
             // only draw if we have made player score visible (end of game)
             if (!invisible) {
                 // Draw the black hexagon
-                g.setColor(new Color(0, 167, 59)); // Set fill color to green
+                g.setColor(color); // Set fill color to green
                 g.fillRoundRect(x, y, SIZE_X, SIZE_Y, dynamicScale(10), dynamicScale(10));
                 g.setColor(Color.WHITE);
                 g.drawString(text, x + (SIZE_Y / 2), y + (SIZE_Y / 2));
