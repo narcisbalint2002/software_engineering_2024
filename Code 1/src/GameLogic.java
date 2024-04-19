@@ -142,7 +142,7 @@ public class GameLogic {
 
 //                    current_player.revealAtoms();
 
-                    board.end_game_button.text = "NEXT ROUND";
+                    board.end_game_button.text = "END GAME";
                     board.repaint();
 
                     ongoing_input = -1;

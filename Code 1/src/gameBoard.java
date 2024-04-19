@@ -103,6 +103,34 @@ public class gameBoard extends JPanel{
         }
     }
 
+    public static class Text {
+
+
+
+        private int x = dynamicScale(1010);
+        private int y = dynamicScale(20);
+
+        private static int SIZE_Y = dynamicScale(50);
+
+        private static int SIZE_X = dynamicScale(SIZE_Y * 4);
+
+        public String text = "";
+        public boolean invisible = true; // not visible until end of game
+
+
+        public void draw(Graphics g) {
+            // only draw if we have made player score visible (end of game)
+            if (!invisible) {
+                // Draw the black hexagon
+                g.setColor(new Color(0, 167, 59)); // Set fill color to green
+                g.fillRoundRect(x, y, SIZE_X, SIZE_Y, dynamicScale(10), dynamicScale(10));
+                g.setColor(Color.WHITE);
+                g.drawString(text, x + (SIZE_Y / 2), y + (SIZE_Y / 2));
+            }
+        }
+    }
+
+
     public static class EndGame {
 
 
@@ -200,6 +228,7 @@ public class gameBoard extends JPanel{
 
     ScreenScale screen_scale_button = new ScreenScale();
     EndGame end_game_button = new EndGame();
+    Text player_points_text = new Text();
 
     //CONSTRUCTOR
     public gameBoard(){
@@ -429,6 +458,10 @@ public class gameBoard extends JPanel{
 
         // draws end game button (when clicked will end game)
         end_game_button.draw(g2);
+
+
+        // player win text (empty at start, updated at end)
+        player_points_text.draw(g2);
 
 
         // FUCKING BROKEN -- DO NOT UNCOMMENT (is supposed to be actual button for scaling)

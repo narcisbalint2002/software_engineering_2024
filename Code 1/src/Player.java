@@ -70,10 +70,13 @@ public class Player {
             }
         }
 
-        String s = "Player Score: " + String.valueOf(score);
+        String s = "Player Score: " + score;
 
-        GameLogic.board.getGraphics().setColor(Color.BLACK);
-        GameLogic.board.getGraphics().drawString(s, 500, 20);
+//        GameLogic.board.getGraphics().setColor(Color.BLACK);
+//        GameLogic.board.getGraphics().drawString(s, 500, 20);
+
+        GameLogic.board.player_points_text.text = s;
+        GameLogic.board.player_points_text.invisible = false;
 
         // update board
         GameLogic.board.repaint();
