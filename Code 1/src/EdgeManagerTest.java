@@ -27,44 +27,44 @@ class EdgeManagerTest {
         test_list.x = 0; // set x
         test_list.y = 0; // set y
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(0).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(0).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(0).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(1).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(1).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(1).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(53).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(53).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(53).y);
 
 
 
         test_list.x = 8; // set x
         test_list.y = 0; // set y
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(26).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(26).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(26).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(27).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(27).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(27).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(28).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(28).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(28).y);
 
 
 
         test_list.x = 4; // set x
         test_list.y = -4; // set y
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(8).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(8).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(8).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(9).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(9).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(9).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(10).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(10).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(10).y);
 
 
 
         test_list.x = 4; // set x
         test_list.y = 4; // set y
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(35).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(35).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(35).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(36).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(36).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(36).y);
         Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(37).x);
-        Assertions.assertEquals(test_list.x, test_edge.getCoordinateManager(37).x);
+        Assertions.assertEquals(test_list.y, test_edge.getCoordinateManager(37).y);
     }
 
 
