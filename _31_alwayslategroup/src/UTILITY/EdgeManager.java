@@ -6,6 +6,14 @@ import OBJECTS.Edge;
 
 import java.util.ArrayList;
 
+
+/**
+ * EdgeManager initializes and manages a list of edges representing the outer edges
+ * of hexagonal board. It provides methods to retrieve individual edges and to
+ * search for edges based on specific coordinates and trajectories.
+ * The initialization involves calculating the coordinates, trajectories, and indices
+ * of the edges based on predefined mathematical patterns.
+ */
 public class EdgeManager {
 
     /*
@@ -32,6 +40,19 @@ public class EdgeManager {
     // when we reach the edge of the board with a ray, we are at a particular set of coordinates with a particular
     // trajectory, with BOTH of these, we can find the edge of that coordinate with the OPPOSITE trajectory (meaning
     // it is pointing at where the ray came from), this means we successfully found our exit edge of our ray
+
+    /**
+     * Searches for the unique Edge with the given Coordinate and Trajectory combo.
+     *
+     * This method searches through the list of edges to find the one that matches the given coordinate
+     * and trajectory combination. It compares the coordinate and trajectory of each edge with the
+     * specified coordinate and inverted trajectory to find the matching edge.
+     *
+     * @param c The Coordinate to be searched.
+     * @param t The trajectory to be searched.
+     * @return Edge The Edge found corresponding to the Coordinate c and Trajectory t.
+     * @throws IllegalArgumentException If no Edge matching the Coordinate and Trajectory is found.
+     */
     public Edge findEdgeByCoordinateAndTrajectory(Coordinate c, Trajectory t) {
         //// reverse the trajectory by multiplying its x and y by -1
         int traj_x = t.getTrajectoryDirection().getX() * -1;
@@ -59,8 +80,7 @@ public class EdgeManager {
             }
 
         }
-        // if we didnt find we lose :( (ideally this shouldnt happen)
-        return null;
+        throw new IllegalArgumentException("No edge found with the specified coordinate and trajectory.");
     }
 
     public int getEdgeNumManager(int i) {
@@ -79,6 +99,17 @@ public class EdgeManager {
         return edge_list.get(i).ray_obj.getTrajectory();
     }
 
+
+    /**
+     * Constructs an EdgeManager object and initializes a list of edges.
+
+     * This constructor initializes an EdgeManager object and populates it with a list of edges
+     * based on predefined math.
+
+     * Note: The implementation involves mathematical calculations to determine the coordinates,
+     * trajectories, and indices of the edges. The resulting list of edges represents the outer
+     * edges of the outer hexagons of the board.
+     */
     // class constructor, auto-constructs edge list with all edge nodes, each containing respective ray
     public EdgeManager() {
         // for iteration
