@@ -9,6 +9,11 @@ import UTILITY.EdgeManager;
 
 import java.awt.*;
 
+/**
+ * The RayManager class manages the trajectory of a ray as it traverses the board,
+ * interacts with atoms and edges, and updates the visual representation of entrance
+ * and exit edges on the game board accordingly.
+ */
 public class RayManager {
 
 
@@ -63,45 +68,16 @@ public class RayManager {
         return new Coordinate(new_left_x, new_left_y);
     }
 
-//    // loop through numbers list to change particular edge
-//    public void edgeUpdate(int ray_entrance, int ray_exit) {
-//
-//        // colour updates, for absorbed, then reflection, then every other path
-//        Color new_color = Color.BLACK;
-//        if (ray_exit == -1) {
-//            new_color = Color.GREEN;
-//        } else if (ray_entrance == ray_exit_edge) {
-//            new_color = Color.RED;
-//        } else {
-//            new_color = Color.BLUE;
-//        }
-//
-////        GUI.GameBoard.numbers.get(ray_entrance - 1).color = new_color;
-////
-////        if (ray_exit > 0) {
-////            GUI.GameBoard.numbers.get(ray_exit - 1).color = new_color;
-////        }
-//
-//        int edge_number = ray_entrance;
-//
-//        // loop for all numbers in GUI.GameBoard list
-//        for (int i = 0; i < GUI.GameBoard.numbers.size(); i++) {
-//            // set current edge data as a variable (easier to read)
-//            GUI.GameBoard.NumberInfo edge_data = GUI.GameBoard.numbers.get(i);
-//            // if edge number passed in matches edge data number, update size to 0 (not clickable),
-//            // then also change colour to that passed in
-//            if (edge_number == edge_data.getNumber()) {
-////                edge_data.number_size = 0;
-//                edge_data.color = new_color;
-//                if ((ray_exit > 0) && (edge_number != ray_exit)) {
-//                    edge_number = ray_exit;
-//                    i = 0;
-//                }
-//            }
-//        }
-//    }
-
-    // loop through numbers list to change particular edge
+    /**
+     * EdgeUpdate Updates the visuals of the edge numbers displayed on GUI.
+     *
+     * This method iterates through the list of edge numbers on the game board and updates the visuals.
+     * It sets the font to bold and changes the color of the entrance and exit edges to the specified new color.
+     *
+     * @param entrance The entrance edge number.
+     * @param exit The exit edge number.
+     * @param new_color The new color to be applied to the entrance and exit edges.
+     */
     public void edgeUpdate(int entrance, int exit, Color new_color) {
 
 
@@ -125,6 +101,18 @@ public class RayManager {
         }
     }
 
+    /**
+     * rayPath method computes the trajectory of a ray as it traverses the board, interacting
+     * with atoms and edges along its path. It checks for direct hits on atoms, total reflection
+     * due to atoms behind the ray, and changes in trajectory due to atoms on the sides of the ray's
+     * path.
+     *
+     * Also calls edgeUpdate to change up color and fonts based off direct hits, total reflection
+     * and deflection.
+     *
+     * @param board_edge_list The list of edges of the board.
+     * @param atomManager The list of atoms on the board.
+     */
     public void rayPath(EdgeManager board_edge_list, AtomManager atomManager) {
         // flag for if direct hit
         boolean direct_hit = false;
@@ -191,7 +179,6 @@ public class RayManager {
                 Utility.changeTrajectory(current_ray, 'r');
                 System.out.println("Ray Coordinates and MATH.Trajectory Changed - (Atom was on Left)");
             }
-
             // start on a coordinate at edge of board
             else if(atom_current){
                 System.out.println("DIRECT HIT CURRENT");
@@ -204,8 +191,6 @@ public class RayManager {
                 direct_hit = true;
                 break;
             }
-
-
             // check for if NO circles of influence either side
             else {
                 System.out.println("Ray Coordinates changed and Trajectory NOT CHANGED - MOVED FORWARD");
@@ -220,14 +205,11 @@ public class RayManager {
             right = new Coordinate(getNextRightX(), getNextRightY());
             left = new Coordinate(getNextLeftX(), getNextLeftY());
         }
-
-
         // if direct hit, exit is -1, otherwise its an edge we can find in the board
         if (direct_hit) {
             ray_exit_edge = -1;
             // update entrance edge number in GUI.GameBoard class to green for "absorbed"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(0, 167, 59));
-
         }
         // if total reflection, we know came out same way came in
         else if (total_reflection) {
@@ -236,7 +218,6 @@ public class RayManager {
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(251, 7, 7));
         }
         else {
-
             // FINAL check (if reaches edge of board and an atom either left or right would affect its exit point)
             if (Utility.isAtom(right, atomManager.getAtoms())) {
                 Utility.changeTrajectory(current_ray, 'l');
@@ -245,7 +226,6 @@ public class RayManager {
                 Utility.changeTrajectory(current_ray, 'r');
                 System.out.println("Ray Coordinates and Trajectory Changed At Edge - (Atom was on Left)");
             }
-
             /* this finds the edge the ray would exit board from based on its coordinate and trajectory
              * what the function does is checks edges that share that coordinate, then the opposite direction ray is going
              * in (because, if you think about it, the ray is going to EXIT through there, meaning the opposite of if you
@@ -253,11 +233,8 @@ public class RayManager {
              */
             // WIP, is getting SUCK HERE
             Edge edge_found = board_edge_list.findEdgeByCoordinateAndTrajectory(current_ray.getCoordinate(), current_ray.getTrajectory());
-
             // ray exit edge is the edge number from the exit edge we JUST found above
             ray_exit_edge = edge_found.getEdgeNum();
-
-
             // update BOTH entrance and exit edge numbers in GUI.GameBoard class to blue for "path"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(9, 119, 210));
         }
