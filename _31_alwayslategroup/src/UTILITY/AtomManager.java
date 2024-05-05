@@ -76,7 +76,7 @@ public class AtomManager {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("OBJECTS.Atom Manager:\n");
+        sb.append("Atom Manager:\n");
         for (Atom atom : atoms) {
             sb.append(atom.toString()).append("\n");
         }

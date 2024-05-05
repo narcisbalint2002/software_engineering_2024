@@ -36,6 +36,6 @@ public class Edge {
     // toString of OBJECTS.Edge incorporates OBJECTS.Ray toString
     @Override
     public String toString() {
-        return "\nOBJECTS.Edge " + edge_num + ray_obj.toString();
+        return "\nEdge " + edge_num + ray_obj.toString();
     }
 }

@@ -24,7 +24,7 @@ public class Atom extends Coordinate {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("OBJECTS.Atom at ").append("(").append(this.getX()).append(", ").append(this.getY()).append(")").append("\n");
+        sb.append("Atom at ").append("(").append(this.getX()).append(", ").append(this.getY()).append(")").append("\n");
         return sb.toString();
     }
 

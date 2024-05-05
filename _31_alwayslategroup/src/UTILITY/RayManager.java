@@ -167,7 +167,7 @@ public class RayManager {
             // in case circle of influence immediately reflects back the atom
             if (atom_right_back || atom_left_back) {
                 Utility.changeTrajectory(current_ray, 'b');
-                System.out.println("OBJECTS.Ray INSTANTLY Reflected");
+                System.out.println("Ray INSTANTLY Reflected");
                 total_reflection = true;
                 break;
             }
@@ -175,7 +175,7 @@ public class RayManager {
 //                //Since atom is on the right, we go left.
 //                MATH.Coordinate temp = new MATH.Coordinate(left.getX(), left.getY());
                 Utility.changeTrajectory(current_ray, 'b');
-                System.out.println("OBJECTS.Ray Reflected");
+                System.out.println("Ray Reflected");
 
                 total_reflection = true;
             }
@@ -183,13 +183,13 @@ public class RayManager {
 //                //Since atom is on the right, we go left.
 //                MATH.Coordinate temp = new MATH.Coordinate(left.getX(), left.getY());
                 Utility.changeTrajectory(current_ray, 'l');
-                System.out.println("OBJECTS.Ray Coordinates and MATH.Trajectory Changed - (OBJECTS.Atom was on Right)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed - (Atom was on Right)");
             }else if(atom_left){
 //                //Since atom is on the left, we go right.
 //                MATH.Coordinate temp = new MATH.Coordinate(current.getX() + trajectory.getRightDirection().getX(),current.getY() + trajectory.getRightDirection().getY());
 //                newTrajectory(ray, trajectories, right, temp);
                 Utility.changeTrajectory(current_ray, 'r');
-                System.out.println("OBJECTS.Ray Coordinates and MATH.Trajectory Changed - (OBJECTS.Atom was on Left)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed - (Atom was on Left)");
             }
 
             // start on a coordinate at edge of board
@@ -208,7 +208,7 @@ public class RayManager {
 
             // check for if NO circles of influence either side
             else {
-                System.out.println("OBJECTS.Ray Coordinates changed and MATH.Trajectory NOT CHANGED - MOVED FORWARD");
+                System.out.println("Ray Coordinates changed and Trajectory NOT CHANGED - MOVED FORWARD");
                 current_ray.setCoordinate(front);
             }
             // // can uncomment for slightly more detail in terminal
@@ -240,10 +240,10 @@ public class RayManager {
             // FINAL check (if reaches edge of board and an atom either left or right would affect its exit point)
             if (Utility.isAtom(right, atomManager.getAtoms())) {
                 Utility.changeTrajectory(current_ray, 'l');
-                System.out.println("OBJECTS.Ray Coordinates and MATH.Trajectory Changed At OBJECTS.Edge - (OBJECTS.Atom was on Right)");
+                System.out.println("Ray Coordinates and Trajectory Changed At Edge - (Atom was on Right)");
             } else if (Utility.isAtom(left, atomManager.getAtoms())) {
                 Utility.changeTrajectory(current_ray, 'r');
-                System.out.println("OBJECTS.Ray Coordinates and MATH.Trajectory Changed At OBJECTS.Edge - (OBJECTS.Atom was on Left)");
+                System.out.println("Ray Coordinates and Trajectory Changed At Edge - (Atom was on Left)");
             }
 
             /* this finds the edge the ray would exit board from based on its coordinate and trajectory

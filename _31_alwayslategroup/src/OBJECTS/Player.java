@@ -83,7 +83,7 @@ public class Player {
             GameLogic.board.player_points_text.color = new Color(255, 165, 0);
         }
 
-        String s = "OBJECTS.Player Score: " + score;
+        String s = "Player Score: " + score;
 
 //        UTILITY.GameLogic.board.getGraphics().setColor(Color.BLACK);
 //        UTILITY.GameLogic.board.getGraphics().drawString(s, 500, 20);

@@ -20,7 +20,7 @@ public class GameLogic {
     public static GameBoard board = new GameBoard();
 
     private GameLogic() {
-        throw new AssertionError("UTILITY.GameLogic should not be instantiated");
+        throw new AssertionError("GameLogic should not be instantiated");
     }
 
     private static void cycleScale() {
@@ -141,11 +141,11 @@ public class GameLogic {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
 
                     current_player.playerGuess();
-                    System.out.println("\nOBJECTS.Player " + Main.NUM_PLAYERS + " OBJECTS.Atom Guesses: " + current_player.player_atoms);
+                    System.out.println("\nPlayer " + Main.NUM_PLAYERS + " Atom Guesses: " + current_player.player_atoms);
 
 
                     current_player.calculatePoints(atom_manager.getAtoms());
-                    System.out.printf("OBJECTS.Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
+                    System.out.printf("Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
 
 //                    board.repaint();
 
@@ -188,8 +188,8 @@ public class GameLogic {
                 // since a ray has been shot, score incremented
                 current_player.score++;
 
-                System.out.println("\nOBJECTS.Ray entered: " + current_ray.ray_entrance_edge);
-                System.out.println("OBJECTS.Ray exited: " + current_ray.ray_exit_edge);
+                System.out.println("\nRay entered: " + current_ray.ray_entrance_edge);
+                System.out.println("Ray exited: " + current_ray.ray_exit_edge);
 
 
 //                // once final guess button is implemented, this method can be modified to be outside while loop

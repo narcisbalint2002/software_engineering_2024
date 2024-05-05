@@ -52,7 +52,7 @@ public class Trajectory {
 
     @Override
     public String toString() {
-        return "MATH.Trajectory Direction: (" + trajectory_direction.getX() + ", " + trajectory_direction.getY() + ")\n" +
+        return "Trajectory Direction: (" + trajectory_direction.getX() + ", " + trajectory_direction.getY() + ")\n" +
                 "Right Direction: (" + right_direction.getX() + ", " + right_direction.getY() + ")\n" +
                 "Left Direction: (" + left_direction.getX() + ", " + left_direction.getY() + ")";
     }

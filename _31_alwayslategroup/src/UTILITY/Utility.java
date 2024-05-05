@@ -12,7 +12,7 @@ public final class Utility {
 
 
     private Utility() {
-        throw new AssertionError("UTILITY.Utility should not be instantiated");
+        throw new AssertionError("Utility should not be instantiated");
     }
 
     public static void changeTrajectory(Ray ray, char new_direction) {
@@ -45,7 +45,7 @@ public final class Utility {
             }
         }
         else {
-            throw new IllegalArgumentException("New OBJECTS.Ray Direction MUST be right, left or backwards ('r','l','b')");
+            throw new IllegalArgumentException("New Ray Direction MUST be right, left or backwards ('r','l','b')");
         }
 
         // set new trajectory to new one found
