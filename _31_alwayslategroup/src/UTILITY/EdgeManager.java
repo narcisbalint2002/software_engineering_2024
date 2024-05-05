@@ -32,7 +32,13 @@ public class EdgeManager {
      * confusion in getting them mixed up
      */
 
-    // returns an OBJECTS.Edge node based on index inputted as argument
+
+    /**
+     * This method returns the edge object at the specified index in the list of edges.
+     *
+     * @param index The index of the edge to retrieve.
+     * @return The edge object at the specified index.
+     */
     public Edge getEdge(int index) {
         return edge_list.get(index);
     }
@@ -83,18 +89,52 @@ public class EdgeManager {
         throw new IllegalArgumentException("No edge found with the specified coordinate and trajectory.");
     }
 
+    /**
+     * This method returns the edge number of the edge at the specified index in the list of edges.
+     *
+     * @param i The index of the edge.
+     * @return The edge number of the edge at the specified index.
+     */
     public int getEdgeNumManager(int i) {
         return edge_list.get(i).getEdgeNum();
     }
+
+    /**
+     * This method sets the edge number of the edge at the specified index in the list of edges to the specified number.
+     *
+     * @param index The index of the edge.
+     * @param num The new edge number to set.
+     */
     public void setEdgeNumManager(int index, int num) {
         edge_list.get(index).setEdgeNum(num);
     }
+
+    /**
+     * This method returns the coordinate of the edge at the specified index in the list of edges.
+     *
+     * @param i The index of the edge.
+     * @return The coordinate of the edge at the specified index.
+     */
     public Coordinate getCoordinateManager(int i) {
         return edge_list.get(i).ray_obj.getCoordinate();
     }
+
+    /**
+     * This method returns the trajectory index of the edge at the specified index in the list of edges.
+     *
+     * @param i The index of the edge.
+     * @return The trajectory index of the edge at the specified index.
+     */
     public int getTrajectoryIndexManager(int i) {
         return edge_list.get(i).ray_obj.getTrajectoryIndex();
     }
+
+    /**
+     * This method returns the trajectory of the edge at the specified index in the list of edges.
+     *
+     * @param i The index of the edge.
+     * @return The trajectory of the edge at the specified index.
+     */
     public Trajectory getTrajectoryManager(int i) {
         return edge_list.get(i).ray_obj.getTrajectory();
     }
@@ -280,13 +320,5 @@ public class EdgeManager {
 
 
 
-    }
-
-    public static void main(String args[]) {
-//        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
-//        UTILITY.EdgeManager board_edge_list = new UTILITY.EdgeManager();
-//        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
-//            System.out.println(board_edge_list.edge_list.get(j).toString());
-//        }
     }
 }

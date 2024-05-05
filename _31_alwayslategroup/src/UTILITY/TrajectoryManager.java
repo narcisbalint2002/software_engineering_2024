@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 /**
- * The TrajectoryManager class manages trajectories.
+ * The TrajectoryManager class creates and manages all possible trajectories.
  * Its functionality includes the creation of these possible trajectories
  * and adds them the list of trajectories.
 
@@ -24,11 +24,6 @@ public class TrajectoryManager {
     public TrajectoryManager(){
         trajectories = new ArrayList<>();
         setTrajectories();
-    }
-
-
-    public static void main(String[] args) {//TESTING PURPOSES
-        TrajectoryManager t = new TrajectoryManager();
     }
 
     /**
@@ -56,9 +51,23 @@ public class TrajectoryManager {
         trajectories.add(trajectory6);
     }
 
+    /**
+     * This method returns the list of trajectories that are managed by the object.
+     * The list contains all the trajectories currently stored in the object.
+     *
+     * @return An ArrayList containing all the trajectories.
+     */
     public ArrayList<Trajectory> getTrajectoriesList() {
         return trajectories;
     }
+
+    /**
+     * This method retrieves the trajectory at the specified index from the list
+     * of trajectories.
+     *
+     * @param index The index of the trajectory to retrieve.
+     * @return The trajectory at the specified index.
+     */
     public Trajectory getTrajectory(int index) {
         return trajectories.get(index);
     }

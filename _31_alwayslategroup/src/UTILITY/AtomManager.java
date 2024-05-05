@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * The AtomManager class manages atoms on the board.
+ * The AtomManager class creates and manages atoms on the board.
  * It provides functionality for creating atoms with specified (x, y) coordinates or generating random atoms.
 
  * Atoms can be created by either passing a char parameter, which is used as a seed for generating atoms
@@ -37,12 +37,6 @@ public class AtomManager {
         this.atoms = new ArrayList<>();
         generateRandomAtoms();
     }
-
-    public static void main(String[] args) {
-        AtomManager manager = new AtomManager();
-        System.out.println(manager);
-    }
-
 
     /**
      * Constructs atoms with specified coordinates and adds it to the list of atoms.
@@ -101,10 +95,22 @@ public class AtomManager {
 
     }
 
+    /**
+     * Method returns the list of atoms.
+     * @return The ArrayList of atoms.
+     */
     public ArrayList<Atom> getAtoms() {
         return atoms;
     }
 
+    /**
+     * Returns a string representation of the AtomManager object.
+     *
+     * This method constructs a string representation of the AtomManager object,
+     * including information about each atom it manages.
+     *
+     * @return A string representation of the AtomManager object.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
