@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import MATH.Coordinate;
 
 public class Atom extends Coordinate {
 

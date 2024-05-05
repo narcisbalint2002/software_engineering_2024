@@ -1,3 +1,6 @@
+import MATH.Coordinate;
+import MATH.Trajectory;
+
 import java.util.ArrayList;
 
 public class EdgeManager {
@@ -38,7 +41,7 @@ public class EdgeManager {
 //            System.out.println(getCoordinateManager(i).toString());
 //            System.out.println(c.toString());
 //            System.out.println(getTrajectoryManager(i).toString());
-//            System.out.println("Trajectory: (" + traj_x + ", " +  traj_y + ")");
+//            System.out.println("MATH.Trajectory: (" + traj_x + ", " +  traj_y + ")");
 
             // here we are getting the current x and y coordinates AND x and y direction the current edge stores
             int current_x = getCoordinateManager(i).getX();

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilityTest {
 
     // test for corner coordinates that should be inside board, this means the top 2, middle 2 edge, and bottom 2
-    // corners of the hexagon, should pass because these are very edge ones but still inside board
+    // corners of the GUI.hexagon, should pass because these are very edge ones but still inside board
     @Test
     public void CornerInRangeTest() {
         Assertions.assertTrue(Utility.inRange(0,0));
@@ -18,7 +18,7 @@ class UtilityTest {
         Assertions.assertTrue(Utility.inRange(8,0));
     }
     // test for corner coordinates that should be outside board, this means the top 2, middle 2 edge, and bottom 2
-    // corners of the hexagon, just with one column outside the range so should fail
+    // corners of the GUI.hexagon, just with one column outside the range so should fail
     @Test
     public void CornerOutOfRangeTest() {
         Assertions.assertFalse(Utility.inRange(0,-1));

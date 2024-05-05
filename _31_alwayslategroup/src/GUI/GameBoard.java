@@ -1,4 +1,6 @@
 
+import GUI.hexagon;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -69,7 +71,7 @@ public class GameBoard extends JPanel{
 
                     GameLogic.ongoing_input = -3;
 
-                    // Draw the black hexagon
+                    // Draw the black GUI.hexagon
                     scale_button.setBackground(Color.BLACK); // Set fill color to black
                     scale_button.setForeground(Color.WHITE);
                     scale_button.repaint();
@@ -92,7 +94,7 @@ public class GameBoard extends JPanel{
             }
 
         public void draw(Graphics g) {
-            // Draw the black hexagon
+            // Draw the black GUI.hexagon
             g.setColor(Color.black); // Set fill color to black
             g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, 10, 10);
             g.setColor(Color.white);
@@ -119,7 +121,7 @@ public class GameBoard extends JPanel{
         public void draw(Graphics g) {
             // only draw if we have made player score visible (end of game)
             if (!invisible) {
-                // Draw the black hexagon
+                // Draw the black GUI.hexagon
                 g.setColor(color); // Set fill color to green
                 g.fillRoundRect(x, y, SIZE_X, SIZE_Y, dynamicScale(10), dynamicScale(10));
                 g.setColor(Color.WHITE);
@@ -151,7 +153,7 @@ public class GameBoard extends JPanel{
         }
 
         public void draw(Graphics g) {
-            // Draw the black hexagon
+            // Draw the black GUI.hexagon
             g.setColor(Color.black); // Set fill color to black
             g.fillRoundRect(x, y, BUTTON_SIZE_X, BUTTON_SIZE_Y, dynamicScale(10), dynamicScale(10));
             g.setColor(Color.white);
@@ -408,9 +410,9 @@ public class GameBoard extends JPanel{
         //Here we have the exact number of hexagons in the array list.
     }
 
-    // change hexagon's polygon (i.e. actual drawing on-screen) colour
+    // change GUI.hexagon's polygon (i.e. actual drawing on-screen) colour
     public void changeHexagonColour(int row, int col, Color new_color) {
-        // for each hexagon in list, check if row and col matches, if it does, change colour to that specified in arguments
+        // for each GUI.hexagon in list, check if row and col matches, if it does, change colour to that specified in arguments
         for (int i = 0; i < hexagons.size(); i++) {
             if ((hexagons.get(i).getRow() == row) && (hexagons.get(i).getCol() == col)) {
                 hexagons.get(i).color = new_color;
@@ -474,13 +476,13 @@ public class GameBoard extends JPanel{
     }
 
 
-    /*This function uses 6 points to draw the shape of a hexagon which is not included in any of the Java Swing libraries.
+    /*This function uses 6 points to draw the shape of a GUI.hexagon which is not included in any of the Java Swing libraries.
        The function has been implemented using information from the website https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fwww.w3schools.com%2Fjava%2Fdefault.asp
        */
 
     public void drawSingleHexagon(Graphics g, hexagon h)
     {
-        //This is the length of the side of a hexagon.
+        //This is the length of the side of a GUI.hexagon.
         int sideLength = dynamicScale(50); // Adjust this value as needed
 
         int dynamic_x = dynamicScale(h.first);
@@ -500,7 +502,7 @@ public class GameBoard extends JPanel{
             p.addPoint((int) (dynamic_x + sideLength * Math.cos(angleRadians)), (int) (dynamic_y + sideLength * Math.sin(angleRadians)));
         }
 
-        // Draw the black hexagon
+        // Draw the black GUI.hexagon
         g.setColor(h.color); // Set fill color to black
         g.fillPolygon(p);
         h.polygon = p;

@@ -1,7 +1,5 @@
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.ArrayList;
-import java.util.List;
+import MATH.Coordinate;
+import MATH.Trajectory;
 
 public class Ray {
     // list of coordinates ray is at (x, y)

@@ -1,3 +1,6 @@
+import GUI.Board;
+import GUI.GameBoard;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -5,7 +8,7 @@ import java.util.Scanner;
 public class GameLogic {
 
 
-    // variable used in GameBoard for mouse event click for current edge
+    // variable used in GUI.GameBoard for mouse event click for current edge
     public static int ongoing_input;
 
     public static GameBoard board = new GameBoard();
@@ -45,8 +48,8 @@ public class GameLogic {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-//        GameBoard board = new GameBoard();
-        /*Add a new object of the class GameBoard to our frame.*/
+//        GUI.GameBoard board = new GUI.GameBoard();
+        /*Add a new object of the class GUI.GameBoard to our frame.*/
         frame.add(board);
 
         frame.setLocationRelativeTo(null);
@@ -75,11 +78,11 @@ public class GameLogic {
             Board.printBoard(board_list);
 
             //// set all atoms in board
-//            Board.setAtoms(board_list);
+//            GUI.Board.setAtoms(board_list);
             System.out.println(atom_manager);
 
 //            // terminal printing (for debugging)
-//            Board.printBoard(board_list);
+//            GUI.Board.printBoard(board_list);
 
 
             EdgeManager board_edge_list = new EdgeManager();

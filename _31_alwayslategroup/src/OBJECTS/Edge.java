@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import MATH.Coordinate;
+import MATH.Trajectory;
 
 public class Edge {
 

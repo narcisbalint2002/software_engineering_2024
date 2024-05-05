@@ -1,3 +1,6 @@
+import MATH.Coordinate;
+import MATH.Trajectory;
+
 import java.util.ArrayList;
 
 public class TrajectoryManager {
@@ -16,7 +19,7 @@ public class TrajectoryManager {
 
     public void setTrajectories(){
 
-        //                           Trajectory(trajectory                 , right_direction            , left_direction             );
+        //                           MATH.Trajectory(trajectory                 , right_direction            , left_direction             );
         Trajectory trajectory1 = new Trajectory(new Coordinate(-1, 0), new Coordinate(-1, 1), new Coordinate(0, -1));
         Trajectory trajectory2 = new Trajectory(new Coordinate(-1, 1), new Coordinate(0, 1), new Coordinate(-1, 0));
         Trajectory trajectory3 = new Trajectory(new Coordinate(0, 1), new Coordinate(1, 0), new Coordinate(-1, 1));

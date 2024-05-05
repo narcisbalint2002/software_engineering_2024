@@ -1,3 +1,6 @@
+import MATH.Coordinate;
+import MATH.Trajectory;
+
 import java.util.ArrayList;
 
 public final class Utility {
@@ -58,7 +61,7 @@ public final class Utility {
 
     public static boolean inRange(int x, int y){ //In Progress for Liam.
 
-        // turns out we actually dont need width of the hexagon, we can figure this out by just the max height
+        // turns out we actually dont need width of the GUI.hexagon, we can figure this out by just the max height
         // (i.e. number of rows in total)
 
         int max_height = 9;

@@ -1,3 +1,5 @@
+import MATH.Coordinate;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -118,13 +120,13 @@ public class Player {
                 if (atomCheck(current_atom) == null) {
                     Coordinate new_atom = new Coordinate(current_atom.getX(), current_atom.getY());
                     player_atoms.add(new_atom);
-                    // update display of new hexagon to show the one we are guessing
+                    // update display of new GUI.hexagon to show the one we are guessing
                     GameLogic.board.changeHexagonColour(new_atom.getX(), new_atom.getY(), Color.GRAY);
                     GameLogic.board.repaint();
                     atoms_guessed++;
                 } else {
                     player_atoms.remove(atomCheck(current_atom));
-                    // update display of new hexagon to reset one we are guessing
+                    // update display of new GUI.hexagon to reset one we are guessing
                     GameLogic.board.changeHexagonColour(current_atom.getX(), current_atom.getY(), Color.BLACK);
                     GameLogic.board.repaint();
                     atoms_guessed--;

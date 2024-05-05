@@ -1,18 +1,10 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
-import org.w3c.dom.Node;
+import GUI.GameBoard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
-import javax.swing.*;
-import java.awt.*;
-import java.sql.Array;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -47,7 +39,7 @@ public class Main {
         // set width to screen size
         width = screen_size.width;
         height = screen_size.height;
-//        aFrame.setSize(GameBoard.dynamicScale2(width), GameBoard.dynamicScale2(height));
+//        aFrame.setSize(GUI.GameBoard.dynamicScale2(width), GUI.GameBoard.dynamicScale2(height));
         aFrame.setSize(GameBoard.dynamicScale(width), GameBoard.dynamicScale(height));
 
         aFrame.setLocationRelativeTo(null);

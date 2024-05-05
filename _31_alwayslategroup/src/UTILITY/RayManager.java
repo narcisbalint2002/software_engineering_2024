@@ -1,3 +1,6 @@
+import GUI.GameBoard;
+import MATH.Coordinate;
+
 import java.awt.*;
 
 public class RayManager {
@@ -67,18 +70,18 @@ public class RayManager {
 //            new_color = Color.BLUE;
 //        }
 //
-////        GameBoard.numbers.get(ray_entrance - 1).color = new_color;
+////        GUI.GameBoard.numbers.get(ray_entrance - 1).color = new_color;
 ////
 ////        if (ray_exit > 0) {
-////            GameBoard.numbers.get(ray_exit - 1).color = new_color;
+////            GUI.GameBoard.numbers.get(ray_exit - 1).color = new_color;
 ////        }
 //
 //        int edge_number = ray_entrance;
 //
-//        // loop for all numbers in GameBoard list
-//        for (int i = 0; i < GameBoard.numbers.size(); i++) {
+//        // loop for all numbers in GUI.GameBoard list
+//        for (int i = 0; i < GUI.GameBoard.numbers.size(); i++) {
 //            // set current edge data as a variable (easier to read)
-//            GameBoard.NumberInfo edge_data = GameBoard.numbers.get(i);
+//            GUI.GameBoard.NumberInfo edge_data = GUI.GameBoard.numbers.get(i);
 //            // if edge number passed in matches edge data number, update size to 0 (not clickable),
 //            // then also change colour to that passed in
 //            if (edge_number == edge_data.getNumber()) {
@@ -96,7 +99,7 @@ public class RayManager {
     public void edgeUpdate(int entrance, int exit, Color new_color) {
 
 
-        // loop for all numbers in GameBoard list
+        // loop for all numbers in GUI.GameBoard list
         for (int i = 0; i < GameBoard.numbers.size(); i++) {
             // set current edge data as a variable (easier to read)
             GameBoard.NumberInfo edge_data = GameBoard.numbers.get(i);
@@ -147,7 +150,7 @@ public class RayManager {
         boolean atom_right_back = Utility.isAtom(right_back, atomManager.getAtoms());
         boolean atom_left_back = Utility.isAtom(left_back, atomManager.getAtoms());
 
-        // this does it while next x and y of ray in range (so if its next hexagon WOULD be on the board)
+        // this does it while next x and y of ray in range (so if its next GUI.hexagon WOULD be on the board)
         while (Utility.inRange(getNextFrontX(), getNextFrontY())) {
 
             atom_current = Utility.isAtom(current_ray.getCoordinate(), atomManager.getAtoms());
@@ -164,7 +167,7 @@ public class RayManager {
             }
             else if(atom_right && atom_left) {
 //                //Since atom is on the right, we go left.
-//                Coordinate temp = new Coordinate(left.getX(), left.getY());
+//                MATH.Coordinate temp = new MATH.Coordinate(left.getX(), left.getY());
                 Utility.changeTrajectory(current_ray, 'b');
                 System.out.println("Ray Reflected");
 
@@ -172,15 +175,15 @@ public class RayManager {
             }
             else if(atom_right) {
 //                //Since atom is on the right, we go left.
-//                Coordinate temp = new Coordinate(left.getX(), left.getY());
+//                MATH.Coordinate temp = new MATH.Coordinate(left.getX(), left.getY());
                 Utility.changeTrajectory(current_ray, 'l');
-                System.out.println("Ray Coordinates and Trajectory Changed - (Atom was on Right)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed - (Atom was on Right)");
             }else if(atom_left){
 //                //Since atom is on the left, we go right.
-//                Coordinate temp = new Coordinate(current.getX() + trajectory.getRightDirection().getX(),current.getY() + trajectory.getRightDirection().getY());
+//                MATH.Coordinate temp = new MATH.Coordinate(current.getX() + trajectory.getRightDirection().getX(),current.getY() + trajectory.getRightDirection().getY());
 //                newTrajectory(ray, trajectories, right, temp);
                 Utility.changeTrajectory(current_ray, 'r');
-                System.out.println("Ray Coordinates and Trajectory Changed - (Atom was on Left)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed - (Atom was on Left)");
             }
 
             // start on a coordinate at edge of board
@@ -199,7 +202,7 @@ public class RayManager {
 
             // check for if NO circles of influence either side
             else {
-                System.out.println("Ray Coordinates changed and Trajectory NOT CHANGED - MOVED FORWARD");
+                System.out.println("Ray Coordinates changed and MATH.Trajectory NOT CHANGED - MOVED FORWARD");
                 current_ray.setCoordinate(front);
             }
             // // can uncomment for slightly more detail in terminal
@@ -216,14 +219,14 @@ public class RayManager {
         // if direct hit, exit is -1, otherwise its an edge we can find in the board
         if (direct_hit) {
             ray_exit_edge = -1;
-            // update entrance edge number in GameBoard class to green for "absorbed"
+            // update entrance edge number in GUI.GameBoard class to green for "absorbed"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(0, 167, 59));
 
         }
         // if total reflection, we know came out same way came in
         else if (total_reflection) {
             ray_exit_edge = ray_entrance_edge;
-            // update entrance edge number in GameBoard class to red for "reflection"
+            // update entrance edge number in GUI.GameBoard class to red for "reflection"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(251, 7, 7));
         }
         else {
@@ -231,10 +234,10 @@ public class RayManager {
             // FINAL check (if reaches edge of board and an atom either left or right would affect its exit point)
             if (Utility.isAtom(right, atomManager.getAtoms())) {
                 Utility.changeTrajectory(current_ray, 'l');
-                System.out.println("Ray Coordinates and Trajectory Changed At Edge - (Atom was on Right)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed At Edge - (Atom was on Right)");
             } else if (Utility.isAtom(left, atomManager.getAtoms())) {
                 Utility.changeTrajectory(current_ray, 'r');
-                System.out.println("Ray Coordinates and Trajectory Changed At Edge - (Atom was on Left)");
+                System.out.println("Ray Coordinates and MATH.Trajectory Changed At Edge - (Atom was on Left)");
             }
 
             /* this finds the edge the ray would exit board from based on its coordinate and trajectory
@@ -249,7 +252,7 @@ public class RayManager {
             ray_exit_edge = edge_found.getEdgeNum();
 
 
-            // update BOTH entrance and exit edge numbers in GameBoard class to blue for "path"
+            // update BOTH entrance and exit edge numbers in GUI.GameBoard class to blue for "path"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(9, 119, 210));
         }
 
