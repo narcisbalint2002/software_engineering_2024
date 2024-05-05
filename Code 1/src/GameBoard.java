@@ -4,13 +4,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
-
-public class gameBoard extends JPanel{
+public class GameBoard extends JPanel{
 
     // this does NOTHING because i am using function 2 (just below) instead to test,
     // also because rest of code uses this and i dont want to change it all back then
@@ -232,11 +229,11 @@ public class gameBoard extends JPanel{
     Text player_points_text = new Text();
 
     //CONSTRUCTOR
-    public gameBoard(){
+    public GameBoard(){
 
 
 
-        /*When a new object of type gameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
+        /*When a new object of type GameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
         about the coordinates used in the main class.
         */
 
@@ -286,7 +283,7 @@ public class gameBoard extends JPanel{
                     return;
                 }
                 // Check if the click occurred within the bounds of any number
-                for (gameBoard.NumberInfo numberInfo : numbers) {
+                for (GameBoard.NumberInfo numberInfo : numbers) {
                     if (numberInfo.isClicked(e.getX(), e.getY())) {
                         // update static variable to the valid edge number
                         GameLogic.ongoing_input = numberInfo.getNumber();

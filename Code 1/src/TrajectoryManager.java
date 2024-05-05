@@ -6,7 +6,7 @@ public class TrajectoryManager {
 
     public TrajectoryManager(){
         trajectories = new ArrayList<>();
-        set_trajectories();
+        setTrajectories();
     }
 
 
@@ -14,7 +14,7 @@ public class TrajectoryManager {
         TrajectoryManager t = new TrajectoryManager();
     }
 
-    public void set_trajectories(){
+    public void setTrajectories(){
 
         //                           Trajectory(trajectory                 , right_direction            , left_direction             );
         Trajectory trajectory1 = new Trajectory(new Coordinate(-1, 0), new Coordinate(-1, 1), new Coordinate(0, -1));

@@ -20,7 +20,7 @@ public class AtomManager {
     // by default no arguments means will generate 6 atoms as normal
     public AtomManager() {
         this.atoms = new ArrayList<>();
-        setter_generatingAtoms();
+        generateRandomAtoms();
     }
 
     public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class AtomManager {
     }
 
 
-    public void setter_generatingAtoms() {
+    public void generateRandomAtoms() {
         ArrayList<int[]> coordinates = new ArrayList<>();
         Random random;
 
@@ -55,7 +55,7 @@ public class AtomManager {
             int row = random.nextInt(9);
             int column = random.nextInt(9) - 4;
 
-            //Check if coordinates are in appropiate range and not Duplicates.
+            //Check if coordinates are in appropriate range and not Duplicates.
             if (Utility.inRange(row, column) && !Utility.containsPair(coordinates, row, column)) {
                 int[] pair = {row, column};
                 createAtom(row, column);

@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class GameLogic {
 
 
-    // variable used in gameBoard for mouse event click for current edge
+    // variable used in GameBoard for mouse event click for current edge
     public static int ongoing_input;
 
-    public static gameBoard board = new gameBoard();
+    public static GameBoard board = new GameBoard();
 
     private GameLogic() {
         throw new AssertionError("GameLogic should not be instantiated");
@@ -45,14 +45,14 @@ public class GameLogic {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-//        gameBoard board = new gameBoard();
-        /*Add a new object of the class gameBoard to our frame.*/
+//        GameBoard board = new GameBoard();
+        /*Add a new object of the class GameBoard to our frame.*/
         frame.add(board);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        Main.gameBoardFullScreen(frame);
+        Main.GameBoardFullScreen(frame);
 
 
 

@@ -19,29 +19,29 @@ public class Trajectory {
         this.left_direction = l;
     }
 
-    public Coordinate getTrajectory_direction(){
+    public Coordinate getTrajectoryDirection(){
         return trajectory_direction;
     }
 
-    public Coordinate getRight_direction(){
+    public Coordinate getRightDirection(){
         return right_direction;
     }
 
-    public Coordinate getLeft_direction(){
+    public Coordinate getLeftDirection(){
         return left_direction;
     }
 
-    public void setTrajectory_direction(int x, int y){
+    public void setTrajectoryDirection(int x, int y){
         trajectory_direction.setX(x);
         trajectory_direction.setY(y);
     }
 
-    public void setRight_direction(int x, int y){
+    public void setRightDirection(int x, int y){
         right_direction.setX(x);
         right_direction.setY(y);
     }
 
-    public void setLeft_direction(int x, int y){
+    public void setLeftDirection(int x, int y){
         left_direction.setX(x);
         left_direction.setY(y);
     }

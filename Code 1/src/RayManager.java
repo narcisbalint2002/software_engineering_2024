@@ -20,22 +20,22 @@ public class RayManager {
 
     // to shorten method call of checking if next ray is out of range in board
     public int getNextFrontX() {
-        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getTrajectory_direction().getX();
+        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getTrajectoryDirection().getX();
     }
     public int getNextFrontY() {
-        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getTrajectory_direction().getY();
+        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getTrajectoryDirection().getY();
     }
     public int getNextRightX() {
-        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getRight_direction().getX();
+        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getRightDirection().getX();
     }
     public int getNextRightY() {
-        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getRight_direction().getY();
+        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getRightDirection().getY();
     }
     public int getNextLeftX() {
-        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getLeft_direction().getX();
+        return current_ray.getCoordinate().getX() + current_ray.getTrajectory().getLeftDirection().getX();
     }
     public int getNextLeftY() {
-        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getLeft_direction().getY();
+        return current_ray.getCoordinate().getY() + current_ray.getTrajectory().getLeftDirection().getY();
     }
 
     public Coordinate getNextFront() {
@@ -67,18 +67,18 @@ public class RayManager {
 //            new_color = Color.BLUE;
 //        }
 //
-////        gameBoard.numbers.get(ray_entrance - 1).color = new_color;
+////        GameBoard.numbers.get(ray_entrance - 1).color = new_color;
 ////
 ////        if (ray_exit > 0) {
-////            gameBoard.numbers.get(ray_exit - 1).color = new_color;
+////            GameBoard.numbers.get(ray_exit - 1).color = new_color;
 ////        }
 //
 //        int edge_number = ray_entrance;
 //
-//        // loop for all numbers in gameBoard list
-//        for (int i = 0; i < gameBoard.numbers.size(); i++) {
+//        // loop for all numbers in GameBoard list
+//        for (int i = 0; i < GameBoard.numbers.size(); i++) {
 //            // set current edge data as a variable (easier to read)
-//            gameBoard.NumberInfo edge_data = gameBoard.numbers.get(i);
+//            GameBoard.NumberInfo edge_data = GameBoard.numbers.get(i);
 //            // if edge number passed in matches edge data number, update size to 0 (not clickable),
 //            // then also change colour to that passed in
 //            if (edge_number == edge_data.getNumber()) {
@@ -96,10 +96,10 @@ public class RayManager {
     public void edgeUpdate(int entrance, int exit, Color new_color) {
 
 
-        // loop for all numbers in gameBoard list
-        for (int i = 0; i < gameBoard.numbers.size(); i++) {
+        // loop for all numbers in GameBoard list
+        for (int i = 0; i < GameBoard.numbers.size(); i++) {
             // set current edge data as a variable (easier to read)
-            gameBoard.NumberInfo edge_data = gameBoard.numbers.get(i);
+            GameBoard.NumberInfo edge_data = GameBoard.numbers.get(i);
             // if edge number passed in matches edge data number, update size to 0 (not clickable),
             // then also change colour to that passed in
             if (entrance == edge_data.getNumber()) {
@@ -177,7 +177,7 @@ public class RayManager {
                 System.out.println("Ray Coordinates and Trajectory Changed - (Atom was on Right)");
             }else if(atom_left){
 //                //Since atom is on the left, we go right.
-//                Coordinate temp = new Coordinate(current.getX() + trajectory.getRight_direction().getX(),current.getY() + trajectory.getRight_direction().getY());
+//                Coordinate temp = new Coordinate(current.getX() + trajectory.getRightDirection().getX(),current.getY() + trajectory.getRightDirection().getY());
 //                newTrajectory(ray, trajectories, right, temp);
                 Utility.changeTrajectory(current_ray, 'r');
                 System.out.println("Ray Coordinates and Trajectory Changed - (Atom was on Left)");
@@ -216,14 +216,14 @@ public class RayManager {
         // if direct hit, exit is -1, otherwise its an edge we can find in the board
         if (direct_hit) {
             ray_exit_edge = -1;
-            // update entrance edge number in gameBoard class to green for "absorbed"
+            // update entrance edge number in GameBoard class to green for "absorbed"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(0, 167, 59));
 
         }
         // if total reflection, we know came out same way came in
         else if (total_reflection) {
             ray_exit_edge = ray_entrance_edge;
-            // update entrance edge number in gameBoard class to red for "reflection"
+            // update entrance edge number in GameBoard class to red for "reflection"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(251, 7, 7));
         }
         else {
@@ -249,7 +249,7 @@ public class RayManager {
             ray_exit_edge = edge_found.getEdgeNum();
 
 
-            // update BOTH entrance and exit edge numbers in gameBoard class to blue for "path"
+            // update BOTH entrance and exit edge numbers in GameBoard class to blue for "path"
             edgeUpdate(ray_entrance_edge, ray_exit_edge, new Color(9, 119, 210));
         }
 

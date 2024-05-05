@@ -27,7 +27,10 @@ public class Main {
 
     public static final int NUM_PLAYERS = 1;
 
-    // seed (if 0 will used random seed in AtomManager.setter_generatingAtoms method, seed 1 was used heavily for testing)
+    // seed
+    //              0:  RANDOM SEED
+    //  ANY OTHER INT:  SET SEED
+    //              1:  SET SEED WE HEAVILY USED
     public static final int SEED = 0;
 
 
@@ -38,14 +41,14 @@ public class Main {
 
 
     /*The following method will allow the graphic game board to be displayed in full screen.*/
-    public static void gameBoardFullScreen(JFrame aFrame)
+    public static void GameBoardFullScreen(JFrame aFrame)
     {
         Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
         // set width to screen size
         width = screen_size.width;
         height = screen_size.height;
-//        aFrame.setSize(gameBoard.dynamicScale2(width), gameBoard.dynamicScale2(height));
-        aFrame.setSize(gameBoard.dynamicScale(width), gameBoard.dynamicScale(height));
+//        aFrame.setSize(GameBoard.dynamicScale2(width), GameBoard.dynamicScale2(height));
+        aFrame.setSize(GameBoard.dynamicScale(width), GameBoard.dynamicScale(height));
 
         aFrame.setLocationRelativeTo(null);
     }

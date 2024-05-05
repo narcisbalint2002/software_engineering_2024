@@ -28,8 +28,8 @@ public class EdgeManager {
     // it is pointing at where the ray came from), this means we successfully found our exit edge of our ray
     public Edge findEdgeByCoordinateAndTrajectory(Coordinate c, Trajectory t) {
         //// reverse the trajectory by multiplying its x and y by -1
-        int traj_x = t.getTrajectory_direction().getX() * -1;
-        int traj_y = t.getTrajectory_direction().getY() * -1;
+        int traj_x = t.getTrajectoryDirection().getX() * -1;
+        int traj_y = t.getTrajectoryDirection().getY() * -1;
 
         // goes thru entire edge list to see if current ray coordinates and inverse trajectory match any of those in list
         // the idea is that we meet an edge that shares the coordinate, but the trajectory will be opposite so we multiply its x and y by -1
@@ -43,8 +43,8 @@ public class EdgeManager {
             // here we are getting the current x and y coordinates AND x and y direction the current edge stores
             int current_x = getCoordinateManager(i).getX();
             int current_y = getCoordinateManager(i).getY();
-            int current_x_trajectory = getTrajectoryManager(i).getTrajectory_direction().getX();
-            int current_y_trajectory = getTrajectoryManager(i).getTrajectory_direction().getY();
+            int current_x_trajectory = getTrajectoryManager(i).getTrajectoryDirection().getX();
+            int current_y_trajectory = getTrajectoryManager(i).getTrajectoryDirection().getY();
 
             // comparing current coordinate and trajectory to arguments passed in (except the trajectory is inverted because opposite direction)
             if ((current_x == c.getX()) && (current_y == c.getY()) && (current_x_trajectory == traj_x) && (current_y_trajectory == traj_y)) {

@@ -42,7 +42,7 @@ public class Ray {
 //        String output = new String("\nCoordinates: [" + coordinate.get(0) + ", " + coordinate.get(1) + "]\nX-Direction: " + x_direction + "\n Y-Direction: " + y_direction + "\n");
 //        return output;
 
-        return "\nCoordinates: " + coordinates.toString() + "\nX-Direction: " + trajectory.getTrajectory_direction().x + "\nY-Direction: " + trajectory.getTrajectory_direction().y + "\n";
+        return "\nCoordinates: " + coordinates.toString() + "\nX-Direction: " + trajectory.getTrajectoryDirection().x + "\nY-Direction: " + trajectory.getTrajectoryDirection().y + "\n";
     }
 
     // set methods
