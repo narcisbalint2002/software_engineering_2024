@@ -1,7 +1,9 @@
+package UTILITY;
+
+import OBJECTS.Atom;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class AtomManager {
     private ArrayList<Atom> atoms;
@@ -74,7 +76,7 @@ public class AtomManager {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Atom Manager:\n");
+        sb.append("OBJECTS.Atom Manager:\n");
         for (Atom atom : atoms) {
             sb.append(atom.toString()).append("\n");
         }

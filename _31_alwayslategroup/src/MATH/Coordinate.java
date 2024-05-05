@@ -1,10 +1,12 @@
+package MATH;
+
 import java.util.Objects;
 
 public class Coordinate {
 
     // coordinates
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     // constructs using parameters
     public Coordinate(int x, int y) {

@@ -1,5 +1,10 @@
+package TESTING;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
+import OBJECTS.*;
+import UTILITY.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

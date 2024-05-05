@@ -1,3 +1,5 @@
+package OBJECTS;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
 

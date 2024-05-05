@@ -1,5 +1,11 @@
+package UTILITY;
+
 import GUI.Board;
 import GUI.GameBoard;
+import OBJECTS.Player;
+import OBJECTS.Edge;
+import UTILITY.AtomManager;
+import UTILITY.EdgeManager;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,7 +20,7 @@ public class GameLogic {
     public static GameBoard board = new GameBoard();
 
     private GameLogic() {
-        throw new AssertionError("GameLogic should not be instantiated");
+        throw new AssertionError("UTILITY.GameLogic should not be instantiated");
     }
 
     private static void cycleScale() {
@@ -38,7 +44,7 @@ public class GameLogic {
 
         // BELOW may NOT work for multiple players (because board is updated throughout,
         // so maybe needs to be reconstructed after each player, this is simple as all
-        // that needs to be done is copy below code INTO GameLogic.gameLoop() method)
+        // that needs to be done is copy below code INTO UTILITY.GameLogic.gameLoop() method)
 
         Scanner scanner = new Scanner(System.in);
         //Create new Frame
@@ -104,7 +110,7 @@ public class GameLogic {
                 // // OLD CODE, can delete once made sure all else works well
 //                // player choose whether want to guess final atoms
 //                Scanner user_input = new Scanner(System.in);  // Create a Scanner object
-//                System.out.println("Edge number (as per diagrams)? ");
+//                System.out.println("OBJECTS.Edge number (as per diagrams)? ");
 //                int edge_index = Integer.parseInt(user_input.nextLine()) - 1; // subtracting 1 to change from 1-54 to 0-53 (for indexing)
                 ongoing_input = -1;
 
@@ -135,11 +141,11 @@ public class GameLogic {
                     System.out.printf("\n\n!!Final guess of atoms for player %d!!", games_played + 1);
 
                     current_player.playerGuess();
-                    System.out.println("\nPlayer " + Main.NUM_PLAYERS + " Atom Guesses: " + current_player.player_atoms);
+                    System.out.println("\nOBJECTS.Player " + Main.NUM_PLAYERS + " OBJECTS.Atom Guesses: " + current_player.player_atoms);
 
 
                     current_player.calculatePoints(atom_manager.getAtoms());
-                    System.out.printf("Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
+                    System.out.printf("OBJECTS.Player %d Score: %d", Main.NUM_PLAYERS, current_player.score);
 
 //                    board.repaint();
 
@@ -182,8 +188,8 @@ public class GameLogic {
                 // since a ray has been shot, score incremented
                 current_player.score++;
 
-                System.out.println("\nRay entered: " + current_ray.ray_entrance_edge);
-                System.out.println("Ray exited: " + current_ray.ray_exit_edge);
+                System.out.println("\nOBJECTS.Ray entered: " + current_ray.ray_entrance_edge);
+                System.out.println("OBJECTS.Ray exited: " + current_ray.ray_exit_edge);
 
 
 //                // once final guess button is implemented, this method can be modified to be outside while loop

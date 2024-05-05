@@ -1,4 +1,9 @@
+package OBJECTS;
+
 import MATH.Coordinate;
+import OBJECTS.Atom;
+import MATH.*;
+import UTILITY.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,16 +15,16 @@ public class Player {
     int num_rays;
 
     // dumb players score
-    int score;
+    public int score;
 
     // by default is -1
-    static Coordinate current_atom = new Coordinate();
+    public static Coordinate current_atom = new Coordinate();
 
-    ArrayList<Coordinate> player_atoms = new ArrayList<>();
+    public ArrayList<Coordinate> player_atoms = new ArrayList<>();
 
 
     // list of rays (each ray has entrance and exit points)
-    ArrayList<RayManager> ray_list = new ArrayList<>();
+    public ArrayList<RayManager> ray_list = new ArrayList<>();
 
 
 
@@ -78,10 +83,10 @@ public class Player {
             GameLogic.board.player_points_text.color = new Color(255, 165, 0);
         }
 
-        String s = "Player Score: " + score;
+        String s = "OBJECTS.Player Score: " + score;
 
-//        GameLogic.board.getGraphics().setColor(Color.BLACK);
-//        GameLogic.board.getGraphics().drawString(s, 500, 20);
+//        UTILITY.GameLogic.board.getGraphics().setColor(Color.BLACK);
+//        UTILITY.GameLogic.board.getGraphics().drawString(s, 500, 20);
 
         GameLogic.board.player_points_text.text = s;
         GameLogic.board.player_points_text.invisible = false;

@@ -1,5 +1,8 @@
+package UTILITY;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
+import OBJECTS.Edge;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ public class EdgeManager {
      * confusion in getting them mixed up
      */
 
-    // returns an Edge node based on index inputted as argument
+    // returns an OBJECTS.Edge node based on index inputted as argument
     public Edge getEdge(int index) {
         return edge_list.get(index);
     }
@@ -250,7 +253,7 @@ public class EdgeManager {
 
     public static void main(String args[]) {
 //        // UNCOMMENT TO PRINT ENTIRE EDGE LIST (shows edge numbers and ray coordinates/direction)
-//        EdgeManager board_edge_list = new EdgeManager();
+//        UTILITY.EdgeManager board_edge_list = new UTILITY.EdgeManager();
 //        for (int j = 0; j < board_edge_list.edge_list.size(); j++) {
 //            System.out.println(board_edge_list.edge_list.get(j).toString());
 //        }

@@ -1,5 +1,10 @@
+package UTILITY;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
+import OBJECTS.Atom;
+import OBJECTS.Ray;
+import UTILITY.TrajectoryManager;
 
 import java.util.ArrayList;
 
@@ -7,7 +12,7 @@ public final class Utility {
 
 
     private Utility() {
-        throw new AssertionError("Utility should not be instantiated");
+        throw new AssertionError("UTILITY.Utility should not be instantiated");
     }
 
     public static void changeTrajectory(Ray ray, char new_direction) {
@@ -40,7 +45,7 @@ public final class Utility {
             }
         }
         else {
-            throw new IllegalArgumentException("New Ray Direction MUST be right, left or backwards ('r','l','b')");
+            throw new IllegalArgumentException("New OBJECTS.Ray Direction MUST be right, left or backwards ('r','l','b')");
         }
 
         // set new trajectory to new one found
@@ -154,7 +159,7 @@ public final class Utility {
     // // WIP, need to make proper tests for top corners, bottom corners, middle 3 rows, as well as out of bounds of all
     // // of those points (so just outside row or column range)
 //    public static void main(String args[]) {
-//        System.out.println(Utility.inRange(0,0));
+//        System.out.println(UTILITY.Utility.inRange(0,0));
 //    }
 
 

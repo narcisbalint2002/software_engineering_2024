@@ -1,6 +1,8 @@
-//// made by liam, method call for this in EdgeManager is way too long
+package UTILITY;
+
+//// made by liam, method call for this in UTILITY.EdgeManager is way too long
 //// its like:
-////    TrajectoryManager.TrajectoryName var = TrajectoryManager.TrajectoryName.UP_LEFT;
+////    UTILITY.TrajectoryManager.UTILITY.TrajectoryName var = UTILITY.TrajectoryManager.UTILITY.TrajectoryName.UP_LEFT;
 public enum TrajectoryName {
     UP_LEFT(0),
     UP_RIGHT(1),

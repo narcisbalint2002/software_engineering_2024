@@ -1,8 +1,12 @@
+package TESTING;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import UTILITY.*;
 
 class UtilityTest {
 

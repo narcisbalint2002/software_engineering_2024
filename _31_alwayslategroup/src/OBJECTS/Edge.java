@@ -1,3 +1,5 @@
+package OBJECTS;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
 
@@ -8,7 +10,7 @@ public class Edge {
 
 
     // ray object for this particular edge (both set to -1 as default value, this SHOULD NOT be kept same)
-    Ray ray_obj = new Ray(new Coordinate(), -1, new Trajectory());
+    public Ray ray_obj = new Ray(new Coordinate(), -1, new Trajectory());
 
 
 
@@ -31,9 +33,9 @@ public class Edge {
 
     public Ray getRayObj() {return ray_obj;};
 
-    // toString of Edge incorporates Ray toString
+    // toString of OBJECTS.Edge incorporates OBJECTS.Ray toString
     @Override
     public String toString() {
-        return "\nEdge " + edge_num + ray_obj.toString();
+        return "\nOBJECTS.Edge " + edge_num + ray_obj.toString();
     }
 }

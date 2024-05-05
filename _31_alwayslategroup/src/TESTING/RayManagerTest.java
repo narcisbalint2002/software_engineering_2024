@@ -1,6 +1,13 @@
+package TESTING;
+
 import GUI.GameBoard;
+import OBJECTS.Edge;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import OBJECTS.*;
+import MATH.*;
+import GUI.*;
+import UTILITY.*;
 
 class RayManagerTest {
 

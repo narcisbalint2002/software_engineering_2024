@@ -1,3 +1,5 @@
+package UTILITY;
+
 import MATH.Coordinate;
 import MATH.Trajectory;
 
@@ -5,7 +7,7 @@ import java.util.ArrayList;
 
 public class TrajectoryManager {
 
-    ArrayList<Trajectory> trajectories;
+    public ArrayList<Trajectory> trajectories;
 
     public TrajectoryManager(){
         trajectories = new ArrayList<>();

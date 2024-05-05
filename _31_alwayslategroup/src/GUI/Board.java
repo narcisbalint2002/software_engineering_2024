@@ -1,11 +1,15 @@
-import java.lang.reflect.Array;
+package GUI;
+
 import java.util.ArrayList;
 import java.util.Random;
+import OBJECTS.*;
+import UTILITY.*;
+import MATH.*;
 
 public class Board {
 
 
-//    ArrayList<Coordinate> atom_coordinates = new ArrayList();
+//    ArrayList<MATH.Coordinate> atom_coordinates = new ArrayList();
 
     private static class Node {
 
@@ -88,7 +92,7 @@ public class Board {
         for (List list : board) {
             Node current = list.head;
 
-            //To print the gameboard in the shape of an hexagon
+            //To print the gameboard in the shape of an GUI.hexagon
 
             for(int i = 0; i < number_tabs; i++)
             {
@@ -153,7 +157,7 @@ public class Board {
 
         //Create duple containing the coordinates
 
-//        // OLD WAY (does NOT use Coordinate class)
+//        // OLD WAY (does NOT use MATH.Coordinate class)
 //        ArrayList<Integer> atom = new ArrayList<>();
 //        atom.add(x);
 //        atom.add(y);
@@ -194,7 +198,7 @@ public class Board {
          *
          * Two extern functions are going to be used:
          * - validateCoordinates(): checks if the extracted coordinates exists on the game board
-         * - checkForAtom(): checks if an atom has already been placed on that specific hexagon.*/
+         * - checkForAtom(): checks if an atom has already been placed on that specific GUI.hexagon.*/
 
         //The number of atoms is 6
 

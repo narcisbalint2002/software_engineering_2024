@@ -1,5 +1,4 @@
-
-import GUI.hexagon;
+package GUI;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import UTILITY.*;
+import OBJECTS.Player;
 
 
 public class GameBoard extends JPanel{
@@ -227,15 +228,15 @@ public class GameBoard extends JPanel{
 
 
     ScreenScale screen_scale_button = new ScreenScale();
-    EndGame end_game_button = new EndGame();
-    Text player_points_text = new Text();
+    public EndGame end_game_button = new EndGame();
+    public Text player_points_text = new Text();
 
     //CONSTRUCTOR
     public GameBoard(){
 
 
 
-        /*When a new object of type GameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
+        /*When a new object of type GUI.GameBoard it's created, the hexagons are automatically initialised. Just to make clear, when I talk about "coordinates" I'm talking about their position on the Panel, I'm not talking
         about the coordinates used in the main class.
         */
 
@@ -272,12 +273,12 @@ public class GameBoard extends JPanel{
 
                 // case for if final guess button is clicked
                 if (end_game_button.isClicked(e.getX(), e.getY())) {
-                    // set as -2 (in GameLogic class this will trigger the final guess)
+                    // set as -2 (in UTILITY.GameLogic class this will trigger the final guess)
                     GameLogic.ongoing_input = -2;
                     repaint();
                     return;
                 } else if (screen_scale_button.isClicked(e.getX(), e.getY())) {
-                    // set as -3 (in GameLogic class this will trigger the final guess)
+                    // set as -3 (in UTILITY.GameLogic class this will trigger the final guess)
                     GameLogic.ongoing_input = -3;
                     repaint();
                     // this DOES NOT work, it just ends up updating it for a split second before resetting the board
@@ -290,7 +291,7 @@ public class GameBoard extends JPanel{
                         // update static variable to the valid edge number
                         GameLogic.ongoing_input = numberInfo.getNumber();
 
-                        // should all probably be done in GameLogic class
+                        // should all probably be done in UTILITY.GameLogic class
                         /* update edge number colour accordingly indicating ray state (absorbed, reflected, etc.)
                          *      AND
                          * making it unclickable by making its size 0 (if its 0 pixels wide cannot be clicked)
