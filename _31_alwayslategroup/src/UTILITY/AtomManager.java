@@ -5,21 +5,34 @@ import OBJECTS.Atom;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The AtomManager class manages atoms on the board.
+ * It provides functionality for creating atoms with specified (x, y) coordinates or generating random atoms.
+
+ * Atoms can be created by either passing a char parameter, which is used as a seed for generating atoms
+ * for test case purposes, or with no parameters, allowing for the generation of random atoms within the board.
+
+ * This class also provides methods to retrieve the list of atoms created.
+ */
 public class AtomManager {
     private ArrayList<Atom> atoms;
 
-
-    // this is ONLY really for testing, so it generates empty board,
-    // then we can specify atom coordinates and test if the ray path
-    // is correct with those specified atoms (instead of random atoms,
-    // to avoid the risk of seed producing different results if we
-    // change the code further down the line)
-    // also, ANY character can be passed in and this will trigger
+    /**
+     * Constructs an AtomManager with an empty list of atoms.
+     * This constructor is primarily used for testing purposes,
+     * allowing the creation of an empty board for custom atom placement.
+     *
+     * @param any_character Any character value triggers the generation of an empty atoms Arraylist.
+     */
     public AtomManager(char any_character) {
         this.atoms = new ArrayList<>();
     }
 
-    // by default no arguments means will generate 6 atoms as normal
+    /**
+     * Constructs an AtomManager with a set of atoms.
+     * This is the main constructor used in the game,
+     * allowing the creation of randomly generated atoms.
+     */
     public AtomManager() {
         this.atoms = new ArrayList<>();
         generateRandomAtoms();
@@ -31,12 +44,31 @@ public class AtomManager {
     }
 
 
+    /**
+     * Constructs atoms with specified coordinates and adds it to the list of atoms.
+     *
+     * @param x The x-coordinate for the atom.
+     * @param y The y-coordinate for the atom.
+     */
     public void createAtom(int x, int y) {
         Atom atom = new Atom(x, y);
         atoms.add(atom);
     }
 
 
+    /**
+     * Generates a set of non-duplicate atoms within the specified range of the board.
+     * It completes the list of atoms with the predefined number of atoms in Main.NUM_ATOMS.
+     *
+     * Atoms are randomly placed within the board's boundaries, ensuring that there are no
+     * duplicate coordinates.
+     *
+     * If the seed value is indicated in Main.SEED !=0, initializes the random number generator with that seed
+     * to ensure predictability of atom placement for testing purposes.
+     *
+     * Note: The implementation uses hard coded values for the board dimensions and atom
+     * generation.
+     */
     public void generateRandomAtoms() {
         ArrayList<int[]> coordinates = new ArrayList<>();
         Random random;
